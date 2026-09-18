@@ -1,0 +1,990 @@
+{
+  "summary": {
+    "label": "base-zero-shot",
+    "n_examples": 57,
+    "exact_match_accuracy": 0.0,
+    "per_field_accuracy": {
+      "target_color": 0.7017543859649122,
+      "constraints": 0.22807017543859648,
+      "target_location": 0.43859649122807015,
+      "action": 0.12280701754385964
+    },
+    "latency_s": {
+      "mean": 6.381649971929858,
+      "median": 7.885088400002132,
+      "min": 1.9543537000026845,
+      "max": 10.721515200002614
+    }
+  },
+  "examples": [
+    {
+      "text": "Retrieve the blue box and bring it back to the starting zone while avoiding all other objects.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.803228000000672
+    },
+    {
+      "text": "Target has changed: return the yellow box to the start safely and ignore everything else.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 9.11818520000088
+    },
+    {
+      "text": "Your goal is to collect the red box and navigate around any obstacles to deliver it to the starting zone.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.161341999999422
+    },
+    {
+      "text": "Focus on getting the black box and avoiding contact with every other object on the field.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.444564699999319
+    },
+    {
+      "text": "New tasking: find and bring back the blue box without touching other objects or leaving the safe pathway.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.49079509999865
+    },
+    {
+      "text": "Stay to the far south of the field until you reach the eastern half and then obtain the blue object in the northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "eastwestern_half",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 10.721515200002614
+    },
+    {
+      "text": "Abort the mission, remain undetected.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 7.173676700000215
+    },
+    {
+      "text": "Avoid the southwest quarter of the field.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "avoid_objects"
+      },
+      "exact_match": false,
+      "latency_s": 8.29397020000033
+    },
+    {
+      "text": "The blue object has been reported to have moved to the northeast quarter of the field.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NE quarter of the field",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 8.865003999999317
+    },
+    {
+      "text": "Go grab the black die and haul it back to base, steer clear of everything else out there.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.678809799999726
+    },
+    {
+      "text": "We need the red one. Get it and come straight back without bumping into any of the other objects.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 7.874244099999487
+    },
+    {
+      "text": "Can you scan the yellow target's chip for me? You don't need to carry it back this time.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 8.722939499999484
+    },
+    {
+      "text": "Just tap the NFC on the blue die and send me the code, leave it where it is.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 8.096832199997152
+    },
+    {
+      "text": "Head out and secure the black object, then make your way home.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.581187499999942
+    },
+    {
+      "text": "Priority target is red -- retrieve it and get back to the starting square, no detours near the other dice.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": false,
+      "latency_s": 7.4786912000017765
+    },
+    {
+      "text": "Bring me the yellow one. Everything else on the field is off limits.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 8.162809500001458
+    },
+    {
+      "text": "Objective: blue target, northwest side of the field. Retrieve it and return.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 7.602691199997935
+    },
+    {
+      "text": "The black target is sitting in the southeast corner -- go get it and bring it home.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "southeast corner",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.219036299997242
+    },
+    {
+      "text": "You're cleared to grab the red die in the northeast section, just don't touch anything else.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 7.947998499999812
+    },
+    {
+      "text": "Read the chip off the yellow object in the southwest corner and radio back the code.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 7.885088400002132
+    },
+    {
+      "text": "Mission's done once you're carrying the blue target -- pick it up and return to start.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 7.847288199998729
+    },
+    {
+      "text": "Scrub the mission. Power down and hold position.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 9.340035200002603
+    },
+    {
+      "text": "Stand down immediately, we're pulling the plug on this run.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 8.12001120000059
+    },
+    {
+      "text": "Abort, abort -- do not engage the target.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 7.812662399999681
+    },
+    {
+      "text": "Cancel the retrieval, get out of there quietly.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 9.530578499998228
+    },
+    {
+      "text": "We're calling it. Halt all movement and go dark.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 7.927931099999114
+    },
+    {
+      "text": "Terminate the mission now, don't let anyone see you.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 6.613481499996851
+    },
+    {
+      "text": "Pull back, the mission is off.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 8.817403500001092
+    },
+    {
+      "text": "Kill the run, hold your position and stay hidden.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 6.375753299998905
+    },
+    {
+      "text": "Mission's scrapped -- freeze in place.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 9.107564199999615
+    },
+    {
+      "text": "Disengage and stay out of sight, we're done here.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 10.51848339999924
+    },
+    {
+      "text": "Forget the target, just bring the system back to the starting zone.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.767242400001123
+    },
+    {
+      "text": "Call off the retrieval and head back to base immediately.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 9.090968900000007
+    },
+    {
+      "text": "Stay out of the northeast section of the field.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "exit_northwest"
+      },
+      "exact_match": false,
+      "latency_s": 8.047163999999611
+    },
+    {
+      "text": "Keep clear of the southeast corner, that area's off limits.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "southeast corner",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 8.022662299998046
+    },
+    {
+      "text": "Do not enter the northwest quadrant for the rest of the run.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 10.01948160000029
+    },
+    {
+      "text": "The southwest side is a no-go zone, route around it.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "no-go zone",
+        "target_location": "SW",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 7.521131999998033
+    },
+    {
+      "text": "Steer clear of the northeast corner, judges' equipment is set up there.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 10.026757900002849
+    },
+    {
+      "text": "New restriction: the southeast quarter is now off limits.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 2.142648900000495
+    },
+    {
+      "text": "Avoid the northwest corner entirely from this point forward.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "avoid_objects"
+      },
+      "exact_match": false,
+      "latency_s": 2.5712496000014653
+    },
+    {
+      "text": "That southwest region just got flagged as unsafe -- don't go near it.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": null,
+        "constraints": null,
+        "target_location": null,
+        "action": null
+      },
+      "exact_match": false,
+      "latency_s": 2.344982999999047
+    },
+    {
+      "text": "We need you to keep away from the northeast quadrant for now.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "avoid_regions"
+      },
+      "exact_match": false,
+      "latency_s": 1.9543537000026845
+    },
+    {
+      "text": "There's a hazard in the southeast corner, avoid that whole area.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "avoid_objects"
+      },
+      "exact_match": false,
+      "latency_s": 2.034275699999853
+    },
+    {
+      "text": "Reroute away from the northwest section, it's restricted.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.150772400000278
+    },
+    {
+      "text": "Do not cross into the southwest quarter under any circumstance.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.179152200002136
+    },
+    {
+      "text": "Update: the red target has shifted to the southwest corner.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.0394966999992903
+    },
+    {
+      "text": "Heads up, the yellow die moved -- it's now in the northwest section.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 2.017908300000272
+    },
+    {
+      "text": "Correction: the black object is now sitting in the southeast quadrant.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "southeast",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.6006707999986247
+    },
+    {
+      "text": "The blue target's position changed, it's over in the southeast corner now.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "southeast corner",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 2.4810528000016348
+    },
+    {
+      "text": "Target relocated -- red object is now northeast.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.1090867000020808
+    },
+    {
+      "text": "The yellow die has been moved to the southwest quarter.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "move_die"
+      },
+      "exact_match": false,
+      "latency_s": 2.0182370000002265
+    },
+    {
+      "text": "New position for the black target: northwest corner of the field.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 2.1225421000017377
+    },
+    {
+      "text": "Just so you know, the blue object shifted over to the northwest side.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 2.1396734999980254
+    },
+    {
+      "text": "The red target isn't where it was -- it's now in the southeast section.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "southeast section",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.358170900002733
+    },
+    {
+      "text": "Object update: yellow target moved to the northeast quadrant.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "move_to"
+      },
+      "exact_match": false,
+      "latency_s": 2.6440542999989702
+    },
+    {
+      "text": "The black die relocated to the southeast corner.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "southeast corner",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 2.510957499998767
+    },
+    {
+      "text": "Position change: the blue target is now in the southwest quarter.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "exact_match": false,
+      "latency_s": 2.5055514000014227
+    }
+  ]
+}

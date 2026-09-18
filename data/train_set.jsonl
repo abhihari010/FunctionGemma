@@ -1,0 +1,228 @@
+{"text": "Locate the blue target and carry it back to the starting zone, avoid touching anything else.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Locate the red target and carry it back to the starting zone, avoid touching anything else.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Locate the yellow target and carry it back to the starting zone, avoid touching anything else.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Locate the black target and carry it back to the starting zone, avoid touching anything else.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Blue is the objective. Pick it up and return to base without disturbing the other objects.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Red is the objective. Pick it up and return to base without disturbing the other objects.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Yellow is the objective. Pick it up and return to base without disturbing the other objects.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Black is the objective. Pick it up and return to base without disturbing the other objects.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Go secure the blue object and bring it home.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Go secure the red object and bring it home.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Go secure the yellow object and bring it home.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Go secure the black object and bring it home.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The blue die is your target -- retrieve it and come back to the start.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The red box is your target -- retrieve it and come back to the start.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The yellow cube is your target -- retrieve it and come back to the start.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The black block is your target -- retrieve it and come back to the start.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "All I need is the chip data off the blue target, no need to bring the object back.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "All I need is the chip data off the red target, no need to bring the object back.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "All I need is the chip data off the yellow target, no need to bring the object back.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "All I need is the chip data off the black target, no need to bring the object back.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the blue object's NFC tag and transmit the code -- leave it in place.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the red object's NFC tag and transmit the code -- leave it in place.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the yellow object's NFC tag and transmit the code -- leave it in place.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the black object's NFC tag and transmit the code -- leave it in place.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Retrieve the blue piece and get it to the starting square, that's the whole job.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the red piece and get it to the starting square, that's the whole job.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the yellow piece and get it to the starting square, that's the whole job.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the black piece and get it to the starting square, that's the whole job.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Fetch the blue target sitting in the northwest area and return to the starting zone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Fetch the red target sitting in the northeast area and return to the starting zone.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Fetch the yellow target sitting in the southwest area and return to the starting zone.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Fetch the black target sitting in the southeast area and return to the starting zone.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Snag the blue box near the northeast corner, avoid the rest of the field, and bring it back.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "NE", "action": "retrieve"}}
+{"text": "Snag the red cube near the southwest corner, avoid the rest of the field, and bring it back.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "SW", "action": "retrieve"}}
+{"text": "Snag the yellow block near the southeast corner, avoid the rest of the field, and bring it back.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "SE", "action": "retrieve"}}
+{"text": "Snag the black die near the northwest corner, avoid the rest of the field, and bring it back.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "NW", "action": "retrieve"}}
+{"text": "Swing by the southwest corner, grab the blue target, and head back without hitting anything.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "SW", "action": "retrieve"}}
+{"text": "Swing by the southeast corner, grab the red target, and head back without hitting anything.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "SE", "action": "retrieve"}}
+{"text": "Swing by the northwest corner, grab the yellow target, and head back without hitting anything.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "NW", "action": "retrieve"}}
+{"text": "Swing by the northeast corner, grab the black target, and head back without hitting anything.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "NE", "action": "retrieve"}}
+{"text": "Abort now, hold your position and don't move.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "This run is scrubbed -- power down and stay put.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cut the mission short, remain hidden where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We're done here, stop and stay concealed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Emergency stop -- abort and remain undetected.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Mission's canceled, freeze and wait for further instructions.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Break off the approach, hold position quietly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Shut everything down right where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cease operation immediately and hold position.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "That's a wrap on this attempt -- abort and lay low.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cancel the run right where you are, don't advance.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We need eyes off you -- abort and go still.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop everything and remain out of sight.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "This mission is finished, power down in place.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Drop the objective and make your way back to the starting zone.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Recall the vehicle, bring it back to base now.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "That's enough for today, return the system to start.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Pull the system out and send it back to the starting square.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Bring the system home, we're aborting the retrieval.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Head back to the starting zone, we're calling off the search.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Keep the vehicle out of the northwest corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Keep the vehicle out of the northeast corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Keep the vehicle out of the southwest corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Keep the vehicle out of the southeast corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "The northwest area is restricted, plan your route around it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "The northeast area is restricted, plan your route around it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "The southwest area is restricted, plan your route around it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "The southeast area is restricted, plan your route around it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Judges have flagged the northwest section -- avoid it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Judges have flagged the northeast section -- avoid it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Judges have flagged the southwest section -- avoid it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Judges have flagged the southeast section -- avoid it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Don't let the system anywhere near the northwest quadrant.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Don't let the system anywhere near the northeast quadrant.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Don't let the system anywhere near the southwest quadrant.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Don't let the system anywhere near the southeast quadrant.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "New boundary: nothing enters the northwest region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "New boundary: nothing enters the northeast region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "New boundary: nothing enters the southwest region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "New boundary: nothing enters the southeast region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Treat the northwest corner as a keep-out zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Treat the northeast corner as a keep-out zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Treat the southwest corner as a keep-out zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Treat the southeast corner as a keep-out zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Reroute around the northwest side of the field, it's off limits now.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Reroute around the northeast side of the field, it's off limits now.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Reroute around the southwest side of the field, it's off limits now.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Reroute around the southeast side of the field, it's off limits now.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "The northwest quarter just became a restricted zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "The northeast quarter just became a restricted zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "The southwest quarter just became a restricted zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "The southeast quarter just became a restricted zone.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Avoid crossing into the northwest section under any circumstance.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "Avoid crossing into the northeast section under any circumstance.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "Avoid crossing into the southwest section under any circumstance.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "Avoid crossing into the southeast section under any circumstance.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "That northwest area is unsafe, route the vehicle elsewhere.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}}
+{"text": "That northeast area is unsafe, route the vehicle elsewhere.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}}
+{"text": "That southwest area is unsafe, route the vehicle elsewhere.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}}
+{"text": "That southeast area is unsafe, route the vehicle elsewhere.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}}
+{"text": "Field update: the blue target now sits in the northwest corner.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Field update: the red target now sits in the northeast corner.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Field update: the yellow target now sits in the southwest corner.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Field update: the black target now sits in the southeast corner.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "The blue object was moved -- it's currently in the northeast section.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "The red object was moved -- it's currently in the southwest section.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "The yellow object was moved -- it's currently in the southeast section.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "The black object was moved -- it's currently in the northwest section.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Correction on target position: blue target, southwest quadrant.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Correction on target position: red target, southeast quadrant.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Correction on target position: yellow target, northwest quadrant.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Correction on target position: black target, northeast quadrant.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "The blue block relocated to the southeast area, adjust your route.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "The red die relocated to the northwest area, adjust your route.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "The yellow box relocated to the northeast area, adjust your route.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "The black cube relocated to the southwest area, adjust your route.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Latest report has the blue target in the northwest corner now.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Latest report has the red target in the northeast corner now.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Latest report has the yellow target in the southwest corner now.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Latest report has the black target in the southeast corner now.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Position change for the blue object: northeast quarter of the field.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Position change for the red object: southwest quarter of the field.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Position change for the yellow object: southeast quarter of the field.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Position change for the black object: northwest quarter of the field.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "The blue target isn't where it was, it's now near the southwest corner.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "The red target isn't where it was, it's now near the southeast corner.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "The yellow target isn't where it was, it's now near the northwest corner.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "The black target isn't where it was, it's now near the northeast corner.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Update your plan -- blue target moved to the southeast side.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Update your plan -- red target moved to the northwest side.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Update your plan -- yellow target moved to the northeast side.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Update your plan -- black target moved to the southwest side.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "New coordinates for the blue object: northwest region.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "New coordinates for the red object: northeast region.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "New coordinates for the yellow object: southwest region.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "New coordinates for the black object: southeast region.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Just relocated: the blue target is now in the northeast corner.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NE", "action": "retrieve"}}
+{"text": "Just relocated: the red target is now in the southwest corner.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SW", "action": "retrieve"}}
+{"text": "Just relocated: the yellow target is now in the southeast corner.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SE", "action": "retrieve"}}
+{"text": "Just relocated: the black target is now in the northwest corner.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NW", "action": "retrieve"}}
+{"text": "Get a chip reading from the blue die and leave it in place.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Get a chip reading from the red box and leave it in place.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Get a chip reading from the yellow cube and leave it in place.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Get a chip reading from the black block and leave it in place.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "We need the tag ID off the blue target, don't move it.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "We need the tag ID off the red target, don't move it.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "We need the tag ID off the yellow target, don't move it.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "We need the tag ID off the black target, don't move it.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the blue object's chip and report the number.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the red object's chip and report the number.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the yellow object's chip and report the number.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the black object's chip and report the number.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Read the tag on the blue target -- no retrieval this run.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Read the tag on the red target -- no retrieval this run.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Read the tag on the yellow target -- no retrieval this run.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Read the tag on the black target -- no retrieval this run.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Tag data only from the blue die, leave the object alone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Tag data only from the red box, leave the object alone.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Tag data only from the yellow cube, leave the object alone.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Tag data only from the black block, leave the object alone.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Record the chip on the blue target and stand by.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Record the chip on the red target and stand by.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Record the chip on the yellow target and stand by.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Record the chip on the black target and stand by.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}}
+{"text": "Scan the chip on the blue target in the northwest corner and send it up.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "read_chip"}}
+{"text": "Scan the chip on the red target in the northeast corner and send it up.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NE", "action": "read_chip"}}
+{"text": "Scan the chip on the yellow target in the southwest corner and send it up.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "read_chip"}}
+{"text": "Scan the chip on the black target in the southeast corner and send it up.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "read_chip"}}
+{"text": "Take a tag reading from the blue box in the northeast quadrant.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NE", "action": "read_chip"}}
+{"text": "Take a tag reading from the red cube in the southwest quadrant.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SW", "action": "read_chip"}}
+{"text": "Take a tag reading from the yellow block in the southeast quadrant.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SE", "action": "read_chip"}}
+{"text": "Take a tag reading from the black die in the northwest quadrant.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NW", "action": "read_chip"}}
+{"text": "Chip data only from the blue object in the southwest section.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SW", "action": "read_chip"}}
+{"text": "Chip data only from the red object in the southeast section.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SE", "action": "read_chip"}}
+{"text": "Chip data only from the yellow object in the northwest section.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NW", "action": "read_chip"}}
+{"text": "Chip data only from the black object in the northeast section.", "expected": {"target_color": "black", "constraints": "none", "target_location": "NE", "action": "read_chip"}}
+{"text": "Pull the code off the blue target over in the southeast area.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "SE", "action": "read_chip"}}
+{"text": "Pull the code off the red target over in the northwest area.", "expected": {"target_color": "red", "constraints": "none", "target_location": "NW", "action": "read_chip"}}
+{"text": "Pull the code off the yellow target over in the northeast area.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NE", "action": "read_chip"}}
+{"text": "Pull the code off the black target over in the southwest area.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SW", "action": "read_chip"}}
+{"text": "Bring the vehicle back to the starting zone, leave the target behind.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Return to the launch point now.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Come back to start, we're resetting the run.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Send it home -- the objective can stay where it is.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Back to the starting square, no retrieval needed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Abandon the pickup and return to base.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Drive the system back to the start line.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Get the vehicle home, we'll re-run this later.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Recall the rover to the starting zone.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Head back to the launch box and hold there.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Leave the object and come home.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Take the system back to start, empty is fine.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Come back to the starting area, we're done attempting this.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Reset -- bring the vehicle back to where it started.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Withdraw to the starting zone without the target.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Return the vehicle to base, we're not collecting anything.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Bring it in. No pickup this run.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Come back to the start point and wait there.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Walk it back to the starting zone, we're done searching.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Send the system home and leave the field as it is.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Return to the start, we're switching to the next attempt.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Get back to base, the retrieval is off.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Drive home -- forget what you were after.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Pull the vehicle back to the launch zone now.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Hard abort, stop where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "No further movement -- the run is over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop the vehicle and keep it dark.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We've lost clearance, shut it down in place.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "End of run. Hold still and stay hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Terminate now, no movement, no signal.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Knock it off and hold position.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Remain stationary and concealed, the attempt is aborted.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "That's enough, kill the run and stay low.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Discontinue the attempt, freeze where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Take it offline right now, don't move.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Halt. Nothing moves until further notice.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cut power and stay out of view.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop immediately, stay dark.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Call off everything and remain in place.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Abort the approach and keep the system hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Collect the blue die and then head straight back to the start.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the red box and then head straight back to the start.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the yellow cube and then head straight back to the start.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the black block and then head straight back to the start.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the blue target, then return to the starting zone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the red target, then return to the starting zone.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the yellow target, then return to the starting zone.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the black target, then return to the starting zone.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
