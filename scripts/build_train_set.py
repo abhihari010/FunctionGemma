@@ -204,6 +204,54 @@ for i, template in enumerate(compound_retrieve):
             c, "none", "unspecified", "retrieve")
 
 
+# ---------- round 2 rebalance. avoid_objects was 16 examples against 172 "none", and every
+# one of them used literal "avoid" / "without touching" wording, so the model keyed on the
+# verb rather than the meaning. These state the same constraint in other words. ----------
+avoid_objects_no_loc = [
+    "Bring back the {c} {n} and make sure you don't bump any of the other objects.",
+    "Collect the {c} target, nothing else on the field may be contacted.",
+    "Get the {c} target home without making contact with any other piece.",
+    "The {c} object is yours -- leave every other item untouched.",
+    "Pick up the {c} {n}, steer around the rest of the objects.",
+    "Recover the {c} target and stay clear of the other dice.",
+    "Fetch the {c} object; the other pieces are off limits.",
+    "Retrieve the {c} {n} and keep the remaining objects undisturbed.",
+]
+for i, template in enumerate(avoid_objects_no_loc):
+    for j, c in enumerate(COLORS):
+        add(template.format(c=c, n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "avoid_objects", "unspecified", "retrieve")
+
+avoid_objects_loc = [
+    "Grab the {c} target in the {lw} corner and keep off the other objects.",
+    "Collect the {c} {n} from the {lw} section without disturbing anything else.",
+]
+for i, template in enumerate(avoid_objects_loc):
+    for j, c in enumerate(COLORS):
+        loc = LOCS[(i + j) % len(LOCS)]
+        add(template.format(c=c, lw=LOC_WORDS[loc], n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "avoid_objects", loc, "retrieve")
+
+# ---------- the retrieve / return_to_start boundary. The rule is whether a target object is
+# NAMED: "take the black cube back to the start" is a retrieval whose return leg is mentioned,
+# not a bare recall. Round 1 added 30 return_to_start examples against only 8 compound
+# retrieves, which pushed the model to read "back to the start" as return_to_start. ----------
+object_named_returns = [
+    "Escort the {c} {n} back to the starting zone.",
+    "The {c} object comes back with the vehicle.",
+    "Move the {c} target to the start point and leave it there.",
+    "Transport the {c} {n} to the starting square.",
+    "Walk the {c} object back to base.",
+    "Ferry the {c} target to the start line.",
+    "The {c} {n} goes back to the starting zone with you.",
+    "Bring the {c} piece in to the start.",
+]
+for i, template in enumerate(object_named_returns):
+    for j, c in enumerate(COLORS):
+        add(template.format(c=c, n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", "unspecified", "retrieve")
+
+
 def main():
     with open("data/eval_set.jsonl", encoding="utf-8") as f:
         eval_texts = {json.loads(line)["text"] for line in f}

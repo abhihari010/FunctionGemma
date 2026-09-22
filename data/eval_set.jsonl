@@ -106,3 +106,45 @@
 {"text": "Nothing may enter the southeast region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}, "set": "ext"}
 {"text": "Treat the northeast quarter as restricted -- stay outside it.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}, "set": "ext"}
 {"text": "The southwest section stays off the route from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}, "set": "ext"}
+{"text": "Pick up the red block and make sure nothing else gets bumped.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Get the blue target home; treat every other object as untouchable.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Fetch the black die from the northeast, no contact with the other pieces.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "NE", "action": "retrieve"}, "set": "ext2"}
+{"text": "The yellow object is the only thing you may touch -- bring it back.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Retrieve the red cube while giving the remaining objects a wide berth.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Collect the blue die in the southwest and don't disturb anything else on the field.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "SW", "action": "retrieve"}, "set": "ext2"}
+{"text": "Bring in the black target; the other dice must stay exactly where they are.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Grab the yellow piece from the northwest without knocking into the others.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "NW", "action": "retrieve"}, "set": "ext2"}
+{"text": "Scan the chip on the red target and avoid touching the other objects.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "read_chip"}, "set": "ext2"}
+{"text": "Read the tag on the blue die in the southeast, no contact with anything else.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "SE", "action": "read_chip"}, "set": "ext2"}
+{"text": "Secure the black object and route around every other item out there.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "The yellow target comes home; leave the rest of the field undisturbed.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Deliver the blue cube to the starting zone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "The red target needs to end up back at the start.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Send the yellow die back to the start line with you.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Get the black object to the starting square.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "ext2"}
+{"text": "Carry the blue target from the northeast back to base.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NE", "action": "retrieve"}, "set": "ext2"}
+{"text": "Nothing to collect -- just come back to the start.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}, "set": "ext2"}
+{"text": "Return to the starting zone on your own.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}, "set": "ext2"}
+{"text": "We're done; bring the vehicle back and leave everything.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}, "set": "ext2"}
+{"text": "Head back to the start, no cargo.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}, "set": "ext2"}
+{"text": "Come back empty, the pickup is cancelled.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}, "set": "ext2"}
+{"text": "Keep out of the northwest quarter while you work.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}, "set": "ext2"}
+{"text": "The southeast zone is barred for this attempt.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}, "set": "ext2"}
+{"text": "Route around the northeast section for the rest of the run.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}, "set": "ext2"}
+{"text": "The southwest corner is a restricted area now.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}, "set": "ext2"}
+{"text": "Do not travel through the northwest region.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "retrieve"}, "set": "ext2"}
+{"text": "Stay well clear of the southeast quarter.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}, "set": "ext2"}
+{"text": "Tag read on the black object, then hold where you are.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "ext2"}
+{"text": "We need the chip number from the blue target in the northwest.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "read_chip"}, "set": "ext2"}
+{"text": "Scan the red die's tag and stay put.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "ext2"}
+{"text": "Just read the chip on the yellow object in the southeast.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "SE", "action": "read_chip"}, "set": "ext2"}
+{"text": "Chip scan on the black target, no pickup.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "ext2"}
+{"text": "Report the tag ID from the blue cube.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "ext2"}
+{"text": "Abort. Stay exactly where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}, "set": "ext2"}
+{"text": "The run is void -- stop moving and stay dark.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}, "set": "ext2"}
+{"text": "Shut the system down in place, we're finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}, "set": "ext2"}
+{"text": "No more movement, hold and stay concealed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}, "set": "ext2"}
+{"text": "The blue target sits in the northwest -- go collect it.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "NW", "action": "retrieve"}, "set": "ext2"}
+{"text": "Black die, southeast quadrant -- that's the target.", "expected": {"target_color": "black", "constraints": "none", "target_location": "SE", "action": "retrieve"}, "set": "ext2"}
+{"text": "Fetch the yellow object from the northeast corner.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "NE", "action": "retrieve"}, "set": "ext2"}
+{"text": "Red target in the southwest -- bring it in.", "expected": {"target_color": "red", "constraints": "none", "target_location": "SW", "action": "retrieve"}, "set": "ext2"}

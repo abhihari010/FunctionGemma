@@ -258,10 +258,116 @@ EXT_EXAMPLES = [
      ("unspecified", "avoid_regions", "SW", "retrieve")),
 ]
 
+# --- second extension. Written BEFORE the round-2 retrain, to give a blind slice for the
+# two categories round 2 targets (avoid_objects, and the retrieve/return_to_start boundary):
+# by then "ext" had been scored, so it is no longer a clean test of those. Probes the
+# categories with fresh phrasing; never paraphrases a known failing example. ---
+EXT2_EXAMPLES = [
+    # --- avoid_objects stated in non-canonical wording (no literal "avoid"/"without touching") ---
+    ("Pick up the red block and make sure nothing else gets bumped.",
+     ("red", "avoid_objects", "unspecified", "retrieve")),
+    ("Get the blue target home; treat every other object as untouchable.",
+     ("blue", "avoid_objects", "unspecified", "retrieve")),
+    ("Fetch the black die from the northeast, no contact with the other pieces.",
+     ("black", "avoid_objects", "NE", "retrieve")),
+    ("The yellow object is the only thing you may touch -- bring it back.",
+     ("yellow", "avoid_objects", "unspecified", "retrieve")),
+    ("Retrieve the red cube while giving the remaining objects a wide berth.",
+     ("red", "avoid_objects", "unspecified", "retrieve")),
+    ("Collect the blue die in the southwest and don't disturb anything else on the field.",
+     ("blue", "avoid_objects", "SW", "retrieve")),
+    ("Bring in the black target; the other dice must stay exactly where they are.",
+     ("black", "avoid_objects", "unspecified", "retrieve")),
+    ("Grab the yellow piece from the northwest without knocking into the others.",
+     ("yellow", "avoid_objects", "NW", "retrieve")),
+    ("Scan the chip on the red target and avoid touching the other objects.",
+     ("red", "avoid_objects", "unspecified", "read_chip")),
+    ("Read the tag on the blue die in the southeast, no contact with anything else.",
+     ("blue", "avoid_objects", "SE", "read_chip")),
+    ("Secure the black object and route around every other item out there.",
+     ("black", "avoid_objects", "unspecified", "retrieve")),
+    ("The yellow target comes home; leave the rest of the field undisturbed.",
+     ("yellow", "avoid_objects", "unspecified", "retrieve")),
+
+    # --- boundary: a target object IS named + start zone mentioned => retrieve ---
+    ("Deliver the blue cube to the starting zone.",
+     ("blue", "none", "unspecified", "retrieve")),
+    ("The red target needs to end up back at the start.",
+     ("red", "none", "unspecified", "retrieve")),
+    ("Send the yellow die back to the start line with you.",
+     ("yellow", "none", "unspecified", "retrieve")),
+    ("Get the black object to the starting square.",
+     ("black", "none", "unspecified", "retrieve")),
+    ("Carry the blue target from the northeast back to base.",
+     ("blue", "none", "NE", "retrieve")),
+
+    # --- boundary: NO target object named => return_to_start ---
+    ("Nothing to collect -- just come back to the start.",
+     ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Return to the starting zone on your own.",
+     ("unspecified", "none", "unspecified", "return_to_start")),
+    ("We're done; bring the vehicle back and leave everything.",
+     ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Head back to the start, no cargo.",
+     ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Come back empty, the pickup is cancelled.",
+     ("unspecified", "none", "unspecified", "return_to_start")),
+
+    # --- avoid_regions, to check it is not eroded by the avoid_objects additions ---
+    ("Keep out of the northwest quarter while you work.",
+     ("unspecified", "avoid_regions", "NW", "retrieve")),
+    ("The southeast zone is barred for this attempt.",
+     ("unspecified", "avoid_regions", "SE", "retrieve")),
+    ("Route around the northeast section for the rest of the run.",
+     ("unspecified", "avoid_regions", "NE", "retrieve")),
+    ("The southwest corner is a restricted area now.",
+     ("unspecified", "avoid_regions", "SW", "retrieve")),
+    ("Do not travel through the northwest region.",
+     ("unspecified", "avoid_regions", "NW", "retrieve")),
+    ("Stay well clear of the southeast quarter.",
+     ("unspecified", "avoid_regions", "SE", "retrieve")),
+
+    # --- read_chip ---
+    ("Tag read on the black object, then hold where you are.",
+     ("black", "none", "unspecified", "read_chip")),
+    ("We need the chip number from the blue target in the northwest.",
+     ("blue", "none", "NW", "read_chip")),
+    ("Scan the red die's tag and stay put.",
+     ("red", "none", "unspecified", "read_chip")),
+    ("Just read the chip on the yellow object in the southeast.",
+     ("yellow", "none", "SE", "read_chip")),
+    ("Chip scan on the black target, no pickup.",
+     ("black", "none", "unspecified", "read_chip")),
+    ("Report the tag ID from the blue cube.",
+     ("blue", "none", "unspecified", "read_chip")),
+
+    # --- abort ---
+    ("Abort. Stay exactly where you are.",
+     ("unspecified", "none", "unspecified", "abort")),
+    ("The run is void -- stop moving and stay dark.",
+     ("unspecified", "none", "unspecified", "abort")),
+    ("Shut the system down in place, we're finished.",
+     ("unspecified", "none", "unspecified", "abort")),
+    ("No more movement, hold and stay concealed.",
+     ("unspecified", "none", "unspecified", "abort")),
+
+    # --- plain retrieve with a location slot ---
+    ("The blue target sits in the northwest -- go collect it.",
+     ("blue", "none", "NW", "retrieve")),
+    ("Black die, southeast quadrant -- that's the target.",
+     ("black", "none", "SE", "retrieve")),
+    ("Fetch the yellow object from the northeast corner.",
+     ("yellow", "none", "NE", "retrieve")),
+    ("Red target in the southwest -- bring it in.",
+     ("red", "none", "SW", "retrieve")),
+]
+
 FIELDS = ("target_color", "constraints", "target_location", "action")
 
 def main():
-    tagged = [(t, l, "core57") for t, l in EXAMPLES] + [(t, l, "ext") for t, l in EXT_EXAMPLES]
+    tagged = ([(t, l, "core57") for t, l in EXAMPLES]
+              + [(t, l, "ext") for t, l in EXT_EXAMPLES]
+              + [(t, l, "ext2") for t, l in EXT2_EXAMPLES])
 
     seen = {}
     for text, _, tag in tagged:
@@ -274,7 +380,8 @@ def main():
             row = {"text": text, "expected": dict(zip(FIELDS, labels)), "set": tag}
             f.write(json.dumps(row) + "\n")
     print(f"wrote {len(tagged)} examples to data/eval_set.jsonl "
-          f"({len(EXAMPLES)} core57 + {len(EXT_EXAMPLES)} ext)")
+          f"({len(EXAMPLES)} core57 + {len(EXT_EXAMPLES)} ext "
+          f"+ {len(EXT2_EXAMPLES)} ext2)")
 
 if __name__ == "__main__":
     main()

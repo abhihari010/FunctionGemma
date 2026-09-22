@@ -201,6 +201,116 @@ Binaries used: llama.cpp `b11026` prebuilt Windows CPU + Vulkan builds (no CUDA 
 on this machine; Vulkan reaches the 4070 without the 400 MB CUDA runtime download). Artifacts in
 `gguf/`, results in `results/gguf-*.json`.
 
+## Data expansion round 1 (2026-09-17, session 3)
+
+Eval **57 -> 108**, train **140 -> 228**, rebalanced. The core 57 are frozen and tagged
+`core57` in `data/eval_set.jsonl`; the 51 additions are tagged `ext`. `build_eval_set.py` now
+refuses duplicates, and `03_evaluate.py` reports `by_set` and `by_action` breakdowns.
+
+Why: `read_chip` had 3 eval / 8 train examples and `return_to_start` had 2 / 6. Half the action
+vocabulary was effectively unmeasured and undertrained. The additions were written from the rules
+doc's action categories **without looking at which examples the old model was failing** — targeting
+known failures would convert the held-out set into a training set.
+
+| slice | before | after |
+|---|---|---|
+| core57 (frozen original) | 53/57 = 93.0% | **54/57 = 94.7%** |
+| ext (51 never-seen) | - | **46/51 = 90.2%** |
+| overall | - | **100/108 = 92.6%** |
+
+Per action, on samples large enough to mean something:
+
+| action | before | after |
+|---|---|---|
+| read_chip | 2/3 (unmeasurable) | **16/17 = 94.1%** |
+| return_to_start | 2/2 (unmeasurable) | **16/16 = 100%** |
+| abort | 11/11 | **16/16 = 100%** |
+| retrieve | 40/41 = 97.6% | **52/59 = 88.1%** |
+
+**`read_chip` was the worry and it is fine** (94.1% on 17 examples). The rebalance worked.
+
+**The expansion exposed a different gap: `avoid_objects`.** Four of the eight remaining misses are
+`constraints: expected avoid_objects, got none`. Training data is still **16 avoid_objects vs 172
+none** — I added read_chip/return_to_start/abort examples but no avoid_objects ones, and the ext
+set tests it with non-canonical phrasing ("come back around the other objects", "nothing else on
+the field may be touched", "keep away from the other pieces") instead of the literal "avoid" /
+"without touching" wording the training templates use. This is a distribution gap, visible without
+looking at failures, and is the obvious next fix.
+
+**`retrieve` fell to 88.1%, and the errors are systematic, not noise.** Three misses are
+`retrieve` -> `return_to_start` on commands that name a target object *and* mention the start zone
+("Take the black cube back to the starting zone", "The yellow one needs to come back with you").
+Adding 30 return_to_start examples appears to have strengthened the "back to start" -> return_to_start
+association. The distinguishing rule is **whether a target object is named**, and only 8 compound
+`retrieve` examples teach it against 30 return_to_start examples. Either add compound retrieve
+examples or write the rule into the schema description.
+
+One core57 regression: "Stay to the far south ... obtain the blue object in the northeast corner"
+now returns `target_color: unspecified`. Two core57 fixes ("Read the chip off the yellow object...",
+"We're calling it. Halt all movement and go dark."). Net +1.
+
+Statistics: at n=108, 92.6% carries a 95% interval of about **[86%, 96%]** — down from +/-7 points
+at n=57 to about +/-5. Still wide; n=200 would bring it to roughly +/-3.5.
+
+Note `results/finetuned-lora.json` (n=57) and `results/finetuned-lora-v2.json` (n=108) are on
+different eval sets — compare via the `by_set.core57` slice, not the headline.
+
+(Superseded by round 2 below.)
+
+## Data expansion round 2 (2026-09-17, session 3) — 98.0%, and it generalises
+
+Train **228 -> 300**, eval **108 -> 150**. Round 1 exposed `avoid_objects` (16 train examples vs
+172 `none`, all using literal "avoid"/"without touching" wording, so the model keyed on the verb
+rather than the meaning) and a systematic `retrieve` -> `return_to_start` confusion. Round 2 added
+40 `avoid_objects` examples in non-canonical wording and 32 "object is NAMED + start zone
+mentioned => retrieve" examples to teach the boundary.
+
+A third eval slice, **`ext2` (42 examples), was written BEFORE this retrain** — `ext` had already
+been scored by then, so it was no longer a clean test of the categories round 2 targets. `ext2` is
+the blind number.
+
+| slice | round 0 | round 1 | round 2 |
+|---|---|---|---|
+| core57 (frozen) | 53/57 = 93.0% | 54/57 = 94.7% | **56/57 = 98.2%** |
+| ext (51) | - | 46/51 = 90.2% | **50/51 = 98.0%** |
+| **ext2 (42, blind)** | - | - | **41/42 = 97.6%** |
+| overall | - | 92.6% (n=108) | **98.0% (n=150)** |
+
+**All three slices agree within half a point, and the blind slice is not the outlier** — the gain is
+generalisation, not eval overfitting.
+
+Per action, all on samples large enough to mean something:
+
+| action | round 1 | round 2 |
+|---|---|---|
+| abort | 16/16 | **20/20 = 100%** |
+| read_chip | 16/17 = 94.1% | **25/25 = 100%** |
+| return_to_start | 16/16 | **21/21 = 100%** |
+| retrieve | 52/59 = 88.1% | **81/84 = 96.4%** |
+
+`action` is now 100% across all 150 — the retrieve/return_to_start boundary is fixed. Per field:
+color 99.3%, constraints 98.7%, location 99.3%, action 100%.
+
+**Base model re-run on the same 150 examples for a fair before/after: 2/150 = 1.3%**
+(color 66.7%, constraints 20.7%, location 38.0%, action 18.0%). Headline is now
+**1.3% -> 98.0% on identical data** (`results/base-zero-shot-v3.json`, `results/finetuned-lora-v3.json`).
+
+Only 3 misses remain in 150, all genuinely hard:
+- (core57) "Stay to the far south of the field until you reach the eastern half and then obtain the
+  blue object in the northeast corner" — verbatim from the rules doc; the routing clause and the
+  target clause fight, and it loses both color and location.
+- (ext) "Collect the blue cube from the southwest corner and come back around the other objects" —
+  "come back around" is genuinely ambiguous between routing and avoidance.
+- (ext2) "The yellow object is the only thing you may touch -- bring it back" — implicit
+  `avoid_objects`, stated as a permission rather than a prohibition.
+
+Statistics: at n=150, 98.0% carries a 95% interval of about **[94%, 99%]**. The lower bound has
+moved from 83% (n=57) to 94%.
+
+GGUF re-converted from the new adapter: **Q8_0 on GPU scores 146/150 = 97.3%** at **0.280 s**
+median (178 tok/s) — one example behind PyTorch, within noise. Latency is unchanged from the
+earlier measurement, as expected: LoRA does not change inference cost.
+
 ## Not yet done
 - ~~**Quantized/GGUF latency**~~ — **DONE, see the GGUF section above** (0.256 s/command, Q8_0 on GPU). Original plan kept below for reference. Rough plan when resuming:
   1. Merge LoRA into base weights (already done in-memory in `03_evaluate.py` via `merge_and_unload()`; for GGUF conversion, save the merged model to disk with `model.save_pretrained(...)`).

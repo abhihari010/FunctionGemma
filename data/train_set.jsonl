@@ -226,3 +226,75 @@
 {"text": "Pick up the red target, then return to the starting zone.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
 {"text": "Pick up the yellow target, then return to the starting zone.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
 {"text": "Pick up the black target, then return to the starting zone.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring back the blue die and make sure you don't bump any of the other objects.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring back the red box and make sure you don't bump any of the other objects.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring back the yellow cube and make sure you don't bump any of the other objects.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring back the black block and make sure you don't bump any of the other objects.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the blue target, nothing else on the field may be contacted.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the red target, nothing else on the field may be contacted.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the yellow target, nothing else on the field may be contacted.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Collect the black target, nothing else on the field may be contacted.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Get the blue target home without making contact with any other piece.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Get the red target home without making contact with any other piece.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Get the yellow target home without making contact with any other piece.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Get the black target home without making contact with any other piece.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The blue object is yours -- leave every other item untouched.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The red object is yours -- leave every other item untouched.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The yellow object is yours -- leave every other item untouched.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The black object is yours -- leave every other item untouched.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the blue die, steer around the rest of the objects.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the red box, steer around the rest of the objects.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the yellow cube, steer around the rest of the objects.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Pick up the black block, steer around the rest of the objects.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Recover the blue target and stay clear of the other dice.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Recover the red target and stay clear of the other dice.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Recover the yellow target and stay clear of the other dice.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Recover the black target and stay clear of the other dice.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Fetch the blue object; the other pieces are off limits.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Fetch the red object; the other pieces are off limits.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Fetch the yellow object; the other pieces are off limits.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Fetch the black object; the other pieces are off limits.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the blue block and keep the remaining objects undisturbed.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the red die and keep the remaining objects undisturbed.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the yellow box and keep the remaining objects undisturbed.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Retrieve the black cube and keep the remaining objects undisturbed.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Grab the blue target in the northwest corner and keep off the other objects.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "NW", "action": "retrieve"}}
+{"text": "Grab the red target in the northeast corner and keep off the other objects.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "NE", "action": "retrieve"}}
+{"text": "Grab the yellow target in the southwest corner and keep off the other objects.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "SW", "action": "retrieve"}}
+{"text": "Grab the black target in the southeast corner and keep off the other objects.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "SE", "action": "retrieve"}}
+{"text": "Collect the blue box from the northeast section without disturbing anything else.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "NE", "action": "retrieve"}}
+{"text": "Collect the red cube from the southwest section without disturbing anything else.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "SW", "action": "retrieve"}}
+{"text": "Collect the yellow block from the southeast section without disturbing anything else.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "SE", "action": "retrieve"}}
+{"text": "Collect the black die from the northwest section without disturbing anything else.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "NW", "action": "retrieve"}}
+{"text": "Escort the blue die back to the starting zone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Escort the red box back to the starting zone.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Escort the yellow cube back to the starting zone.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Escort the black block back to the starting zone.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The blue object comes back with the vehicle.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The red object comes back with the vehicle.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The yellow object comes back with the vehicle.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The black object comes back with the vehicle.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Move the blue target to the start point and leave it there.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Move the red target to the start point and leave it there.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Move the yellow target to the start point and leave it there.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Move the black target to the start point and leave it there.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Transport the blue block to the starting square.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Transport the red die to the starting square.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Transport the yellow box to the starting square.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Transport the black cube to the starting square.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Walk the blue object back to base.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Walk the red object back to base.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Walk the yellow object back to base.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Walk the black object back to base.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Ferry the blue target to the start line.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Ferry the red target to the start line.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Ferry the yellow target to the start line.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Ferry the black target to the start line.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The blue cube goes back to the starting zone with you.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The red block goes back to the starting zone with you.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The yellow die goes back to the starting zone with you.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "The black box goes back to the starting zone with you.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring the blue piece in to the start.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring the red piece in to the start.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring the yellow piece in to the start.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}
+{"text": "Bring the black piece in to the start.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}}

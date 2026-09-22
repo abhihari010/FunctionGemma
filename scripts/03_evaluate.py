@@ -110,6 +110,14 @@ def main():
             "exact_match": is_exact, "latency_s": lat,
         })
 
+    def accuracy_by(key):
+        groups = {}
+        for row, ex in zip(eval_rows, per_example):
+            hits, total = groups.get(key(row), (0, 0))
+            groups[key(row)] = (hits + ex["exact_match"], total + 1)
+        return {k: {"exact_match": hits / total, "n": total}
+                for k, (hits, total) in sorted(groups.items())}
+
     summary = {
         "label": label,
         "n_examples": n,
@@ -117,6 +125,11 @@ def main():
         "per_field_accuracy": {f: field_correct[f] / n for f in FIELDS},
         "batch_size": args.batch_size,
         "wall_clock_s": wall_clock_s,
+        # accuracy sliced two ways: by eval_set.jsonl's "set" tag (core57 = the frozen
+        # original 57, ext = later coverage additions) and by expected action, because a
+        # headline average hides a weak class -- read_chip once sat at 2/3 unnoticed
+        "by_set": accuracy_by(lambda row: row.get("set", "all")),
+        "by_action": accuracy_by(lambda row: row["expected"]["action"]),
         # at --batch-size 1 this is true per-request latency; above that it is batch time
         # amortised per example (throughput), which is NOT a latency number for the report
         "latency_s": {
