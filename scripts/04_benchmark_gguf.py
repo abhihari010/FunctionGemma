@@ -23,11 +23,14 @@ from schema import FUNCTION_SCHEMA, FIELDS, build_messages, parse_function_call
 MODEL_ID = "google/functiongemma-270m-it"
 
 
+EVAL_SET = "data/eval_set.jsonl"
+
+
 def build_prompts():
     """Render + tokenize with the HF tokenizer so llama.cpp gets identical ids."""
     processor = AutoProcessor.from_pretrained(MODEL_ID)
     tokenizer = processor.tokenizer if hasattr(processor, "tokenizer") else processor
-    with open("data/eval_set.jsonl", encoding="utf-8") as f:
+    with open(EVAL_SET, encoding="utf-8") as f:
         rows = [json.loads(line) for line in f]
     for row in rows:
         text = processor.apply_chat_template(
@@ -57,6 +60,8 @@ def completion(port, ids, max_new_tokens, cache_prompt):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--eval-set", default="data/eval_set.jsonl",
+                        help="eval set to score against")
     parser.add_argument("--port", type=int, default=8080)
     parser.add_argument("--label", default="gguf")
     parser.add_argument("--max-new-tokens", type=int, default=128)
@@ -66,6 +71,8 @@ def main():
                              "comparable to the PyTorch eval, which re-prefills every time)")
     args = parser.parse_args()
 
+    global EVAL_SET
+    EVAL_SET = args.eval_set
     rows = build_prompts()
     completion(args.port, rows[0]["ids"], args.max_new_tokens, args.cache_prompt)  # warm
 
