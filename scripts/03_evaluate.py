@@ -23,6 +23,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--adapter", default=None, help="path to a LoRA adapter dir; omit for base model")
     parser.add_argument("--label", default=None, help="name for this run in the results file")
+    # data/heldout_set.jsonl is the fresh set written after eval_set.jsonl had been
+    # used for model selection three times and stopped being a clean estimate
+    parser.add_argument("--eval-set", default="data/eval_set.jsonl",
+                        help="eval set to score against")
     parser.add_argument("--max-new-tokens", type=int, default=128)
     parser.add_argument("--batch-size", type=int, default=16,
                         help="prompts per generate() call. 1 = true single-request latency "
@@ -40,7 +44,7 @@ def main():
         model = model.merge_and_unload()
     model.eval()
 
-    eval_rows = load_eval_set()
+    eval_rows = load_eval_set(args.eval_set)
     n = len(eval_rows)
 
     def sync():

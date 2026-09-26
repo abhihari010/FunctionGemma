@@ -78,7 +78,12 @@ def main():
 
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
-        num_train_epochs=6,
+        # round 4 rebalanced the set by oversampling, 504 distinct rows -> 1511. At 6
+        # epochs that is ~4x the gradient exposure that already drove loss to 2e-5, i.e.
+        # memorising the duplicates rather than learning the new class balance. 2 epochs
+        # holds total optimizer steps near the 288 that converged before (~378 now), so
+        # what changes between runs is the class mix, not the amount of training.
+        num_train_epochs=2,
         per_device_train_batch_size=8,
         gradient_accumulation_steps=1,
         learning_rate=2e-4,

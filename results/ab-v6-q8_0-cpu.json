@@ -1,0 +1,3261 @@
+{
+  "summary": {
+    "label": "ab-v6-q8_0-cpu",
+    "n_examples": 202,
+    "cache_prompt": false,
+    "exact_match_accuracy": 0.9108910891089109,
+    "per_field_accuracy": {
+      "target_color": 1.0,
+      "constraints": 0.9306930693069307,
+      "target_location": 1.0,
+      "action": 0.9801980198019802
+    },
+    "latency_s": {
+      "mean": 0.7632070782178698,
+      "median": 0.75291819999984,
+      "min": 0.6900132999999187,
+      "max": 0.9975907000007282
+    },
+    "tokens_generated": {
+      "mean": 41.2029702970297,
+      "total": 8323
+    },
+    "decode_tok_per_s": 98.46297789073752,
+    "prompt_ms_median": 335.366,
+    "wall_clock_s": 154.1678298000097
+  },
+  "examples": [
+    {
+      "text": "Bring the blue die in and don't make contact with anything else out there.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red cube is the pickup -- everything else stays untouched.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Haul the yellow block back without brushing the other pieces.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black target only. Do not touch the rest.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Collect the blue object and keep the other dice exactly as they are.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Take the red die home, nothing else on that field gets moved.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Yellow is the pickup; the remaining objects must not be touched.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Get the black cube without laying a finger on the others.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Retrieve the blue block, and no contact with the rest of the field.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Red object comes in clean -- do not disturb the others.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Pull the yellow die out without shifting any of the other objects.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black cube is the objective, everything else is hands off.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Grab the blue target from the northwest and leave the others alone.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Red die in the southeast -- take it without touching the rest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Collect the yellow object in the northeast, no contact with the other pieces.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black block sits in the southwest; bring it in without disturbing anything.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Go get the blue die and bring it home.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red object is the target -- collect it.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the yellow cube in.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black block is what we want. Go fetch it.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Your pickup is the blue target.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Head out and collect the red die.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We want the yellow object retrieved.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Go after the black cube and return with it.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Blue is the objective this run.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Collect the red block and come home.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The yellow die is yours to bring back.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Go recover the black object.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Pick up the red cube and head for the start.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The yellow target needs collecting.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Blue object -- retrieve and return.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the black target back to the starting zone.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The blue die is in the northwest. Go get it.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Red cube, southeast corner -- collect it.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "You'll find the yellow object in the northeast.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black block is sitting in the southwest quadrant.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Our blue piece is down in the southeast somewhere.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red die is over in the northwest area.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Pick up the yellow cube in the southwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black object, northeast quarter. Bring it in.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Head northwest and collect the blue block.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red target waits in the southeast.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Yellow die is in the northeast corner -- retrieve it.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Go to the southwest and pick up the black cube.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Blue object is positioned in the northeast.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Retrieve the red block from the southwest corner.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The yellow target is in the northwest quadrant.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black die, southeast side. Go collect it.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Be advised: the blue die shifted to the southwest.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Red target has been repositioned to the northeast.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The yellow cube is no longer where it was; check the northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black object moved -- southeast quadrant now.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "New location on the blue target: northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red die got bumped over to the southwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Yellow object is now in the southeast section.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black cube has shifted to the northwest quarter.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Updated position, blue block: southwest side.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red target now sits in the northwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Yellow die relocated to the northeast area.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Black object's new spot is the southeast corner.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Shut it all down and don't move a wheel.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We're aborting. Stay silent and stay still.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "End the attempt right now, stay concealed.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Stop. No movement, no transmission.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scrap this run and hold where you sit.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Everything halts here -- remain hidden.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The attempt is cancelled. Freeze.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Power it down and stay out of view.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We've lost the window. Abort and hold.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "No more advancing, the run is dead.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Cease movement immediately and lie low.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Kill it here. Nothing moves.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Pack it in -- stop and stay dark.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "That's a scratch. Hold position, stay quiet.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Stop the run and remain undetected.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Abort the attempt, keep the system concealed.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Just come home, nothing to carry.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the vehicle in, we're not collecting.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Drive back to the start and stop there.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Return to the launch box, empty.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Head for the starting zone, leave the field alone.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We're resetting -- get the system back to start.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Come back in. No pickup.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring it home without anything.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Return the vehicle to the start, that's all.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Roll back to the starting square.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Make your way home, the run's over.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Get the rover back to base, nothing to bring.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Come back to the launch point now.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We're pulling it in. Back to start.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Return to the start area and wait.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the system in, we're finished searching.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Read the tag on the blue die and call it in.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We need the chip number off the red cube.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the yellow object's tag, don't lift it.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Take a chip reading from the black block.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Tag data on the blue target, that's all.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Get the code off the red die and stay there.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the yellow cube and report.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Chip read on the black object, leave it in place.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We want the tag ID from the blue block.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Read the red target's chip and hold.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Pull the code from the yellow die.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the black cube's tag and send it through.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Read the chip on the blue die in the northwest.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Tag scan on the red cube over in the southeast.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Get the chip code from the yellow object in the northeast.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the black block sitting in the southwest.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Chip data from the blue target in the southeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Read the tag on the red die in the northwest quadrant.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Tag reading on the yellow cube in the southwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the black object's chip in the northeast section.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The northwest is closed for this attempt.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Don't route through the southeast quarter.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Northeast corner is off the table now.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Keep the vehicle out of the southwest.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "That northwest section is barred.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Nothing goes through the southeast region.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Stay outside the northeast quadrant.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The southwest area is restricted from here.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Hold off the northwest quarter entirely.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Southeast is a no-entry zone this run.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Skip the northeast section on your route.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The southwest corner is blocked off.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Judges closed the northwest region.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Do not pass through the southeast area.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Northeast quarter is out of play.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Keep well outside the southwest section.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "You may handle the blue die and nothing besides it.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Clearance is for the red cube alone -- bring it in.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "The yellow object is the single item you're allowed to move.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Only the black block may be picked up.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Permission extends to the blue target and no further.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red die is the one object cleared for contact.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "You're authorised for the yellow cube only.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Black object alone is yours to take.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Contact is limited to the blue block.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "The red target is the only piece you may lift.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Just the yellow die is in scope for handling.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Restrict contact to the black cube.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Run the western edge on the way out, the blue die is in the northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Keep to the north side as you go, then collect the red cube from the southwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Move along the eastern boundary first; the yellow object is in the northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Track the southern edge, then pick up the black block in the northeast.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Approach up the western flank -- the blue target sits in the southeast.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Take the northern route out and grab the red die from the southwest corner.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Follow the eastern side down, then collect the yellow cube in the northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Cut across the southern half before retrieving the black object in the northeast.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Stay along the western boundary, the blue block is in the southeast quadrant.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Head up the northern edge; the red target is in the southwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Work the eastern margin, then take the yellow die from the northwest corner.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Come in along the southern side and collect the black cube in the northeast.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Give the other dice plenty of room while you collect the blue block.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Keep a gap from the rest of the objects and bring the red cube in.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Swing well wide of the other pieces to reach the yellow die.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Leave space around the other objects on your way to the black target.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Don't crowd the other dice -- collect the blue object and return.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Stay off the other pieces while you pull the red block out.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Take a wide line past the other objects and grab the yellow cube.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Keep separation from the rest of the field and bring the black die home.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Collect the blue die, working around whatever is in your way.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Get the red cube and pick a path through the clutter.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the yellow object in, steering past any obstruction you meet.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Retrieve the black block, negotiating any obstacles en route.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Fetch the blue target and handle whatever terrain you hit.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Go for the red die, routing past anything blocking you.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Collect the yellow cube and deal with obstructions as they come.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Bring the black object back, navigating whatever stands in the path.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Scan the blue die's chip and keep off the other objects.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Tag read on the red cube -- no contact with the rest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Get the chip code from the yellow block without touching the others.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Read the black object's tag; the other dice stay untouched.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Can you bring the blue die back for me?",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Could you read the tag on the red cube?",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Would you head back to the start now?",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Mind grabbing the yellow object from the northeast?",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Can we get the black block in without touching the others?",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Can you keep clear of the southwest corner?",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The blue target is to be collected and returned.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The red die's chip is to be scanned.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The northeast quadrant is to be avoided.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "All other objects are to be left untouched while the yellow cube is recovered.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The run is to be aborted immediately.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "The vehicle is to be returned to the start.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Blue. Northwest. Go.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Red cube. Chip only.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Abort.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Home. Now.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Yellow, southeast, no contact with the others.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Southwest closed.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "If the blue die is still in the northeast, bring it in.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Once you're clear of the start, collect the red object and return.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "After the reset, scan the yellow cube's tag.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Since the northwest is blocked, plan around it.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "NW",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Because the others must stay put, take only the black block.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "Whatever else you see, the black die is the only thing coming back.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": false
+    },
+    {
+      "text": "I'd like the blue object brought back, please.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "We'd rather you didn't enter the southeast quarter.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "avoid_regions",
+        "target_location": "SE",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Let's have the red die's chip read.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Best you come back to start now.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "I need you to stop everything and stay hidden.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true
+    },
+    {
+      "text": "Please bring the yellow cube in without disturbing the rest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "avoid_objects",
+        "target_location": "unspecified",
+        "action": "retrieve"
+      },
+      "exact_match": true
+    }
+  ]
+}

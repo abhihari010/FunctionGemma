@@ -1,0 +1,29 @@
+# GBNF grammar pinning the model to the exact tagged call it was fine-tuned to emit,
+# with every slot restricted to its schema enum (scripts/schema.py FUNCTION_SCHEMA).
+#
+# Why this exists: on the held-out set the model emitted action values that are not in the
+# schema at all -- "freeze" for "The attempt is cancelled. Freeze." and "skip_section" for
+# "Skip the northeast section on your route." It was copying words straight out of the input
+# into the slot. No amount of training data makes that impossible; a grammar does, and it
+# costs nothing at inference.
+#
+# Usage:
+#   llama-server -m gguf/<model>-q8_0.gguf --grammar-file gguf/leader_intent.gbnf
+# or per-request, by passing the file's contents as the "grammar" field.
+#
+# Field ORDER is fixed here because it is fixed in training (schema.py FIELDS and
+# 02_finetune_lora.py format_target both emit target_color, constraints, target_location,
+# action). If FIELDS is ever reordered, this grammar has to move with it.
+
+# NOTE: a rule body must stay on ONE line. GBNF treats a newline as the start of the next
+# rule, so splitting `args` across lines fails with "expecting name at ...".
+root ::= "<start_function_call>call:set_leader_intent{" args "}<end_function_call>"
+
+args ::= "target_color:" esc color esc "," "constraints:" esc constraints esc "," "target_location:" esc location esc "," "action:" esc action esc
+
+esc ::= "<escape>"
+
+color ::= "blue" | "red" | "yellow" | "black" | "unspecified"
+constraints ::= "avoid_objects" | "avoid_regions" | "none"
+location ::= "NW" | "NE" | "SW" | "SE" | "unspecified"
+action ::= "read_chip" | "retrieve" | "abort" | "return_to_start"
