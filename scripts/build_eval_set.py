@@ -362,6 +362,14 @@ EXT2_EXAMPLES = [
      ("red", "none", "SW", "retrieve")),
 ]
 
+# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
+# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
+# as originally written; collapse_constraints() maps them at write time, so the original
+# labelling intent stays readable and the change is one line to revert.
+def collapse_constraints(value):
+    return "none" if value == "avoid_objects" else value
+
+
 FIELDS = ("target_color", "constraints", "target_location", "action")
 
 def main():
@@ -377,6 +385,8 @@ def main():
 
     with open("data/eval_set.jsonl", "w", encoding="utf-8") as f:
         for text, labels, tag in tagged:
+            labels = tuple(collapse_constraints(v) if f == "constraints" else v
+                           for f, v in zip(FIELDS, labels))
             row = {"text": text, "expected": dict(zip(FIELDS, labels)), "set": tag}
             f.write(json.dumps(row) + "\n")
     print(f"wrote {len(tagged)} examples to data/eval_set.jsonl "

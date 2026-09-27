@@ -24,6 +24,6 @@ args ::= "target_color:" esc color esc "," "constraints:" esc constraints esc ",
 esc ::= "<escape>"
 
 color ::= "blue" | "red" | "yellow" | "black" | "unspecified"
-constraints ::= "avoid_objects" | "avoid_regions" | "none"
+constraints ::= "avoid_regions" | "none"
 location ::= "NW" | "NE" | "SW" | "SE" | "unspecified"
 action ::= "read_chip" | "retrieve" | "abort" | "return_to_start"

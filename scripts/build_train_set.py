@@ -14,9 +14,17 @@ NOUNS = ["die", "box", "cube", "block"]
 
 rows = []
 
+# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
+# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
+# as originally written; collapse_constraints() maps them at write time, so the original
+# labelling intent stays readable and the change is one line to revert.
+def collapse_constraints(value):
+    return "none" if value == "avoid_objects" else value
+
+
 def add(text, color, constraints, loc, action):
     rows.append({"text": text, "expected": {
-        "target_color": color, "constraints": constraints,
+        "target_color": color, "constraints": collapse_constraints(constraints),
         "target_location": loc, "action": action,
     }})
 
@@ -476,12 +484,10 @@ for i, template in enumerate(round4_read_chip_avoid_objects):
 # constraints from 63/24/13 to roughly 47/28/25, and actions from 71/14/8/8 to roughly
 # 57/17/13/13, without letting either axis collapse.
 TARGET_CELLS = {
-    ("abort", "none"): 0.13,
-    ("return_to_start", "none"): 0.13,
-    ("read_chip", "none"): 0.12,
-    ("read_chip", "avoid_objects"): 0.05,
-    ("retrieve", "none"): 0.09,
-    ("retrieve", "avoid_objects"): 0.23,
+    ("abort", "none"): 0.15,
+    ("return_to_start", "none"): 0.15,
+    ("read_chip", "none"): 0.18,
+    ("retrieve", "none"): 0.27,
     ("retrieve", "avoid_regions"): 0.25,
 }
 

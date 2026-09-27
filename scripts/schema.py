@@ -17,8 +17,16 @@ FUNCTION_SCHEMA = {
                 },
                 "constraints": {
                     "type": "string",
-                    "enum": ["avoid_objects", "avoid_regions", "none"],
-                    "description": "Explicit avoidance constraint stated in the command.",
+                    "enum": ["avoid_regions", "none"],
+                    # avoid_objects was removed from this enum: rules doc section 2.2 requires
+                    # that "All other objects on the mission field shall be avoided" on every
+                    # run, so it is a standing constraint, not something a judge can vary. The
+                    # model was spending its hardest decision on a value that is always true --
+                    # 22 of its 28 remaining field errors were the avoid_objects/none boundary,
+                    # and six different models in the cross-model benchmark missed the same
+                    # sentences. Object avoidance is now the autonomy stack's invariant; this
+                    # field only reports whether a REGION was placed off limits.
+                    "description": "Region-avoidance constraint stated in the command. Object avoidance is always required and is not reported here.",
                 },
                 "target_location": {
                     "type": "string",

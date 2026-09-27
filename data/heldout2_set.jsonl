@@ -14,24 +14,24 @@
 {"text": "The southeast strip has been retired.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SE", "action": "retrieve"}, "set": "heldout2"}
 {"text": "Northeast is a restricted band this round.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}, "set": "heldout2"}
 {"text": "Nothing of yours crosses the southwest.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "retrieve"}, "set": "heldout2"}
-{"text": "The blue die comes back; nothing near it gets moved.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Red cube only. The rest of the field is untouchable.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Fetch the yellow block, and let the other dice be.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Black target is the sole pickup, the others stay planted.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Bring the blue object in without upsetting the arrangement.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Take the red die and let everything else sit.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Yellow cube out, nothing else moves an inch.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Collect the black block; the others are not yours.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "The blue block is the extent of what you may touch.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Your remit covers the red die and nothing else.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "The yellow object is the whole of your clearance.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "You are cleared for the black cube, full stop.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Handling rights: the blue die, and that is all.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "The red target is where your permission ends.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Leave a margin around the other dice and collect the yellow block.", "expected": {"target_color": "yellow", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Keep off the rest of the field while you take the black object.", "expected": {"target_color": "black", "constraints": "avoid_objects", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
-{"text": "Tag the blue cube and let the others alone.", "expected": {"target_color": "blue", "constraints": "avoid_objects", "target_location": "unspecified", "action": "read_chip"}, "set": "heldout2"}
-{"text": "Chip read on the red block, the others stay put.", "expected": {"target_color": "red", "constraints": "avoid_objects", "target_location": "unspecified", "action": "read_chip"}, "set": "heldout2"}
+{"text": "The blue die comes back; nothing near it gets moved.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Red cube only. The rest of the field is untouchable.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Fetch the yellow block, and let the other dice be.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Black target is the sole pickup, the others stay planted.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Bring the blue object in without upsetting the arrangement.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Take the red die and let everything else sit.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Yellow cube out, nothing else moves an inch.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Collect the black block; the others are not yours.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "The blue block is the extent of what you may touch.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Your remit covers the red die and nothing else.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "The yellow object is the whole of your clearance.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "You are cleared for the black cube, full stop.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Handling rights: the blue die, and that is all.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "The red target is where your permission ends.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Leave a margin around the other dice and collect the yellow block.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Keep off the rest of the field while you take the black object.", "expected": {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
+{"text": "Tag the blue cube and let the others alone.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "heldout2"}
+{"text": "Chip read on the red block, the others stay put.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}, "set": "heldout2"}
 {"text": "Blue die, bring it in.", "expected": {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
 {"text": "The red object needs to come home.", "expected": {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}
 {"text": "Fetch the yellow block.", "expected": {"target_color": "yellow", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}, "set": "heldout2"}

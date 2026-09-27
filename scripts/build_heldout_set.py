@@ -386,6 +386,14 @@ HELDOUT2 = [
     ("Get it back to base, nothing retrieved.", ("unspecified", "none", "unspecified", "return_to_start")),
 ]
 
+# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
+# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
+# as originally written; collapse_constraints() maps them at write time, so the original
+# labelling intent stays readable and the change is one line to revert.
+def collapse_constraints(value):
+    return "none" if value == "avoid_objects" else value
+
+
 FIELDS = ("target_color", "constraints", "target_location", "action")
 
 # Above this similarity to any existing train/eval sentence, a "fresh" sentence is a
@@ -433,6 +441,8 @@ def build(tagged, out_path, extra_sources):
 
     with open(out_path, "w", encoding="utf-8") as f:
         for text, labels, tag in tagged:
+            labels = tuple(collapse_constraints(v) if f == "constraints" else v
+                           for f, v in zip(FIELDS, labels))
             row = {"text": text, "expected": dict(zip(FIELDS, labels)), "set": tag}
             f.write(json.dumps(row) + "\n")
     counts = collections.Counter(tag for _, _, tag in tagged)

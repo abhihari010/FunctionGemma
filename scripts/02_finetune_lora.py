@@ -83,9 +83,20 @@ def main():
         # memorising the duplicates rather than learning the new class balance. 2 epochs
         # holds total optimizer steps near the 288 that converged before (~378 now), so
         # what changes between runs is the class mix, not the amount of training.
-        num_train_epochs=2,
-        per_device_train_batch_size=8,
-        gradient_accumulation_steps=1,
+        # round 5 dropped avoid_objects from the schema, so less oversampling is needed to
+        # balance -- 1511 rows -> 828. 4 epochs keeps optimizer steps near the ~378 that
+        # converged in round 4 (828/8 * 4 = 414), so what changes between runs is the
+        # schema, not the amount of training.
+        num_train_epochs=4,
+        # 8x1 and 4x2 both died at step 1 with a raw "CUDA error: out of memory" from the
+        # driver (not torch's allocator) while nvidia-smi showed 7.4 GB free. On Windows WDDM
+        # a GPU allocation is backed by system RAM, and this machine was down to ~5.5 GB of
+        # 16.8 GB free, so the driver refused it. Measured peak at 1x8 is 2.17 GB and it runs
+        # clean. Effective batch is still 8, so optimizer steps and the training math are
+        # identical to rounds 3-4; only peak activation memory changed.
+        # If this ever OOMs again, free system RAM before lowering the effective batch.
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=8,
         learning_rate=2e-4,
         logging_steps=5,
         save_strategy="no",
