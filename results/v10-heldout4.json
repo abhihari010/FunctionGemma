@@ -1,0 +1,913 @@
+{
+  "summary": {
+    "label": "v10-heldout4",
+    "n_examples": 50,
+    "exact_match_accuracy": 0.9,
+    "per_field_accuracy": {
+      "target_color": 1.0,
+      "constraints": 1.0,
+      "target_location": 1.0,
+      "action": 0.9
+    },
+    "batch_size": 16,
+    "wall_clock_s": 9.31286689999979,
+    "by_set": {
+      "heldout4": {
+        "exact_match": 0.9,
+        "n": 50
+      }
+    },
+    "by_action": {
+      "abort": {
+        "exact_match": 0.6666666666666666,
+        "n": 6
+      },
+      "collect_target": {
+        "exact_match": 1.0,
+        "n": 18
+      },
+      "pause": {
+        "exact_match": 0.6666666666666666,
+        "n": 6
+      },
+      "read_chip": {
+        "exact_match": 0.9090909090909091,
+        "n": 11
+      },
+      "report_status": {
+        "exact_match": 1.0,
+        "n": 3
+      },
+      "resume": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "retry_read": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "retry_send": {
+        "exact_match": 1.0,
+        "n": 2
+      }
+    },
+    "latency_s": {
+      "mean": 0.18583047000021907,
+      "median": 0.13338252500034287,
+      "min": 0.11336499375011044,
+      "max": 1.1754873500030953
+    }
+  },
+  "examples": [
+    {
+      "text": "Correction, the blue die is in the southeast.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Update -- red cube now northwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "The yellow object has relocated to the northeast.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Ignore the earlier position; black block is southwest.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Turns out the blue target is northeast after all.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Latest: red object, southwest quadrant.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "The yellow die isn't where we said -- northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Position revised for the black cube: southeast.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "The blue block is in the northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Red die sits in the southwest quadrant.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "The yellow cube is over in the southeast.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Black object is up in the northwest area.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Blue target, northeast quarter.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "The red block is in the southwest.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Chip alone from the blue die.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Red cube -- tag, not the cube.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "We only want the yellow object's number.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Black die: code and nothing further.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Solely a chip reading on the blue target.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Read the red object, don't lift it.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "The yellow die's tag is the entire task.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Scan the black cube and that's it.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Just the blue die comes home with you.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "The red object alone needs bringing in.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Collect the yellow cube and nothing besides.",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Only the black block is coming back.",
+      "expected": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Report the code from the blue die.",
+      "expected": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Report how the run is going.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Send up the red target's tag number.",
+      "expected": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Send up a summary of your task.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "What does the yellow object's tag say?",
+      "expected": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Give me a picture of where you're at.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Stop a moment, I'll be back to you.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Halt for a bit, not finished.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Break for a second, more instructions coming.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Come to a stop briefly.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Quit what you're doing for now, stand by.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Down tools briefly, we resume shortly.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": false,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Stop a moment -- actually, we're done entirely.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": false,
+      "latency_s": 1.1754873500030953
+    },
+    {
+      "text": "Halt for good and stay concealed.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Break off, the attempt is finished.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Come to a stop and stay unseen.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.11336499375011044
+    },
+    {
+      "text": "Quit what you're doing, run's over.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 1.1754873500030953
+    },
+    {
+      "text": "Down tools, nothing further today.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": false,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Alright, back to it.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Continue from where you paused.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "That read didn't land -- again please.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.18703678124984435
+    },
+    {
+      "text": "Have another go at the chip.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "That send failed, go again.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    },
+    {
+      "text": "Transmit the code one more time.",
+      "expected": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "constraints": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "exact_match": true,
+      "latency_s": 0.13338252500034287
+    }
+  ]
+}

@@ -35,7 +35,33 @@ FUNCTION_SCHEMA = {
                 },
                 "action": {
                     "type": "string",
-                    "enum": ["read_chip", "retrieve", "abort", "return_to_start"],
+                    "enum": [
+                        "collect_target", "read_chip", "abort", "return_to_start",
+                        "report_status", "pause", "resume",
+                        "retry_read", "retry_send",
+                    ],
+                    # "retrieve" was renamed to "collect_target". The proposed rename was
+                    # retrieve_target/retrieve_message, but the one error left in 282 clean
+                    # examples is read_chip misread as retrieve -- giving those two a shared
+                    # "retrieve_" prefix adds token overlap to exactly the pair that already
+                    # confuses. collect_target moves them apart instead.
+                    #
+                    # BOUNDARY RULES, because several of these compete for the same wording:
+                    #   pause vs abort  -- pause expects to resume ("hold", "wait", "stand by",
+                    #     "hold one"); abort ends the run ("scrub", "we're done", "stay hidden").
+                    #     When a command only says "stop", the presence of concealment or
+                    #     finality language decides it, otherwise it is pause.
+                    #   A POSITION CORRECTION IS collect_target. Round 8 removed
+                    #     update_only: all 245 of its examples corrected the location of the
+                    #     target already being pursued, it never carried a constraint, and the
+                    #     state machine merges a partial update onto the active task anyway, so
+                    #     the action field never needed to encode it. Emit the fields the
+                    #     correction states and leave the rest "unspecified"; folding the label
+                    #     in lifted v9 from 95.94% to 97.00% across all five sets with no
+                    #     retraining. A volunteered fact about a NON-target object would need a
+                    #     separate flag, not an action slot -- no such example exists yet.
+                    #   retry_read/retry_send -- explicit repetition of a chip read or a
+                    #     transmit ("try that scan again", "resend the code").
                     "description": "The action the vehicle system should take.",
                 },
             },

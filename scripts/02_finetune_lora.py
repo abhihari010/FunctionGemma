@@ -87,7 +87,11 @@ def main():
         # balance -- 1511 rows -> 828. 4 epochs keeps optimizer steps near the ~378 that
         # converged in round 4 (828/8 * 4 = 414), so what changes between runs is the
         # schema, not the amount of training.
-        num_train_epochs=4,
+        # round 6 grew the set to 1282 rows (655 distinct) with the new actions. 3 epochs
+        # keeps optimizer steps near the ~414 that converged in round 5 (1282/8*3 = 481).
+        # round 7 grew the set to 1721 rows (821 distinct). 2 epochs keeps optimizer steps
+        # near the ~481 that converged in round 6 (1721/8*2 = 430).
+        num_train_epochs=2,
         # 8x1 and 4x2 both died at step 1 with a raw "CUDA error: out of memory" from the
         # driver (not torch's allocator) while nvidia-smi showed 7.4 GB free. On Windows WDDM
         # a GPU allocation is backed by system RAM, and this machine was down to ~5.5 GB of

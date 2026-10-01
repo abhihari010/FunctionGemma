@@ -11,17 +11,17 @@ MODEL_ID = "google/functiongemma-270m-it"
 
 QUICK_SAMPLES = [
     ("Retrieve the red box and bring it back to the starting zone.",
-     {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}),
+     {"target_color": "red", "constraints": "none", "target_location": "unspecified", "action": "collect_target"}),
     ("Abort the mission, remain undetected.",
      {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}),
     ("Avoid the northeast quarter of the field.",
-     {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "retrieve"}),
+     {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "collect_target"}),
     ("The yellow object has moved to the southwest corner.",
-     {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "retrieve"}),
+     {"target_color": "yellow", "constraints": "none", "target_location": "SW", "action": "collect_target"}),
     # object avoidance is a standing rule, not a reported constraint -- this example now shows
     # that such wording leaves the field at "none" (see scripts/schema.py)
     ("Get the blue box and avoid all other objects on the field.",
-     {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "retrieve"}),
+     {"target_color": "blue", "constraints": "none", "target_location": "unspecified", "action": "collect_target"}),
     ("Just scan the chip on the black object, don't bring it back.",
      {"target_color": "black", "constraints": "none", "target_location": "unspecified", "action": "read_chip"}),
     ("Return to the starting zone now, we're done.",
