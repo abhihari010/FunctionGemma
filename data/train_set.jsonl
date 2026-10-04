@@ -800,25 +800,79 @@
 {"text": "Report back on the mission, not the chip.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "report_status"}}
 {"text": "Tell me your state, not a code.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "report_status"}}
 {"text": "Stop for a moment, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Stop for good, we're done here.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Halt the task briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Halt the task, the run is over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Interrupt what you're doing, back shortly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Interrupt what you're doing and stay hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Cease for now, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Cease now, nothing more today.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Break off for a second, more coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Break off and keep out of sight.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Everything stops briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Everything stops, permanently.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Suspend for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Suspend the run and conceal yourself.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Cut the task for now, stand by.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Cut the task, we've lost clearance.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Freeze it for a minute, I'll call you back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Shut it down for a moment only.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Stop work temporarily.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Down tools for a second, not done yet.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop for good, we're done here.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Halt the task, the run is over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Interrupt what you're doing and stay hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Cease now, nothing more today.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Break off and keep out of sight.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Everything stops, permanently.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Suspend the run and conceal yourself.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
-{"text": "Cut the task, we've lost clearance.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Down tools for now, back shortly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Down tools, there's nothing more today.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Down tools a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Down tools -- we're done entirely.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Come to a stop for a short while.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Come to a stop, that's the run over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Come to a stop, I'll call you back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Come to a stop and stay out of sight.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop just there, I'll be back for you.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Stop there, we're finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop there a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Stop there and stay hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Knock it off for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Knock it off, run's scrubbed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Pack it in briefly, more to follow.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Pack it in, nothing more today.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Hold fire a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Hold fire, we're done.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Wrap up what you're doing for now.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Wrap up for good, clearance pulled.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Halt a tick -- no, call it, we're finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Abort -- wait, no, just hold there, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Hold on -- no, scrub it, we're out.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We're done -- correction, only a short hold.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Pause there -- correction, the run is over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Scrub the run -- actually just wait one, more coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Stand by -- actually forget it, nothing further.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Shut it down -- no, hold on, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Down tools a short while, we resume after.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Stop holding and get going.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Hold there, you'll resume in a minute.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "The pause is over, carry on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Wait one -- resuming soon, not yet.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "No more waiting -- continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Pause now, I'll call the resume myself.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Done pausing, back to the objective.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Right then, press ahead.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Press on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Crack on with it.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Crack on then.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Onwards.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Push on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Get on with it.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Away you go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "At it again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Walk it back to the start and halt.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Tools down. Stay right where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Come home and shut down.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Stop moving and stay put, run's over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Return to start, then hold.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Stay where you are, we're finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Back to the launch box and stop there.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
+{"text": "Don't come back -- just stop and hide.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Keep the vehicle out of the northwest corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NW", "action": "collect_target"}}
 {"text": "Keep the vehicle out of the northeast corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "NE", "action": "collect_target"}}
 {"text": "Keep the vehicle out of the southwest corner from here on.", "expected": {"target_color": "unspecified", "constraints": "avoid_regions", "target_location": "SW", "action": "collect_target"}}
@@ -1024,6 +1078,18 @@
 {"text": "Bring it to a halt and stay unseen.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "No more of this run -- stop moving.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Stay put, the attempt is over.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Shut down and hold, we have been flagged.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "That is the end of it. Stop and stay hidden.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Do not continue. Hold position.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cancel out and keep still.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Stop right there and stay dark.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We are pulling the run. Hold and conceal.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Abort now, hold your position and don't move.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "This run is scrubbed -- power down and stay put.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Cut the mission short, remain hidden where you are.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "We're done here, stop and stay concealed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Emergency stop -- abort and remain undetected.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
+{"text": "Mission's canceled, freeze and wait for further instructions.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "abort"}}
 {"text": "Drop the objective and make your way back to the starting zone.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
 {"text": "Recall the vehicle, bring it back to base now.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
 {"text": "That's enough for today, return the system to start.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "return_to_start"}}
@@ -1135,22 +1201,6 @@
 {"text": "Hold up a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Park it for now, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Sit tight for a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop and hold, I'll be right back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Hold position, more instructions coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Wait there, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Freeze, I need a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop for a moment, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Halt the task briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Interrupt what you're doing, back shortly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Cease for now, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Break off for a second, more coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Everything stops briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Suspend for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Cut the task for now, stand by.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Freeze it for a minute, I'll call you back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Shut it down for a moment only.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop work temporarily.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Down tools for a second, not done yet.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Hold on a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Wait there for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Pause the run, I'll come back to you.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
@@ -1170,22 +1220,6 @@
 {"text": "Hold up a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Park it for now, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Sit tight for a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop and hold, I'll be right back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Hold position, more instructions coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Wait there, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Freeze, I need a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop for a moment, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Halt the task briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Interrupt what you're doing, back shortly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Cease for now, we're not finished.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Break off for a second, more coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Everything stops briefly.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Suspend for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Cut the task for now, stand by.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Freeze it for a minute, I'll call you back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Shut it down for a moment only.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Stop work temporarily.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
-{"text": "Down tools for a second, not done yet.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Hold on a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Wait there for a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Pause the run, I'll come back to you.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
@@ -1200,6 +1234,11 @@
 {"text": "Temporarily stop, I'll tell you when to go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Just wait, don't do anything yet.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Stop for now, stand by for instructions.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Hold the task, more coming.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Pause right there.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Hold up a moment.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Park it for now, I'll be back.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
+{"text": "Sit tight for a second.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "pause"}}
 {"text": "Carry on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Resume the task.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Go ahead, continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
@@ -1224,6 +1263,16 @@
 {"text": "Back to work.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Carry on with the objective.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Continue on, same as before.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Right then, press ahead.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Press on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Crack on with it.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Crack on then.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Onwards.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Push on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Get on with it.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Away you go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "At it again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
+{"text": "Go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Carry on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Resume the task.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Go ahead, continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
@@ -1235,26 +1284,6 @@
 {"text": "Proceed.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Start again from where you stopped.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Resume, same objective.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Green light, carry on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Keep going with what you had.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Continue as before.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Go on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Unpause and continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Off you go again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Restart the task from where it paused.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "You're good to go.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Resume operations.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Get moving again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Back to work.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Carry on with the objective.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Continue on, same as before.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Carry on.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Resume the task.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Go ahead, continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Pick up where you left off.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "You're clear to continue.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Back to it.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
-{"text": "Continue the run.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "resume"}}
 {"text": "Try that scan again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "retry_read"}}
 {"text": "Read the chip one more time.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "retry_read"}}
 {"text": "That tag read failed -- do it again.", "expected": {"target_color": "unspecified", "constraints": "none", "target_location": "unspecified", "action": "retry_read"}}

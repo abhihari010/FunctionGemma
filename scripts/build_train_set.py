@@ -39,6 +39,21 @@ def add(text, color, constraints, loc, action):
         "target_location": loc, "action": collapse_action(action),
     }})
 
+# Contrast pairs teach "the modifier decides, not the idiom", which only works if both
+# halves stay 1:1. balance() oversamples pause at 3.4x and abort at 1.71x and duplicates from
+# the FRONT of each pool, so round 9's appended pairs came out 8 pause : 2 abort on
+# "down tools" -- the balancer silently undid the one property the pairs exist for. These
+# texts are therefore exempt: they appear exactly once and never get duplicated.
+NO_OVERSAMPLE = set()
+
+
+def add_pair(text_a, action_a, text_b, action_b):
+    """Add a minimal pair, exempt from oversampling so it stays 1:1."""
+    for t, a in ((text_a, action_a), (text_b, action_b)):
+        add(t, "unspecified", "none", "unspecified", a)
+        NO_OVERSAMPLE.add(t)
+
+
 # ---------- target retrieval (no location slot) ----------
 no_loc_templates = [
     ("Locate the {c} target and carry it back to the starting zone, avoid touching anything else.", "avoid_objects"),
@@ -662,8 +677,8 @@ pause_vs_abort_contrast = [
     ("Freeze, I need a moment.", "pause"),
     ("Freeze and stay concealed, mission scrubbed.", "abort"),
 ]
-for t, a in pause_vs_abort_contrast:
-    add(t, "unspecified", "none", "unspecified", a)
+for (t_a, a_a), (t_b, a_b) in zip(pause_vs_abort_contrast[::2], pause_vs_abort_contrast[1::2]):
+    add_pair(t_a, a_a, t_b, a_b)
 
 update_vs_collect_contrast = [
     ("The {c} {n} is now in the {lw} corner.", "update_only"),
@@ -800,9 +815,6 @@ pause_after_stop_verb = [
     "Stop work temporarily.",
     "Down tools for a second, not done yet.",
 ]
-for t in pause_after_stop_verb:
-    add(t, "unspecified", "none", "unspecified", "pause")
-
 # the abort half of the same openings, so the temporary marker is the only difference
 abort_after_stop_verb = [
     "Stop for good, we're done here.",
@@ -814,8 +826,113 @@ abort_after_stop_verb = [
     "Suspend the run and conceal yourself.",
     "Cut the task, we've lost clearance.",
 ]
-for t in abort_after_stop_verb:
-    add(t, "unspecified", "none", "unspecified", "abort")
+
+# round 7 wrote these two lists as matched openings ("the abort half of the same openings,
+# so the temporary marker is the only difference") but added them as independent rows, so
+# balance() oversampled the pause half 3.4x against the abort half's 1.71x and left
+# "down tools" at 6 pause : 2 abort -- the opposite of what a matched opening is for. The
+# first 8 align one-to-one with abort_after_stop_verb; pair those and exempt the 4 extras
+# so they cannot re-create the lean.
+for p_text, a_text in zip(pause_after_stop_verb, abort_after_stop_verb):
+    add_pair(p_text, "pause", a_text, "abort")
+for t in pause_after_stop_verb[len(abort_after_stop_verb):]:
+    add(t, "unspecified", "none", "unspecified", "pause")
+    NO_OVERSAMPLE.add(t)
+
+
+
+
+# ---------- round 9: the pause/abort boundary, driven by v10's actual errors ----------
+# 7 of v10's 18 errors sat on pause vs abort, and the cause was not the stop verb -- it was
+# that a NEUTRAL STOP IDIOM only ever appeared under one label. "down tools" existed 3 times
+# in round 7, all pause, so the model learned the idiom as the signal and ignored the
+# modifier: it read "Down tools, nothing further today" (abort) as pause. Same shape for
+# "come to a stop" and "stop there".
+#
+# So these are minimal pairs: identical idiom, the ONLY difference is the temporary vs final
+# marker. Anything that teaches the idiom itself to carry a label re-creates the bug, so both
+# halves must stay the same length -- if you add to one list, add to the other.
+neutral_stop_idiom = [
+    # (pause form, abort form) -- same opening, modifier decides
+    ("Down tools for now, back shortly.",        "Down tools, there's nothing more today."),
+    ("Down tools a moment.",                     "Down tools -- we're done entirely."),
+    ("Come to a stop for a short while.",        "Come to a stop, that's the run over."),
+    ("Come to a stop, I'll call you back.",       "Come to a stop and stay out of sight."),
+    ("Stop just there, I'll be back for you.",    "Stop there, we're finished."),
+    ("Stop there a second.",                     "Stop there and stay hidden."),
+    ("Knock it off for a moment.",               "Knock it off, run's scrubbed."),
+    ("Pack it in briefly, more to follow.",       "Pack it in, nothing more today."),
+    ("Hold fire a moment.",                      "Hold fire, we're done."),
+    ("Wrap up what you're doing for now.",        "Wrap up for good, clearance pulled."),
+]
+for p_text, a_text in neutral_stop_idiom:
+    add_pair(p_text, "pause", a_text, "abort")
+
+# v10 read "Stop a moment -- actually, we're done entirely." as pause: it took the first
+# clause and never reached the correction. A trailing clause OVERRIDES the opening, in both
+# directions, so neither direction becomes "whichever marker comes last wins" by default.
+mid_sentence_correction = [
+    ("Halt a tick -- no, call it, we're finished.",               "abort"),
+    ("Hold on -- no, scrub it, we're out.",                      "abort"),
+    ("Pause there -- correction, the run is over.",              "abort"),
+    ("Stand by -- actually forget it, nothing further.",         "abort"),
+    ("Abort -- wait, no, just hold there, I'll be back.",        "pause"),
+    ("We're done -- correction, only a short hold.",             "pause"),
+    ("Scrub the run -- actually just wait one, more coming.",    "pause"),
+    ("Shut it down -- no, hold on, we're not finished.",         "pause"),
+]
+# first 4 are abort, last 4 are pause -- pair them across so each label keeps equal weight
+for (t_a, a_a), (t_b, a_b) in zip(mid_sentence_correction[:4], mid_sentence_correction[4:]):
+    add_pair(t_a, a_a, t_b, a_b)
+
+# v10 read "Down tools briefly, we resume shortly." as resume: the literal word "resume" in a
+# pause sentence outranked the actual instruction. Same for "stop" inside a resume sentence.
+# These put each action's keyword inside the OTHER action's sentence.
+keyword_leak = [
+    ("Down tools a short while, we resume after.",           "pause"),
+    ("Hold there, you'll resume in a minute.",              "pause"),
+    ("Wait one -- resuming soon, not yet.",                 "pause"),
+    ("Pause now, I'll call the resume myself.",             "pause"),
+    ("Stop holding and get going.",                        "resume"),
+    ("The pause is over, carry on.",                        "resume"),
+    ("No more waiting -- continue.",                        "resume"),
+    ("Done pausing, back to the objective.",                "resume"),
+]
+for (t_a, a_a), (t_b, a_b) in zip(keyword_leak[:4], keyword_leak[4:]):
+    add_pair(t_a, a_a, t_b, a_b)
+
+# v10 hallucinated retry_press_on for "Right, press on." and retry_read for "Crack on." --
+# both absent from round 7. Bare two-word resume idioms with no object, which is exactly the
+# shape the retry_* classes own ("try that again"), so they need explicit coverage.
+resume_bare_idiom = [
+    "Right then, press ahead.",
+    "Press on.",
+    "Crack on with it.",
+    "Crack on then.",
+    "Onwards.",
+    "Push on.",
+    "Get on with it.",
+    "Away you go.",
+    "At it again.",
+    "Go.",
+]
+for t in resume_bare_idiom:
+    add(t, "unspecified", "none", "unspecified", "resume")
+
+# "Bring the rover in and stop." went to abort, and "Down tools. Stay where you are." went to
+# return_to_start -- a motion verb plus a stop verb. The motion verb decides.
+motion_vs_stop = [
+    ("Walk it back to the start and halt.",       "return_to_start"),
+    ("Come home and shut down.",                  "return_to_start"),
+    ("Return to start, then hold.",               "return_to_start"),
+    ("Back to the launch box and stop there.",    "return_to_start"),
+    ("Tools down. Stay right where you are.",     "abort"),
+    ("Stop moving and stay put, run's over.",     "abort"),
+    ("Stay where you are, we're finished.",       "abort"),
+    ("Don't come back -- just stop and hide.",    "abort"),
+]
+for (t_a, a_a), (t_b, a_b) in zip(motion_vs_stop[:4], motion_vs_stop[4:]):
+    add_pair(t_a, a_a, t_b, a_b)
 
 
 # Balancing one marginal skews the other: oversampling avoid_regions (always action
@@ -865,8 +982,14 @@ def balance(rows):
     would throw away coverage already paid for.
     """
     import collections
+    # exempt rows still land in `out` once (via list(rows)) but never enter a pool, so they
+    # are never duplicated. A cell holding exempt rows therefore overshoots its target by
+    # however many it holds -- single digits here, and keeping the pairs 1:1 is worth more
+    # than hitting the share exactly.
     pools = collections.defaultdict(list)
     for r in rows:
+        if r["text"] in NO_OVERSAMPLE:
+            continue
         e = r["expected"]
         pools[(e["action"], e["constraints"])].append(r)
 
