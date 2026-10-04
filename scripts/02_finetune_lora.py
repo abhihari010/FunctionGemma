@@ -2,10 +2,12 @@
 Trains on the exact tagged function-call format the base model natively
 emits (see scripts/schema.py), with loss masked to the completion span."""
 import json
+import os
 
 import torch
 from torch.utils.data import Dataset
 from transformers import AutoProcessor, AutoModelForCausalLM, Trainer, TrainingArguments
+from transformers.trainer_utils import get_last_checkpoint
 from peft import LoraConfig, get_peft_model
 
 from schema import FUNCTION_SCHEMA, FIELDS, build_messages
@@ -120,7 +122,14 @@ def main():
         gradient_accumulation_steps=8,
         learning_rate=2e-4,
         logging_steps=5,
-        save_strategy="no",
+        # Checkpoint every quarter so an interrupted run resumes instead of restarting. This
+        # run was lost three times in a row to things that had nothing to do with it -- the
+        # low-memory reaper, a closed session, and a machine crash -- each time ~15 minutes
+        # in with save_strategy="no", so nothing survived. Two checkpoints of LoRA weights
+        # plus optimizer state is ~100 MB, which is cheap against losing the run again.
+        save_strategy="steps",
+        save_steps=TARGET_STEPS // 4,
+        save_total_limit=2,
         report_to=[],
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
@@ -132,11 +141,27 @@ def main():
         train_dataset=dataset,
         data_collator=lambda batch: collate_fn(batch, tokenizer.pad_token_id),
     )
-    trainer.train()
+    # Pick up from the newest checkpoint in OUTPUT_DIR if one is there, else start fresh.
+    last = get_last_checkpoint(OUTPUT_DIR) if os.path.isdir(OUTPUT_DIR) else None
+    if last:
+        print(f"resuming from {last}")
+    trainer.train(resume_from_checkpoint=last)
 
     model.save_pretrained(OUTPUT_DIR)
     processor.save_pretrained(OUTPUT_DIR)
     print(f"saved LoRA adapter to {OUTPUT_DIR}")
+
+    # Delete the resume checkpoints now the run has finished. Without this a stale
+    # checkpoint-* from THIS run sits in OUTPUT_DIR and the auto-resume above would pick it
+    # up on the NEXT run, silently training the next round's data from the previous round's
+    # optimizer state. That is the same shape of bug as the epoch proxy: nothing errors, the
+    # number just quietly stops meaning what the comment says. A leftover checkpoint now
+    # means exactly one thing -- the run did not finish.
+    import shutil
+    for name in os.listdir(OUTPUT_DIR):
+        if name.startswith("checkpoint-"):
+            shutil.rmtree(os.path.join(OUTPUT_DIR, name))
+            print(f"  cleaned up {name}")
 
 
 if __name__ == "__main__":
