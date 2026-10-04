@@ -15,23 +15,78 @@ FUNCTION_SCHEMA = {
                     "enum": ["blue", "red", "yellow", "black", "unspecified"],
                     "description": "Color of the target object, or unspecified if no target object is named.",
                 },
-                "constraints": {
-                    "type": "string",
-                    "enum": ["avoid_regions", "none"],
-                    # avoid_objects was removed from this enum: rules doc section 2.2 requires
-                    # that "All other objects on the mission field shall be avoided" on every
-                    # run, so it is a standing constraint, not something a judge can vary. The
-                    # model was spending its hardest decision on a value that is always true --
-                    # 22 of its 28 remaining field errors were the avoid_objects/none boundary,
-                    # and six different models in the cross-model benchmark missed the same
-                    # sentences. Object avoidance is now the autonomy stack's invariant; this
-                    # field only reports whether a REGION was placed off limits.
-                    "description": "Region-avoidance constraint stated in the command. Object avoidance is always required and is not reported here.",
-                },
                 "target_location": {
                     "type": "string",
                     "enum": ["NW", "NE", "SW", "SE", "unspecified"],
+                    # v3 narrowed this back to its stated meaning. Through v11 it was
+                    # OVERLOADED: all 212 avoid_regions training rows carried the AVOIDED
+                    # region here with target_color unspecified, so a consumer reading
+                    # target_location=NW could not tell "go there" from "never go there".
+                    # Regions now live in constraint_region and this field is the target only.
                     "description": "Field quadrant of the target, or unspecified if not stated.",
+                },
+                "avoid_region": {
+                    "type": "string",
+                    "enum": ["NW", "NE", "SW", "SE", "N", "S", "E", "W", "none"],
+                    # v3 replaced the single `constraints` enum with one scalar field per
+                    # constraint. Reasons, in order of weight:
+                    #   1. A judge can state both at once ("stay in the north half, keep clear
+                    #      of the southwest corner") and a single-valued enum cannot hold it.
+                    #      A list could, but a list enlarges the output space to a power set,
+                    #      breaks the fixed-structure grammar that killed out-of-enum actions,
+                    #      and makes exact-match scoring order-dependent. Separate scalars get
+                    #      the expressiveness with none of that.
+                    #   2. It removes a whole class of impossible output. `constraints:
+                    #      avoid_regions` alongside an until_region was nonsense the grammar
+                    #      could not forbid; here there is no cross-field contradiction to
+                    #      train against.
+                    #   3. Per-field accuracy becomes diagnostic -- avoid and contain fail
+                    #      separately instead of hiding inside one `constraints` number.
+                    # "none" means no keep-out constraint was stated. There is deliberately no
+                    # value for "a region constraint with no region named": all 212
+                    # avoid_regions rows through v11 named a compass region, so the case is
+                    # unattested. If a judge ever says "avoid the shaded areas" with no
+                    # compass reference, this enum needs a value for it.
+                    "description": "Region the vehicle must keep out of, or none if no keep-out region was stated.",
+                },
+                "stay_region": {
+                    "type": "string",
+                    "enum": ["NW", "NE", "SW", "SE", "N", "S", "E", "W",
+                             "pathway", "none"],
+                    # Containment, the dual of avoid_region. The rules list it twice in their
+                    # own example Leader's Intent statements ("Stay to the far south of the
+                    # field until you reach the eastern half...", "...without touching other
+                    # objects or leaving the safe pathway"), so it is judge-issued, which is
+                    # the test for earning a slot.
+                    #
+                    # Halves (N/S/E/W) are here because the rules phrase constraints that way
+                    # -- "the far south of the field", "the eastern half" -- while targets are
+                    # only ever given by quadrant, which is why target_location stays
+                    # NW/NE/SW/SE. "pathway" carries "the safe pathway": a corridor the rules
+                    # name but never define geometrically, so it cannot be a compass value;
+                    # the autonomy stack resolves what the pathway is.
+                    #
+                    # NOT modelled here: staying inside the overall ALLOWED AREA. The rules
+                    # make that mandatory every run ("The system must stay within the allowed
+                    # area"), so like object avoidance it is a standing invariant, and putting
+                    # an always-true value in a field is exactly what made avoid_objects
+                    # harmful -- 22 of 28 remaining field errors sat on that boundary.
+                    "description": "Region the vehicle must remain inside, or none if no containment region was stated.",
+                },
+                "until_region": {
+                    "type": "string",
+                    "enum": ["NW", "NE", "SW", "SE", "N", "S", "E", "W", "none"],
+                    # The release condition on a containment constraint: where the vehicle has
+                    # to get to before stay_region stops applying ("stay to the far south UNTIL
+                    # YOU REACH THE EASTERN HALF"). Only meaningful alongside stay_region, and
+                    # "none" on every row without one -- including every avoid_region row,
+                    # since a keep-out region has no release condition in any rules example.
+                    # The grammar cannot enforce that dependency (GBNF has no cross-slot
+                    # conditions), so training carries it.
+                    #
+                    # No "pathway" value: a pathway is somewhere you remain, not somewhere you
+                    # arrive.
+                    "description": "Region that releases the stay_region constraint once reached, or none if the constraint has no stated end.",
                 },
                 "action": {
                     "type": "string",
@@ -65,12 +120,18 @@ FUNCTION_SCHEMA = {
                     "description": "The action the vehicle system should take.",
                 },
             },
-            "required": ["target_color", "constraints", "target_location", "action"],
+            "required": ["target_color", "avoid_region", "stay_region",
+                         "until_region", "target_location", "action"],
         },
     },
 }
 
-FIELDS = ("target_color", "constraints", "target_location", "action")
+# Serialization order. The three constraint fields sit together so a reader (and the grammar)
+# sees the whole constraint in one run. Sentinels: the region fields use "none" (no such
+# constraint); target_color and target_location keep "unspecified" (nothing stated), because
+# "no target named" is not the same claim as "no constraint imposed".
+FIELDS = ("target_color", "avoid_region", "stay_region", "until_region",
+          "target_location", "action")
 DEVELOPER_MESSAGE = "You are a model that can do function calling with the following functions"
 
 

@@ -12,18 +12,28 @@
 # or per-request, by passing the file's contents as the "grammar" field.
 #
 # Field ORDER is fixed here because it is fixed in training (schema.py FIELDS and
-# 02_finetune_lora.py format_target both emit target_color, constraints, target_location,
-# action). If FIELDS is ever reordered, this grammar has to move with it.
+# 02_finetune_lora.py format_target both emit target_color, avoid_region, stay_region,
+# until_region, target_location, action). If FIELDS is ever reordered, this grammar has to
+# move with it.
+#
+# v3 dropped the single `constraints` enum for one scalar field per constraint, so a judge
+# can state a keep-out region and a containment region in the same command without this
+# grammar needing a variable-length list. A grammar still cannot express that until_region
+# is only meaningful alongside a stay_region -- GBNF has no cross-slot conditions -- so it
+# permits an until_region on a row with stay_region:none. Training carries that rule; this
+# file only bounds the vocabulary.
 
 # NOTE: a rule body must stay on ONE line. GBNF treats a newline as the start of the next
 # rule, so splitting `args` across lines fails with "expecting name at ...".
 root ::= "<start_function_call>call:set_leader_intent{" args "}<end_function_call>"
 
-args ::= "target_color:" esc color esc "," "constraints:" esc constraints esc "," "target_location:" esc location esc "," "action:" esc action esc
+args ::= "target_color:" esc color esc "," "avoid_region:" esc aregion esc "," "stay_region:" esc sregion esc "," "until_region:" esc uregion esc "," "target_location:" esc location esc "," "action:" esc action esc
 
 esc ::= "<escape>"
 
 color ::= "blue" | "red" | "yellow" | "black" | "unspecified"
-constraints ::= "avoid_regions" | "none"
 location ::= "NW" | "NE" | "SW" | "SE" | "unspecified"
+aregion ::= "NW" | "NE" | "SW" | "SE" | "N" | "S" | "E" | "W" | "none"
+sregion ::= "NW" | "NE" | "SW" | "SE" | "N" | "S" | "E" | "W" | "pathway" | "none"
+uregion ::= "NW" | "NE" | "SW" | "SE" | "N" | "S" | "E" | "W" | "none"
 action ::= "collect_target" | "read_chip" | "abort" | "return_to_start" | "report_status" | "pause" | "resume" | "retry_read" | "retry_send"
