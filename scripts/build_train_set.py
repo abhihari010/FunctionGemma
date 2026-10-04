@@ -1283,6 +1283,165 @@ for i, template in enumerate(avoid_stay_round11):
             "unspecified", "none", "unspecified", "collect_target", stay=stay, avoid=ar)
 
 
+# ---------- round 12: polarity. Which way does the fence face? ----------
+# v14's failure mode is not v13's. v13 UNDER-FIRED, saying "none" when a constraint was
+# stated. v14 finds the constraint and reads the region off the sentence correctly, then puts
+# it in the WRONG FIELD, in both directions:
+#   "Anything outside the south half is out of bounds."  stay=S  -> avoid=S
+#   "The west half has been struck from the course."     avoid=W -> stay=W
+# Across all 740 examples v14 made exactly 1 wrong-region error and 31 trigger/slot errors.
+# So region extraction is solved and POLARITY is not.
+#
+# This is self-inflicted, and visible by auditing the training set alone -- no test data
+# needed. Rounds 10 and 11 handed both fields enclosure metaphors drawn from one vocabulary
+# and never contrasted them: "seal" appears on 8 avoid rows and 4 stay rows, "fenc" 8 and 4,
+# "limit" 8 and 21, "close" 8 and 4. Near-synonyms split across opposite fields with nothing
+# teaching the model which way each points.
+#
+# The fix is minimal pairs on polarity alone: same frame, same region, one word flipped. If
+# the model keys on vocabulary it must get one side of every pair wrong, so the pairs cannot
+# be satisfied by memorising words.
+#
+# Note on instruments: heldout8 was written BEFORE this block and tests complement
+# constructions ("everywhere except X", "all but X", "leaving vs entering"). Deliberately
+# none of those realisations appear here -- this block uses in/out, leave/enter, inside/
+# outside and "the only place / the one place". The 0.85 guard enforces it.
+
+# (a) the canonical pair: one preposition decides the field
+inout_pairs = [
+    ("Stay in the {hw} half.",                  "Stay out of the {hw} half."),
+    ("Keep inside the {hw} half.",              "Keep outside the {hw} half."),
+    ("Work inside the {hw} half.",              "Work clear of the {hw} half."),
+    ("You belong in the {hw} half.",            "You do not belong in the {hw} half."),
+    ("The {hw} half is where you may go.",      "The {hw} half is where you may not go."),
+    ("The only place you may be is the {hw} half.",
+     "The one place you may not be is the {hw} half."),
+]
+for stay_t, avoid_t in inout_pairs:
+    for h in HALVES:
+        w = HALF_WORDS[h]
+        add(stay_t.format(hw=w), "unspecified", "none", "unspecified",
+            "collect_target", stay=h)
+        add(avoid_t.format(hw=w), "unspecified", "avoid_regions", h, "collect_target")
+
+# (b) leave vs enter. Round 10 taught "Do not leave the {hw} half" as containment and never
+# taught its mirror, so "enter" had to be inferred from unrelated avoid wording.
+leave_enter_pairs = [
+    ("Do not exit the {hw} half.",              "Do not enter the {hw} half."),
+    ("Leaving the {hw} half is not allowed.",   "Entering the {hw} half is not allowed."),
+    ("No part of your route leaves the {hw} half.",
+     "No part of your route enters the {hw} half."),
+    ("Crossing out of the {hw} half is a fault.",
+     "Crossing into the {hw} half is a fault."),
+]
+for stay_t, avoid_t in leave_enter_pairs:
+    for h in HALVES:
+        w = HALF_WORDS[h]
+        add(stay_t.format(hw=w), "unspecified", "none", "unspecified",
+            "collect_target", stay=h)
+        add(avoid_t.format(hw=w), "unspecified", "avoid_regions", h, "collect_target")
+
+# (c) the same polarity contrast on QUADRANTS and with a target named, because v14's
+# target_location spill happened on exactly these rows: when it misread the polarity it
+# sometimes dropped the quadrant into target_location instead of either constraint field.
+quad_polarity_pairs = [
+    ("Stay in the {lw} corner. The {c} {n} is the pickup.",
+     "Stay out of the {lw} corner. The {c} {n} is the pickup."),
+    ("Keep inside the {lw} section, and bring in the {c} target.",
+     "Keep clear of the {lw} section, and bring in the {c} target."),
+    ("{C} object, and the {lw} quadrant is where you may work.",
+     "{C} object, and the {lw} quadrant is where you may not work."),
+    ("Do not exit the {lw} corner; the {c} {n} comes home.",
+     "Do not enter the {lw} corner; the {c} {n} comes home."),
+]
+for i, (stay_t, avoid_t) in enumerate(quad_polarity_pairs):
+    for j, c in enumerate(COLORS):
+        loc = LOCS[(i + j) % len(LOCS)]
+        kw = dict(c=c, C=c.capitalize(), lw=LOC_WORDS[loc], n=NOUNS[(i + j) % len(NOUNS)])
+        add(stay_t.format(**kw), c, "none", "unspecified", "collect_target", stay=loc)
+        add(avoid_t.format(**kw), c, "avoid_regions", loc, "collect_target")
+
+# (d) pathway polarity. "On the path" is containment; "off the path" is not a keep-out
+# region, it is the same containment stated negatively -- both are stay=pathway. This pair
+# exists to stop the model reading "off"/"not" as an avoid cue by itself.
+pathway_polarity = [
+    "Stay on the marked path.",
+    "Do not stray off the marked path.",
+    "On the corridor at all times.",
+    "Never off the corridor.",
+    "Inside the taped lane, always.",
+    "Not once outside the taped lane.",
+]
+for t in pathway_polarity:
+    add(t, "unspecified", "none", "unspecified", "collect_target", stay="pathway")
+
+# ---------- round 12: the stop-verb cluster ----------
+# 15 of v14's 19 action errors sit here: abort->pause 4, abort->return_to_start 3, and six
+# ways of mishandling resume. Every one turns on a cue that is NOT the verb -- the verb is
+# shared. So the verb is held constant and only the cue varies, three ways:
+#   pause            expects to resume        -> a time-limited modifier
+#   abort            ends the run in place    -> finality AND/OR concealment, no movement
+#   return_to_start  ends the run by coming home -> an explicit movement-to-base cue
+# Round 11 did pause/abort and abort/return as separate two-way pairs. Making it one
+# three-way frame per verb is the change: the model sees all three readings of the same
+# opening words, which is the only way the cue can be the thing it learns.
+STOP_TRIPLES = [
+    "Break off",
+    "Pack up",
+    "Wind it down",
+    "Call time",
+    "Ease up",
+    "Pull up",
+    "Shelve it",
+    "Put it down",
+]
+for verb in STOP_TRIPLES:
+    add(f"{verb} for a moment, I'll wave you on.",
+        "unspecified", "none", "unspecified", "pause")
+    add(f"{verb} where you stand and stay out of sight -- that's the attempt.",
+        "unspecified", "none", "unspecified", "abort")
+    add(f"{verb} and drive yourself back to the start.",
+        "unspecified", "none", "unspecified", "return_to_start")
+
+# (f) resume, with no operation named. v14 read resume as pause twice and as retry_send
+# twice. A retry names the thing being redone; a bare "go again" does not.
+resume_extra = [
+    "Back to work.", "Onwards.", "You may proceed.", "Resume the task.",
+    "Clear to continue.", "Carry on where you were.", "Moving again, please.",
+    "Hold's over -- go.", "Release -- continue the job.", "Pick up the task again.",
+]
+for t in resume_extra:
+    add(t, "unspecified", "none", "unspecified", "resume")
+
+# retry_read is the one cell still hitting the 4.0x oversample cap -- 29 distinct sentences
+# copied four times. More wording, not more copies.
+retry_read_extra = [
+    "The chip read came back empty, go again.",
+    "Scan failed. Repeat it.",
+    "Didn't catch the tag -- once more.",
+    "Bad read. Do that scan over.",
+    "The NFC didn't take, try it again.",
+    "Reread that chip for me.",
+    "That tag scan was no good, repeat.",
+    "Take another run at the chip read.",
+]
+for t in retry_read_extra:
+    add(t, "unspecified", "none", "unspecified", "retry_read")
+
+# (g) read_chip in a terse frame, still 2 errors in v14 and 3 in v13. The fragment shape
+# carries no verb, so a colour plus a noun reads as a retrieval.
+chip_extra = [
+    "{C} {n}, chip only.",
+    "{C} target -- the code, not the object.",
+    "Only the chip off the {c} {n}.",
+    "{C} object: read it where it sits.",
+]
+for i, template in enumerate(chip_extra):
+    for j, c in enumerate(COLORS):
+        add(template.format(c=c, C=c.capitalize(), n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", "unspecified", "read_chip")
+
+
 # v3 note: the cell key used to be (action, constraints), and `constraints` is gone. The
 # replacement collapses the three region fields to WHICH KIND of constraint is present,
 # which is what the balancing was ever about -- the specific region is already balanced by
@@ -1384,7 +1543,7 @@ def main():
     # near-duplicate. Cost is a slower difflib pass over 6 sets; worth it.
     sources = {name: f"data/{name}_set.jsonl" for name in
                ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5",
-                "heldout6", "heldout7")}
+                "heldout6", "heldout7", "heldout8")}
     existing = {}
     for name, path in sources.items():
         try:
@@ -1415,6 +1574,28 @@ def main():
                 print(f"  {ratio:.3f}")
                 print(f"    TRAIN  : {r}")
                 print(f"    {name.upper():7s}: {m}")
+
+    # "distinct" below counts AUTHORED rows, which is not the same as distinct sentences: a
+    # sentence written twice in two different template lists is two rows and gets double
+    # weight. v15 trained with 3 such pairs ("Back to work.", "Resume the task.", "How's it
+    # going out there?") -- all three agreed on their label, so this is weighting, not a
+    # labelling conflict, and 3 of 1554 is why it is reported rather than silently deduped:
+    # deduping here would change the output file and break reproducibility of a measured run.
+    # Conflicting labels WOULD be a real bug, so that case is fatal.
+    import collections as _c
+    text_counts = _c.Counter(r["text"] for r in rows)
+    dups = {t: n for t, n in text_counts.items() if n > 1}
+    if dups:
+        conflicting = {}
+        for t in dups:
+            labels = [r["expected"] for r in rows if r["text"] == t]
+            if any(x != labels[0] for x in labels):
+                conflicting[t] = labels
+        if conflicting:
+            raise SystemExit(f"same sentence, different labels: {conflicting}")
+        print(f"NOTE: {len(rows)} authored rows but {len(text_counts)} distinct sentences; "
+              f"{len(dups)} written twice (same label, so double weight only): "
+              + ", ".join(repr(t) for t in dups))
 
     balanced = balance(rows)
 

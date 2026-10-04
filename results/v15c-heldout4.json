@@ -1,0 +1,1115 @@
+{
+  "summary": {
+    "label": "v15c-heldout4",
+    "n_examples": 50,
+    "exact_match_accuracy": 0.94,
+    "per_field_accuracy": {
+      "target_color": 1.0,
+      "avoid_region": 0.98,
+      "stay_region": 1.0,
+      "until_region": 1.0,
+      "target_location": 0.98,
+      "action": 0.96
+    },
+    "batch_size": 16,
+    "wall_clock_s": 33.964038099999925,
+    "by_set": {
+      "heldout4": {
+        "exact_match": 0.94,
+        "n": 50
+      }
+    },
+    "by_action": {
+      "abort": {
+        "exact_match": 1.0,
+        "n": 6
+      },
+      "collect_target": {
+        "exact_match": 0.9444444444444444,
+        "n": 18
+      },
+      "pause": {
+        "exact_match": 1.0,
+        "n": 6
+      },
+      "read_chip": {
+        "exact_match": 0.8181818181818182,
+        "n": 11
+      },
+      "report_status": {
+        "exact_match": 1.0,
+        "n": 3
+      },
+      "resume": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "retry_read": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "retry_send": {
+        "exact_match": 1.0,
+        "n": 2
+      }
+    },
+    "latency_s": {
+      "mean": 0.6792614179999691,
+      "median": 0.6752077000001009,
+      "min": 0.6432057000001805,
+      "max": 0.8813356999999087
+    }
+  },
+  "examples": [
+    {
+      "text": "Correction, the blue die is in the southeast.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6793171999997867
+    },
+    {
+      "text": "Update -- red cube now northwest.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6616177999994761
+    },
+    {
+      "text": "The yellow object has relocated to the northeast.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6707096000000092
+    },
+    {
+      "text": "Ignore the earlier position; black block is southwest.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6801846999996997
+    },
+    {
+      "text": "Turns out the blue target is northeast after all.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6803673000003982
+    },
+    {
+      "text": "Latest: red object, southwest quadrant.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6703070999992633
+    },
+    {
+      "text": "The yellow die isn't where we said -- northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.680654400000094
+    },
+    {
+      "text": "Position revised for the black cube: southeast.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6723504999999932
+    },
+    {
+      "text": "The blue block is in the northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6707562000001417
+    },
+    {
+      "text": "Red die sits in the southwest quadrant.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.671852299999955
+    },
+    {
+      "text": "The yellow cube is over in the southeast.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6724598999999216
+    },
+    {
+      "text": "Black object is up in the northwest area.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6752077000001009
+    },
+    {
+      "text": "Blue target, northeast quarter.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.8813356999999087
+    },
+    {
+      "text": "The red block is in the southwest.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6705936999996993
+    },
+    {
+      "text": "Chip alone from the blue die.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.663780200000474
+    },
+    {
+      "text": "Red cube -- tag, not the cube.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6733625999995638
+    },
+    {
+      "text": "We only want the yellow object's number.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6774235000002591
+    },
+    {
+      "text": "Black die: code and nothing further.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6721970999997211
+    },
+    {
+      "text": "Solely a chip reading on the blue target.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6761639999995168
+    },
+    {
+      "text": "Read the red object, don't lift it.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.681774900000164
+    },
+    {
+      "text": "The yellow die's tag is the entire task.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6820254000003843
+    },
+    {
+      "text": "Scan the black cube and that's it.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6762680000001637
+    },
+    {
+      "text": "Just the blue die comes home with you.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6767595999999685
+    },
+    {
+      "text": "The red object alone needs bringing in.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6727995999999621
+    },
+    {
+      "text": "Collect the yellow cube and nothing besides.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6714440999994622
+    },
+    {
+      "text": "Only the black block is coming back.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6708202999998321
+    },
+    {
+      "text": "Report the code from the blue die.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6701222000001508
+    },
+    {
+      "text": "Report how the run is going.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.6686713999997664
+    },
+    {
+      "text": "Send up the red target's tag number.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6783999000008407
+    },
+    {
+      "text": "Send up a summary of your task.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.6724511000002167
+    },
+    {
+      "text": "What does the yellow object's tag say?",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6772510999999213
+    },
+    {
+      "text": "Give me a picture of where you're at.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.6830561999995552
+    },
+    {
+      "text": "Stop a moment, I'll be back to you.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6870270999997956
+    },
+    {
+      "text": "Halt for a bit, not finished.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6826311000004353
+    },
+    {
+      "text": "Break for a second, more instructions coming.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6785497999999279
+    },
+    {
+      "text": "Come to a stop briefly.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6432057000001805
+    },
+    {
+      "text": "Quit what you're doing for now, stand by.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.7098009000001184
+    },
+    {
+      "text": "Down tools briefly, we resume shortly.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6714992999995957
+    },
+    {
+      "text": "Stop a moment -- actually, we're done entirely.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6788455999994767
+    },
+    {
+      "text": "Halt for good and stay concealed.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.67530380000062
+    },
+    {
+      "text": "Break off, the attempt is finished.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6751611999998204
+    },
+    {
+      "text": "Come to a stop and stay unseen.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6741662000003998
+    },
+    {
+      "text": "Quit what you're doing, run's over.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6811354999999821
+    },
+    {
+      "text": "Down tools, nothing further today.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6772921000001588
+    },
+    {
+      "text": "Alright, back to it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.6643985999999131
+    },
+    {
+      "text": "Continue from where you paused.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.6742054000005737
+    },
+    {
+      "text": "That read didn't land -- again please.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.6831516000002011
+    },
+    {
+      "text": "Have another go at the chip.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.6753536999995049
+    },
+    {
+      "text": "That send failed, go again.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "exact_match": true,
+      "latency_s": 0.6742125999999189
+    },
+    {
+      "text": "Transmit the code one more time.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "exact_match": true,
+      "latency_s": 0.6746453999994628
+    }
+  ]
+}

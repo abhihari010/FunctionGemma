@@ -793,6 +793,88 @@ HELDOUT7 = [
     ("Out across the south half and back, nothing to collect.", ("unspecified", "none", "unspecified", "return_to_start"), "route_neg"),
 ]
 
+# Eighth clean slice, written BEFORE round 12's templates.
+#
+# heldout7 is spent: I read v14's error dump on it to diagnose the avoid<->stay polarity
+# confusion, so a round-12 gain there partly measures how well those failures were
+# paraphrased. Same bookkeeping as heldout6 before it. The treadmill is real and is called
+# out in the commit: every round costs an instrument, and the way off it is test data written
+# by someone who is not the author of the training set.
+#
+# COMPLEMENT CONSTRUCTIONS are the point of this set. v14's polarity errors were not random
+# -- they clustered on sentences that state a constraint by naming what is EXCLUDED rather
+# than what is permitted ("anything outside the south half is out of bounds" means stay=S,
+# not avoid=S). Each polarity pair below is the same words with the quantifier flipped, so
+# the only cue is scope, and a model that keys on vocabulary alone must fail one side.
+#
+# label tuple = (target_color, constraints, target_location, action[, stay, until, avoid])
+HELDOUT8 = [
+    # --- polarity_pair: identical frame, "everywhere except X" (stay) vs "X" (avoid) ---
+    ("Everywhere except the northern half is off the table.", ("unspecified", "none", "unspecified", "collect_target", "N"), "polarity_pair"),
+    ("The northern half is off the table.", ("unspecified", "avoid_regions", "N", "collect_target"), "polarity_pair"),
+    ("Anywhere other than the south half is a problem.", ("unspecified", "none", "unspecified", "collect_target", "S"), "polarity_pair"),
+    ("The south half is a problem -- route around it.", ("unspecified", "avoid_regions", "S", "collect_target"), "polarity_pair"),
+    ("All but the eastern half is denied to you.", ("unspecified", "none", "unspecified", "collect_target", "E"), "polarity_pair"),
+    ("The eastern half is denied to you.", ("unspecified", "avoid_regions", "E", "collect_target"), "polarity_pair"),
+    ("Everything but the west half is a lost cause.", ("unspecified", "none", "unspecified", "collect_target", "W"), "polarity_pair"),
+    ("The west half is a lost cause -- keep off it.", ("unspecified", "avoid_regions", "W", "collect_target"), "polarity_pair"),
+    ("Nothing beyond the northwest corner is permitted.", ("unspecified", "none", "unspecified", "collect_target", "NW"), "polarity_pair"),
+    ("Nothing within the northwest corner is permitted.", ("unspecified", "avoid_regions", "NW", "collect_target"), "polarity_pair"),
+    ("Leaving the southeast section is the violation.", ("unspecified", "none", "unspecified", "collect_target", "SE"), "polarity_pair"),
+    ("Entering the southeast section is the violation.", ("unspecified", "avoid_regions", "SE", "collect_target"), "polarity_pair"),
+
+    # --- polarity_single: one side only, mixed, with targets named ---
+    ("You're confined to the north half. Blue die.", ("blue", "none", "unspecified", "collect_target", "N"), "polarity_single"),
+    ("The north half is a dead zone. Blue die is still the pickup.", ("blue", "avoid_regions", "N", "collect_target"), "polarity_single"),
+    ("Red cube, and you're not to exit the southern half.", ("red", "none", "unspecified", "collect_target", "S"), "polarity_single"),
+    ("Red cube. You're not to enter the southern half.", ("red", "avoid_regions", "S", "collect_target"), "polarity_single"),
+    ("Yellow block is yours; the marked corridor is where you live.", ("yellow", "none", "unspecified", "collect_target", "pathway"), "polarity_single"),
+    ("Black object, and the northeast quarter is a write-off.", ("black", "avoid_regions", "NE", "collect_target"), "polarity_single"),
+    ("Restricted to the southwest corner. Yellow target.", ("yellow", "none", "unspecified", "collect_target", "SW"), "polarity_single"),
+    ("The southwest corner is restricted. Yellow target.", ("yellow", "avoid_regions", "SW", "collect_target"), "polarity_single"),
+
+    # --- stop_verbs: abort vs pause vs return_to_start. 15 of v14's 19 action errors are in
+    #     this cluster. Same opening, the modifier or the movement cue decides.
+    ("Cut the power -- briefly.", ("unspecified", "none", "unspecified", "pause"), "stop_verbs"),
+    ("Cut the power, we're finished.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Down you go, back shortly.", ("unspecified", "none", "unspecified", "pause"), "stop_verbs"),
+    ("Down you go for good, stay out of sight.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Drop everything and sit there a moment.", ("unspecified", "none", "unspecified", "pause"), "stop_verbs"),
+    ("Drop everything and sit there -- that's the run.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Drop everything and bring yourself back.", ("unspecified", "none", "unspecified", "return_to_start"), "stop_verbs"),
+    ("Enough. Freeze and keep hidden.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Enough. Trundle on back to the line.", ("unspecified", "none", "unspecified", "return_to_start"), "stop_verbs"),
+    ("Quit and hold, nobody should see you.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Quit and make for the start.", ("unspecified", "none", "unspecified", "return_to_start"), "stop_verbs"),
+    ("Simmer down a second, I'll call it.", ("unspecified", "none", "unspecified", "pause"), "stop_verbs"),
+    ("Simmer down, the attempt is void.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Go dark and don't move. We're out.", ("unspecified", "none", "unspecified", "abort"), "stop_verbs"),
+    ("Empty-handed, head for base.", ("unspecified", "none", "unspecified", "return_to_start"), "stop_verbs"),
+    ("Hold it -- I'll tell you when.", ("unspecified", "none", "unspecified", "pause"), "stop_verbs"),
+
+    # --- resume_retry: "again" without an operation is resume; retry names the scan or send ---
+    ("Wheels turning, please.", ("unspecified", "none", "unspecified", "resume"), "resume_retry"),
+    ("Take it from where you stopped.", ("unspecified", "none", "unspecified", "resume"), "resume_retry"),
+    ("You're released -- proceed.", ("unspecified", "none", "unspecified", "resume"), "resume_retry"),
+    ("That chip never came through. Again.", ("unspecified", "none", "unspecified", "retry_read"), "resume_retry"),
+    ("The tag needs rereading.", ("unspecified", "none", "unspecified", "retry_read"), "resume_retry"),
+    ("Nothing arrived on our end -- push the code out.", ("unspecified", "none", "unspecified", "retry_send"), "resume_retry"),
+    ("Broadcast those digits one more time.", ("unspecified", "none", "unspecified", "retry_send"), "resume_retry"),
+    ("Resume, and no need to rescan anything.", ("unspecified", "none", "unspecified", "resume"), "resume_retry"),
+
+    # --- controls: no constraint at all, and a plain read_chip. Over-firing detector: round 12
+    #     adds a lot of polarity vocabulary, which is the change most likely to make the model
+    #     see a constraint in a sentence that has none.
+    ("Collect the blue block and come back.", ("blue", "none", "unspecified", "collect_target"), "controls"),
+    ("Red die is in the northeast. Go.", ("red", "none", "NE", "collect_target"), "controls"),
+    ("Read the chip on the yellow object.", ("yellow", "none", "unspecified", "read_chip"), "controls"),
+    ("Black cube, southwest. Chip data, leave it be.", ("black", "none", "SW", "read_chip"), "controls"),
+    ("Swing wide around the southern half on your way to the blue target in the northeast.", ("blue", "none", "NE", "collect_target"), "controls"),
+    ("Your line runs the eastern half; the yellow die is in the northwest.", ("yellow", "none", "NW", "collect_target"), "controls"),
+    ("What are you working on?", ("unspecified", "none", "unspecified", "report_status"), "controls"),
+    ("Current task, please.", ("unspecified", "none", "unspecified", "report_status"), "controls"),
+]
+
 # Above this similarity to any existing train/eval sentence, a "fresh" sentence is a
 # paraphrase and the held-out set stops being held out. Tuned so the genuine
 # near-misses surface for inspection rather than silently passing.
@@ -983,6 +1065,12 @@ def main():
     build(HELDOUT7, "data/heldout7_set.jsonl",
           {f"heldout{i}": f"data/heldout{i}_set.jsonl".replace("heldout1_", "heldout_")
            for i in range(1, 7)})
+
+    # heldout8 replaces heldout7: round 12's templates are informed by v14's heldout7 error
+    # dump, which spends it. Checked against all seven.
+    build(HELDOUT8, "data/heldout8_set.jsonl",
+          {f"heldout{i}": f"data/heldout{i}_set.jsonl".replace("heldout1_", "heldout_")
+           for i in range(1, 8)})
 
 
 if __name__ == "__main__":

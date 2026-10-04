@@ -1,0 +1,1177 @@
+{
+  "summary": {
+    "label": "v14c-heldout8",
+    "n_examples": 52,
+    "exact_match_accuracy": 0.75,
+    "per_field_accuracy": {
+      "target_color": 1.0,
+      "avoid_region": 0.8653846153846154,
+      "stay_region": 0.8653846153846154,
+      "until_region": 1.0,
+      "target_location": 1.0,
+      "action": 0.9038461538461539
+    },
+    "batch_size": 16,
+    "wall_clock_s": 35.220806399999674,
+    "by_set": {
+      "controls": {
+        "exact_match": 0.875,
+        "n": 8
+      },
+      "polarity_pair": {
+        "exact_match": 0.5,
+        "n": 12
+      },
+      "polarity_single": {
+        "exact_match": 0.875,
+        "n": 8
+      },
+      "resume_retry": {
+        "exact_match": 0.625,
+        "n": 8
+      },
+      "stop_verbs": {
+        "exact_match": 0.875,
+        "n": 16
+      }
+    },
+    "by_action": {
+      "abort": {
+        "exact_match": 0.8571428571428571,
+        "n": 7
+      },
+      "collect_target": {
+        "exact_match": 0.6666666666666666,
+        "n": 24
+      },
+      "pause": {
+        "exact_match": 1.0,
+        "n": 5
+      },
+      "read_chip": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "report_status": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "resume": {
+        "exact_match": 0.5,
+        "n": 4
+      },
+      "retry_read": {
+        "exact_match": 1.0,
+        "n": 2
+      },
+      "retry_send": {
+        "exact_match": 0.5,
+        "n": 2
+      },
+      "return_to_start": {
+        "exact_match": 0.75,
+        "n": 4
+      }
+    },
+    "latency_s": {
+      "mean": 0.6773047903846313,
+      "median": 0.6733227999993687,
+      "min": 0.6414849000002505,
+      "max": 0.8978538999999728
+    }
+  },
+  "examples": [
+    {
+      "text": "Everywhere except the northern half is off the table.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6817604999996547
+    },
+    {
+      "text": "The northern half is off the table.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6713497000000643
+    },
+    {
+      "text": "Anywhere other than the south half is a problem.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "S",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6779595000007248
+    },
+    {
+      "text": "The south half is a problem -- route around it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "S",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "S",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.689574499999253
+    },
+    {
+      "text": "All but the eastern half is denied to you.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "E",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6706513999997696
+    },
+    {
+      "text": "The eastern half is denied to you.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "E",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "E",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6741847999992387
+    },
+    {
+      "text": "Everything but the west half is a lost cause.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "W",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6693692999997438
+    },
+    {
+      "text": "The west half is a lost cause -- keep off it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "W",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "W",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6812880999996196
+    },
+    {
+      "text": "Nothing beyond the northwest corner is permitted.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "NW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6633472000003167
+    },
+    {
+      "text": "Nothing within the northwest corner is permitted.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6630275000006804
+    },
+    {
+      "text": "Leaving the southeast section is the violation.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "SE",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6633062000000791
+    },
+    {
+      "text": "Entering the southeast section is the violation.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6672097000000576
+    },
+    {
+      "text": "You're confined to the north half. Blue die.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6807043999997404
+    },
+    {
+      "text": "The north half is a dead zone. Blue die is still the pickup.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.684428100000332
+    },
+    {
+      "text": "Red cube, and you're not to exit the southern half.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6833128999996916
+    },
+    {
+      "text": "Red cube. You're not to enter the southern half.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "S",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6776857000004384
+    },
+    {
+      "text": "Yellow block is yours; the marked corridor is where you live.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6837046000000555
+    },
+    {
+      "text": "Black object, and the northeast quarter is a write-off.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "NE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "NE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6799414999995861
+    },
+    {
+      "text": "Restricted to the southwest corner. Yellow target.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "SW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "SW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.674311900000248
+    },
+    {
+      "text": "The southwest corner is restricted. Yellow target.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "SW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "SW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6644328000002133
+    },
+    {
+      "text": "Cut the power -- briefly.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6435188999994352
+    },
+    {
+      "text": "Cut the power, we're finished.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6689923000003546
+    },
+    {
+      "text": "Down you go, back shortly.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6658058000002711
+    },
+    {
+      "text": "Down you go for good, stay out of sight.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6797187000001941
+    },
+    {
+      "text": "Drop everything and sit there a moment.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6676170000000639
+    },
+    {
+      "text": "Drop everything and sit there -- that's the run.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6732730000003357
+    },
+    {
+      "text": "Drop everything and bring yourself back.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 0.6724578000003021
+    },
+    {
+      "text": "Enough. Freeze and keep hidden.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.671377499999835
+    },
+    {
+      "text": "Enough. Trundle on back to the line.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true,
+      "latency_s": 0.6816000999997414
+    },
+    {
+      "text": "Quit and hold, nobody should see you.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.67669240000032
+    },
+    {
+      "text": "Quit and make for the start.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true,
+      "latency_s": 0.6720366999998078
+    },
+    {
+      "text": "Simmer down a second, I'll call it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6784808000002158
+    },
+    {
+      "text": "Simmer down, the attempt is void.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": false,
+      "latency_s": 0.683137799999713
+    },
+    {
+      "text": "Go dark and don't move. We're out.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": true,
+      "latency_s": 0.6871275000003152
+    },
+    {
+      "text": "Empty-handed, head for base.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": true,
+      "latency_s": 0.6674653000000035
+    },
+    {
+      "text": "Hold it -- I'll tell you when.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": true,
+      "latency_s": 0.6842806000004202
+    },
+    {
+      "text": "Wheels turning, please.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "pause"
+      },
+      "exact_match": false,
+      "latency_s": 0.6414849000002505
+    },
+    {
+      "text": "Take it from where you stopped.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 0.6710914999994202
+    },
+    {
+      "text": "You're released -- proceed.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.6733227999993687
+    },
+    {
+      "text": "That chip never came through. Again.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.6645876000002318
+    },
+    {
+      "text": "The tag needs rereading.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_read"
+      },
+      "exact_match": true,
+      "latency_s": 0.6557050999999774
+    },
+    {
+      "text": "Nothing arrived on our end -- push the code out.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "abort"
+      },
+      "exact_match": false,
+      "latency_s": 0.6714946000001873
+    },
+    {
+      "text": "Broadcast those digits one more time.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "retry_send"
+      },
+      "exact_match": true,
+      "latency_s": 0.6763018000001466
+    },
+    {
+      "text": "Resume, and no need to rescan anything.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "resume"
+      },
+      "exact_match": true,
+      "latency_s": 0.6846503999995548
+    },
+    {
+      "text": "Collect the blue block and come back.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6660710000005565
+    },
+    {
+      "text": "Red die is in the northeast. Go.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6726979000004576
+    },
+    {
+      "text": "Read the chip on the yellow object.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6666100000002189
+    },
+    {
+      "text": "Black cube, southwest. Chip data, leave it be.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "read_chip"
+      },
+      "exact_match": true,
+      "latency_s": 0.6765116999995371
+    },
+    {
+      "text": "Swing wide around the southern half on your way to the blue target in the northeast.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.6884337999999843
+    },
+    {
+      "text": "Your line runs the eastern half; the yellow die is in the northwest.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.6866757000007055
+    },
+    {
+      "text": "What are you working on?",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.6512238999994224
+    },
+    {
+      "text": "Current task, please.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "report_status"
+      },
+      "exact_match": true,
+      "latency_s": 0.8978538999999728
+    }
+  ]
+}
