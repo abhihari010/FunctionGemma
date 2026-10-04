@@ -681,6 +681,118 @@ HELDOUT6 = [
     ("Via the eastern half, please -- black piece, southwest corner.", ("black", "none", "SW", "collect_target"), "route_negative"),
 ]
 
+# Seventh clean slice, written BEFORE round 11's training data and BEFORE v14 trains.
+#
+# Round 10 is about to spend heldout6: the v13 error dump on that set is the input to round
+# 11's templates, so a later gain on heldout6 partly measures how well those failures were
+# paraphrased. heldout6 becomes a DEV set from here on and this file replaces it as the clean
+# instrument. That is the same trade round 9 made by accident with heldout3/heldout4; making
+# it deliberately, and writing the replacement first, is the whole difference.
+#
+# Honest limit on "clean": the guarantee is mechanical -- build() rejects any exact overlap
+# and reports anything >=0.85 similar to train/eval/heldout1-6. It is NOT "the author had
+# never seen this set", because the same author writes round 11 afterwards. Different idioms
+# were chosen deliberately; the similarity check is what actually enforces it.
+#
+# Every stratum targets a v13 failure mode, in INDEPENDENT wording from both round 10's
+# training templates and heldout6:
+#   stay_novel     - containment, a third distinct idiom family (19 missed on heldout6)
+#   pause_v_abort  - same opening verb, one modifier decides. 8 of v13's 23 action errors.
+#   abort_v_return - "stop AND stay put" is abort, not return_to_start (3 errors)
+#   resume_v_retry - "again" alone is resume; retry needs a read or a send (3 errors)
+#   chip_terse     - "chip only" in fragments (2 errors)
+#   avoid_halves   - keep-out stated as a half, not a quadrant (16 training rows only)
+#   route_neg      - route verbs, no constraint. Over-firing control; v13 scored 8/8.
+#
+# label tuple = (target_color, constraints, target_location, action[, stay, until, avoid])
+HELDOUT7 = [
+    # --- stay_novel: containment verbs unlike round 10's and unlike heldout6's ---
+    ("Keep it to the northern half, please.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_novel"),
+    ("The southern half is where you live this round.", ("unspecified", "none", "unspecified", "collect_target", "S"), "stay_novel"),
+    ("No leaving the eastern half. At all.", ("unspecified", "none", "unspecified", "collect_target", "E"), "stay_novel"),
+    ("You're penned into the western half.", ("unspecified", "none", "unspecified", "collect_target", "W"), "stay_novel"),
+    ("Work exclusively in the north half of the course.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_novel"),
+    ("Anything outside the south half is out of bounds.", ("unspecified", "none", "unspecified", "collect_target", "S"), "stay_novel"),
+    ("Restrict all movement to the east half.", ("unspecified", "none", "unspecified", "collect_target", "E"), "stay_novel"),
+    ("The west half is your envelope for this attempt.", ("unspecified", "none", "unspecified", "collect_target", "W"), "stay_novel"),
+    ("You may not exit the northern half.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_novel"),
+    ("Stick to the south half and bring in the blue die.", ("blue", "none", "unspecified", "collect_target", "S"), "stay_novel"),
+    ("The northwest quadrant is the play area -- red cube is the pickup.", ("red", "none", "unspecified", "collect_target", "NW"), "stay_novel"),
+    ("Treat the southeast corner boundary as hard. Yellow object.", ("yellow", "none", "unspecified", "collect_target", "SE"), "stay_novel"),
+    ("Inside the marked lane, always. Black block please.", ("black", "none", "unspecified", "collect_target", "pathway"), "stay_novel"),
+    ("The taped corridor contains you for the whole run.", ("unspecified", "none", "unspecified", "collect_target", "pathway"), "stay_novel"),
+    ("Penned to the eastern half until you make the northern half.", ("unspecified", "none", "unspecified", "collect_target", "E", "N"), "stay_novel"),
+    ("Keep it to the west half; the south half releases you.", ("unspecified", "none", "unspecified", "collect_target", "W", "S"), "stay_novel"),
+
+    # --- pause_v_abort: identical opening, a single modifier decides. These are the pairs. ---
+    ("Halt -- back shortly.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Halt -- that's final.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Standby mode, I'll call you.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Standby permanently, we're out.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Freeze for the moment.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Freeze -- mission terminated.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Suspend it, I'm not finished.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Suspend it, we're finished.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Hold fire, more coming.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Hold fire and stay dark, we're done.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Stall there a second.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Stall there, the run is over.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+    ("Downtime, brief.", ("unspecified", "none", "unspecified", "pause"), "pause_v_abort"),
+    ("Downtime, permanent.", ("unspecified", "none", "unspecified", "abort"), "pause_v_abort"),
+
+    # --- abort_v_return: both say "stop". The cue is whether the vehicle is told to STAY
+    #     where it is (abort) or to come home (return_to_start). v13 read three aborts as
+    #     returns despite explicit "hold where you sit" wording.
+    ("Knock it off and don't budge.", ("unspecified", "none", "unspecified", "abort"), "abort_v_return"),
+    ("Knock it off and come on home.", ("unspecified", "none", "unspecified", "return_to_start"), "abort_v_return"),
+    ("That's enough -- park it where it stands.", ("unspecified", "none", "unspecified", "abort"), "abort_v_return"),
+    ("That's enough -- drive it back to the line.", ("unspecified", "none", "unspecified", "return_to_start"), "abort_v_return"),
+    ("Wrap up and stay exactly there, out of sight.", ("unspecified", "none", "unspecified", "abort"), "abort_v_return"),
+    ("Wrap up and bring it in empty.", ("unspecified", "none", "unspecified", "return_to_start"), "abort_v_return"),
+    ("Jack it in. No movement, stay concealed.", ("unspecified", "none", "unspecified", "abort"), "abort_v_return"),
+    ("Jack it in and return to the starting square.", ("unspecified", "none", "unspecified", "return_to_start"), "abort_v_return"),
+
+    # --- resume_v_retry: "again" is the trap. Resuming a paused run is not retrying an
+    #     operation; a retry names the thing being redone (the scan, the transmission).
+    ("Away you go, pick up where you left off.", ("unspecified", "none", "unspecified", "resume"), "resume_v_retry"),
+    ("Put the reader back on that tag.", ("unspecified", "none", "unspecified", "retry_read"), "resume_v_retry"),
+    ("Push the code out again.", ("unspecified", "none", "unspecified", "retry_send"), "resume_v_retry"),
+    ("Back underway, carry on.", ("unspecified", "none", "unspecified", "resume"), "resume_v_retry"),
+    ("Fire it up once more and keep going.", ("unspecified", "none", "unspecified", "resume"), "resume_v_retry"),
+    ("The tag didn't take -- one more pass on it.", ("unspecified", "none", "unspecified", "retry_read"), "resume_v_retry"),
+    ("Transmission dropped, put it through once more.", ("unspecified", "none", "unspecified", "retry_send"), "resume_v_retry"),
+    ("You're clear to move again.", ("unspecified", "none", "unspecified", "resume"), "resume_v_retry"),
+
+    # --- chip_terse: read_chip stated as a fragment, the shape v13 read as collect_target
+    ("Blue block. Tag data only.", ("blue", "none", "unspecified", "read_chip"), "chip_terse"),
+    ("Red die, southeast -- data, not the object.", ("red", "none", "SE", "read_chip"), "chip_terse"),
+    ("Yellow object: scan, don't lift.", ("yellow", "none", "unspecified", "read_chip"), "chip_terse"),
+    ("Black cube. Read it, leave it.", ("black", "none", "unspecified", "read_chip"), "chip_terse"),
+    ("Just the numbers off the blue target.", ("blue", "none", "unspecified", "read_chip"), "chip_terse"),
+    ("Red piece in the northwest. Scan only.", ("red", "none", "NW", "read_chip"), "chip_terse"),
+
+    # --- avoid_halves: a keep-out region stated as a HALF. Training had 16 such rows and
+    #     v13 missed "fenced off" and "is scratched" on both.
+    ("The northern half is walled off for this attempt.", ("unspecified", "avoid_regions", "N", "collect_target"), "avoid_halves"),
+    ("Write off the south half, it's not in play.", ("unspecified", "avoid_regions", "S", "collect_target"), "avoid_halves"),
+    ("Keep every wheel out of the east half.", ("unspecified", "avoid_regions", "E", "collect_target"), "avoid_halves"),
+    ("The west half has been struck from the course.", ("unspecified", "avoid_regions", "W", "collect_target"), "avoid_halves"),
+    ("Blue die is the pickup; the northern half is barred.", ("blue", "avoid_regions", "N", "collect_target"), "avoid_halves"),
+    ("Grab the red cube. South half: forbidden.", ("red", "avoid_regions", "S", "collect_target"), "avoid_halves"),
+    ("Yellow object comes home and the east half stays empty of you.", ("yellow", "avoid_regions", "E", "collect_target"), "avoid_halves"),
+    ("We've closed the west half. Black block is still yours.", ("black", "avoid_regions", "W", "collect_target"), "avoid_halves"),
+
+    # --- route_neg: region words under route verbs, no constraint. Control stratum: v13
+    #     scored 8/8 here and round 11 adds containment breadth, which is exactly the change
+    #     most likely to break it by making the model trigger-happy.
+    ("Run the northern half on your way to the blue cube in the southeast.", ("blue", "none", "SE", "collect_target"), "route_neg"),
+    ("Approach over the south half; red object is in the northwest corner.", ("red", "none", "NW", "collect_target"), "route_neg"),
+    ("Your path cuts the east half -- yellow die is in the southwest.", ("yellow", "none", "SW", "collect_target"), "route_neg"),
+    ("Come through the west half to the black block in the northeast.", ("black", "none", "NE", "collect_target"), "route_neg"),
+    ("Transit the northern half, then read the chip on the blue target.", ("blue", "none", "unspecified", "read_chip"), "route_neg"),
+    ("Out across the south half and back, nothing to collect.", ("unspecified", "none", "unspecified", "return_to_start"), "route_neg"),
+]
+
 # Above this similarity to any existing train/eval sentence, a "fresh" sentence is a
 # paraphrase and the held-out set stops being held out. Tuned so the genuine
 # near-misses surface for inspection rather than silently passing.
@@ -865,6 +977,12 @@ def main():
     build(HELDOUT6, "data/heldout6_set.jsonl",
           {f"heldout{i}": f"data/heldout{i}_set.jsonl".replace("heldout1_", "heldout_")
            for i in range(1, 6)})
+
+    # heldout7 replaces heldout6 as the clean instrument: round 11's templates are written
+    # from v13's heldout6 error dump, which spends that set. Checked against all six.
+    build(HELDOUT7, "data/heldout7_set.jsonl",
+          {f"heldout{i}": f"data/heldout{i}_set.jsonl".replace("heldout1_", "heldout_")
+           for i in range(1, 7)})
 
 
 if __name__ == "__main__":

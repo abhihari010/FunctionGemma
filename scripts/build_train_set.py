@@ -983,6 +983,306 @@ for i, template in enumerate(route_not_containment):
             c, "none", loc, "collect_target")
 
 
+# ---------- round 11: construction breadth for the fields v13 under-fired ----------
+# v13 made 52 errors on 674 examples and they concentrate hard. Across ALL of them there were
+# ZERO wrong-region errors -- the model never maps a region to the wrong compass value. Every
+# region error was a trigger error: 19 stay_region missed, 4 spurious, 3 avoid_region missed,
+# 5 spurious, 1 until_region missed. So the region vocabulary is solid and what is missing is
+# recognising that a constraint was stated at all.
+#
+# This block is written from v13's heldout6 error dump, which SPENDS heldout6 as a clean
+# instrument -- a later gain there partly measures paraphrase quality. That is the trade round
+# 9 made by accident; heldout7 was written first, before any template below, to replace it.
+#
+# The failures were not missing verbs, they were missing CONSTRUCTIONS. Round 10 wrote eight
+# containment templates and every one of them is an imperative with an explicit containment
+# verb ("stay within", "do not leave"). v13 handled those and missed possessives ("your box
+# for this attempt is the southern half"), exclusives ("east half only"), bare fragments
+# ("South half. Nowhere else."), confirmations ("Is the north half my limit? Yes") and
+# drift verbs ("don't wander out of"). Breadth below is by construction, not by synonym.
+
+# (a) containment as POSSESSION / ASSIGNMENT -- the single biggest missed family
+stay_possessive = [
+    "The {hw} half is yours and nothing beyond it.",
+    "{HW} half is your area of operations this round.",
+    "You have the {hw} half, that is the lot.",
+    "Your working envelope is the {hw} half.",
+    "The {hw} half belongs to you; the rest does not.",
+    "{HW} half is the whole of your ground today.",
+]
+# (b) containment as EXCLUSIVE / "only"
+stay_exclusive = [
+    "{HW} half only.",
+    "The {hw} half, and only the {hw} half.",
+    "Nowhere but the {hw} half.",
+    "Strictly the {hw} half this attempt.",
+    "{HW} half exclusively, no exceptions.",
+]
+# (c) containment as a BARE FRAGMENT with a negation
+stay_fragment = [
+    "{HW} half. Nothing past it.",
+    "{HW} half -- hard edge.",
+    "{HW} half, and not a wheel outside.",
+    "{HW} half. That is the boundary.",
+]
+# (d) containment via DRIFT verbs (wander / stray / drift / creep)
+stay_drift = [
+    "Do not drift out of the {hw} half.",
+    "No wandering past the {hw} half.",
+    "Don't creep beyond the {hw} half.",
+    "Nothing strays outside the {hw} half.",
+]
+# (e) containment via ENCLOSURE metaphors
+stay_enclosure = [
+    "You are walled into the {hw} half.",
+    "Hemmed into the {hw} half for the duration.",
+    "The {hw} half is sealed around you.",
+    "Shut inside the {hw} half this run.",
+]
+# (f) containment as a CONFIRMATION or question-answer
+stay_confirm = [
+    "Can you leave the {hw} half? No.",
+    "Am I clear that the {hw} half is the cap? You are.",
+    "Is anything outside the {hw} half allowed? It is not.",
+]
+# (g) containment via LIMIT / CEILING nouns
+stay_limit = [
+    "The {hw} half is your limit.",
+    "Your ceiling is the {hw} half.",
+    "The {hw} half marks how far you go.",
+    "Outer bound: the {hw} half.",
+]
+for group in (stay_possessive, stay_exclusive, stay_fragment, stay_drift,
+              stay_enclosure, stay_confirm, stay_limit):
+    for i, template in enumerate(group):
+        for j, h in enumerate(HALVES):
+            add(template.format(hw=HALF_WORDS[h], HW=HALF_WORDS[h].capitalize(),
+                                hb=HALF_BARE[h]),
+                "unspecified", "none", "unspecified", "collect_target", stay=h)
+
+# (h) the same constructions on QUADRANTS and with a named target, because v13's worst
+# heldout6 stratum was stay_quad at 33% -- when it missed the containment it spilled the
+# quadrant into target_location, the round-3 "first direction wins" bias resurfacing.
+stay_quad_round11 = [
+    "The {lw} corner is yours and nothing beyond it -- {c} {n} is the pickup.",
+    "{LW} section only. Bring in the {c} target.",
+    "{LW} quadrant. Nothing past it. The {c} object comes home.",
+    "Do not drift out of the {lw} corner; the {c} {n} is in there.",
+    "You are walled into the {lw} section. Collect the {c} target.",
+    "Your limit is the {lw} quadrant, and the {c} {n} is what we want.",
+    "Can you leave the {lw} corner? No. {C} object, please.",
+    "{LW} corner is your whole ground. The {c} {n} is the objective.",
+]
+for i, template in enumerate(stay_quad_round11):
+    for j, c in enumerate(COLORS):
+        loc = LOCS[(i + j) % len(LOCS)]
+        add(template.format(c=c, C=c.capitalize(), lw=LOC_WORDS[loc],
+                            LW=LOC_WORDS[loc].capitalize(), n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", "unspecified", "collect_target", stay=loc)
+
+# (i) pathway in the same new constructions. v13 scored 50% on the pathway stratum with 12
+# training rows, all of them explicit "do not leave"/"keep to" imperatives.
+pathway_round11 = [
+    "The marked lane is yours and nothing either side of it.",
+    "Taped route only.",
+    "The corridor. Nothing outside it.",
+    "Do not drift off the safe pathway.",
+    "You are walled into the marked corridor.",
+    "Can you cut off the path? No.",
+    "Your limit is the edge of the safe pathway.",
+    "Designated route exclusively, no exceptions.",
+    "On the lane, and not a wheel either side.",
+    "The pathway is the boundary this run.",
+]
+for i, template in enumerate(pathway_round11):
+    add(template, "unspecified", "none", "unspecified", "collect_target", stay="pathway")
+
+# (j) avoid_region stated as a HALF. Round 10 gave this 16 rows and v13 missed "has been
+# fenced off" and "is scratched" -- the same construction-breadth gap, on the other field.
+# NOTE: heldout7's avoid_halves stratum was written first and uses "walled off", "write
+# off", "keep every wheel out", "struck from the course", "barred", "forbidden" and
+# "closed". A first draft of this list reused four of those and the overlap guard flagged
+# them at 0.86-0.96 against heldout7 -- the contamination this round was supposed to avoid,
+# caught by the check rather than by my reading. Vocabulary below is disjoint from it.
+avoid_half_round11 = [
+    "The {hw} half is a no-go for this run.",
+    "{HW} half is out of play.",
+    "Steer well away from the {hw} half.",
+    "Nothing of yours enters the {hw} half.",
+    "The {hw} half is suspended from the course.",
+    "{HW} half: no entry.",
+    "Give the {hw} half a wide berth.",
+    "The {hw} half is fenced off for the round.",
+    "Treat the {hw} half as a hazard zone.",
+    "The {hw} half is unavailable to you.",
+]
+for i, template in enumerate(avoid_half_round11):
+    for j, h in enumerate(HALVES):
+        add(template.format(hw=HALF_WORDS[h], HW=HALF_WORDS[h].capitalize()),
+            "unspecified", "avoid_regions", h, "collect_target")
+
+# ---------- round 11: action boundaries ----------
+# (k) pause vs abort MINIMAL PAIRS: identical opening, one modifier decides. 8 of v13's 23
+# action errors were this pair, 4 each way, and the deciding word was always a modifier
+# ("permanently", "temporarily", "briefly", "entirely").
+#
+# Writing them as pairs also fixes a ratio bug. pause had 35 distinct rows against abort's 62,
+# so balance() oversampled pause 3.6x and abort 1.8x and a 1:1 authored pair came out 2:1 in
+# the file. Round 9 built machinery to pin pair ratios and it bought 2 examples out of 566.
+# Growing the pause pool is the cheaper lever than new machinery -- but see (o) below: the
+# pairs alone did NOT equalise the factors, because they grow both pools at once.
+PAUSE_ABORT_PAIRS = [
+    ("Pens down.", "Pens down for good."),
+    ("Take five.", "Take the rest of the day, we're out."),
+    ("Idle it a moment.", "Kill it, we're through."),
+    ("Park it briefly.", "Park it, run's over."),
+    ("Breather -- back in a tick.", "Last call, we're finished."),
+    ("Hold station briefly.", "Hold station, mission scrubbed."),
+    ("Hang on, more to do.", "Hang on -- actually, bin the whole thing."),
+    ("Wait one.", "Wait -- no, scrap it entirely."),
+    ("Cool it for a minute.", "Cool it, the run is dead."),
+    ("Sit idle, I'll wave you on.", "Sit idle, nothing more is coming."),
+    ("Pause it there, not done.", "Pause it there -- permanently."),
+    ("Rest a beat.", "Rest easy, that's the end of it."),
+    ("Stop the clock, briefly.", "Stop the clock. We're done and staying dark."),
+    ("Stand easy a second.", "Stand easy, the attempt is cancelled."),
+]
+for pause_text, abort_text in PAUSE_ABORT_PAIRS:
+    add(pause_text, "unspecified", "none", "unspecified", "pause")
+    add(abort_text, "unspecified", "none", "unspecified", "abort")
+
+# (l) abort vs return_to_start MINIMAL PAIRS. v13 read three aborts as returns even though
+# each said to STAY ("hold where you sit", "stay where you are"). The cue is movement: abort
+# ends the run in place, return_to_start sends the vehicle home.
+ABORT_RETURN_PAIRS = [
+    ("Knock off and sit tight.", "Knock off and head for home."),
+    ("Stop work, stay exactly there.", "Stop work and come back in."),
+    ("Done -- plant it where it is.", "Done -- walk it back to the line."),
+    ("Finish up and hold, stay hidden.", "Finish up and roll home empty."),
+    ("Shut it down in place.", "Shut it down back at the start."),
+    ("Cease and remain put.", "Cease and make your way back."),
+    ("That's all -- no movement from you.", "That's all -- bring it in."),
+    ("Stop there and stay dark.", "Stop there, then return to base."),
+]
+for abort_text, return_text in ABORT_RETURN_PAIRS:
+    add(abort_text, "unspecified", "none", "unspecified", "abort")
+    add(return_text, "unspecified", "none", "unspecified", "return_to_start")
+
+# (m) resume vs retry MINIMAL PAIRS on the word "again". v13 read "Crack on." and "Spin it up
+# again." as retry_send. "Again" alone resumes a held run; a retry has to name the operation
+# being redone -- the scan, the tag, the code, the transmission.
+RESUME_RETRY_TRIPLES = [
+    ("Under way again.", "Scan it again.", "Send it again."),
+    ("Green light, continue.", "Another pass on the tag.", "Push the code out once more."),
+    ("Back in business.", "Re-read the chip.", "Re-transmit the numbers."),
+    ("Resume from the hold.", "That read failed -- do it over.", "That send failed -- do it over."),
+    ("Underway once more.", "Give the chip another try.", "Give the uplink another try."),
+]
+RESUME_RETRY_TRIPLES += [
+    ("Pick it back up.", "The tag didn't register -- again.", "The code didn't land -- again."),
+    ("You're live once more.", "Run the tag a second time.", "Run the uplink a second time."),
+    ("Carry on from the hold.", "Have the reader try once more.", "Have the radio try once more."),
+    ("Let's get moving.", "Redo the chip read.", "Redo the transmission."),
+    ("Unpaused -- go.", "One more scan of the tag.", "One more push of the code."),
+    ("Off the brakes, continue.", "Try the NFC read a second time.", "Try the send a second time."),
+]
+for resume_text, read_text, send_text in RESUME_RETRY_TRIPLES:
+    add(resume_text, "unspecified", "none", "unspecified", "resume")
+    add(read_text, "unspecified", "none", "unspecified", "retry_read")
+    add(send_text, "unspecified", "none", "unspecified", "retry_send")
+
+# (n) read_chip as a TERSE FRAGMENT. v13 read "Red cube. Chip only." and "Yellow cube in the
+# northwest -- chip only." as collect_target: the fragment shape carries no verb, so the
+# colour plus a noun looked like a retrieval. Those two sentences are held-out, so these use
+# different frames.
+chip_fragment = [
+    "{C} {n} -- chip data only, leave the object.",
+    "{C} target: tag read, no lift.",
+    "{C} {n}. Numbers off it, nothing more.",
+    "Data from the {c} object, that is all.",
+    "{C} {n} -- read and walk away.",
+    "Scan the {c} target. Do not pick it up.",
+]
+for i, template in enumerate(chip_fragment):
+    for j, c in enumerate(COLORS):
+        add(template.format(c=c, C=c.capitalize(), n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", "unspecified", "read_chip")
+
+
+# (o) More wording for the three thinnest pools. At 1288 distinct rows, pause oversampled
+# 3.6x, report_status 3.9x and avoid_stay 3.8x -- those cells are carried by a few dozen
+# sentences copied four times, which is round 4's memorisation failure in miniature. "More
+# wording, not more copies" is the fix that worked then.
+#
+# This is also where the pause/abort ratio note above gets corrected. I claimed the minimal
+# pairs would bring pause's oversample factor down to abort's on their own. They did not:
+# the pairs grew BOTH pools (pause 35->49, abort 62->84) so the ratio barely moved, 1:0.50
+# to 1:0.52. The pause sentences below are deliberately UNPAIRED to close the gap, and even
+# then it only reaches ~1:0.8, because the cell shares that set the ratio are a measured
+# class-balance choice (round 4: held-out recall 0.762 at 12.5% share, 1.000 at 25%) and the
+# pair ratio loses that argument. Documented rather than engineered around -- round 9 built
+# machinery for exactly this and it bought 2 examples out of 566.
+pause_extra = [
+    "Hold up a sec.", "Give it a rest for now.", "Pencils down, briefly.",
+    "On hold.", "Just wait there.",
+    "Nothing for the moment.", "Hang fire.", "Take a knee.",
+    "Keep still, I'll shout when.", "Pause -- stand by for more.", "Hold off, I'll be back to you.",
+    "Halt for now, there's more coming.", "Wait where you are, briefly.",
+    "Time out.", "Settle down a minute.", "Hold that thought.",
+    "Don't move yet.", "Give me a second here.", "Stay there, I'm thinking.",
+    "Not just now -- wait.", "Idle, pending my call.", "Steady -- hold.",
+    "Freeze it, I'll release you.", "Hold the line a moment.",
+    "Stop briefly, we continue after.", "Standby, resuming shortly.",
+    "Suspend briefly, more instructions coming.", "Wait up, not finished here.",
+    "Hold position, temporary only.", "Brief hold, then we go on.",
+]
+for t in pause_extra:
+    add(t, "unspecified", "none", "unspecified", "pause")
+
+abort_extra = [
+    "Scrub the attempt, stay where you sit.", "Call it off and keep low.",
+    "That's the run gone -- hold and stay quiet.", "Terminate. No movement.",
+    "We're pulling the plug, stop in place.", "Run's void, remain concealed.",
+    "End it here and don't be seen.", "Null the attempt, freeze.",
+    "Binning this one -- stay down.", "The attempt is dead, hold still.",
+    "Stand down for good, stay hidden.", "Shut it down, nothing further.",
+]
+for t in abort_extra:
+    add(t, "unspecified", "none", "unspecified", "abort")
+
+report_extra = [
+    "Position and task, please.", "Sitrep, when you get a chance.", "Which part of the job are you on?",
+    "Talk to me -- what are you on?", "Tell me what you're doing right now.",
+    "State your current task.", "How's it going out there?",
+    "I need an update on your progress.",
+]
+for t in report_extra:
+    add(t, "unspecified", "none", "unspecified", "report_status")
+
+# (p) avoid + stay together, the combination that justified splitting the field. 24 distinct
+# rows oversampled 3.8x, and heldout6's avoid_stay stratum scored 62.5%. Same constructions
+# as the round-11 containment families above, so the two constraints are stated in one breath.
+avoid_stay_round11 = [
+    "The {sw} half is yours and the {aw} corner is a no-go.",
+    "{SW} half only, and nothing enters the {aw} quadrant.",
+    "{SW} half. Nothing past it. The {aw} corner is out of play.",
+    "Do not drift out of the {sw} half, and give the {aw} section a wide berth.",
+    "You are walled into the {sw} half; the {aw} corner is fenced off.",
+    "Your limit is the {sw} half and the {aw} quadrant is a hazard zone.",
+    "Can you leave the {sw} half? No. And the {aw} corner is shut.",
+    "{SW} half is your ground. Steer well away from the {aw} section.",
+    "Stay to the marked corridor and keep out of the {aw} quadrant.",
+    "The pathway is your bound, and the {aw} corner is suspended.",
+]
+for i, template in enumerate(avoid_stay_round11):
+    for j, (ar, sr) in enumerate(AVOID_STAY_PAIRS):
+        stay = "pathway" if "corridor" in template or "pathway" in template else sr
+        word = HALF_WORDS[sr]
+        add(template.format(sw=word, SW=word.capitalize(), aw=LOC_WORDS[ar],
+                            AW=LOC_WORDS[ar].capitalize()),
+            "unspecified", "none", "unspecified", "collect_target", stay=stay, avoid=ar)
+
+
 # v3 note: the cell key used to be (action, constraints), and `constraints` is gone. The
 # replacement collapses the three region fields to WHICH KIND of constraint is present,
 # which is what the balancing was ever about -- the specific region is already balanced by
@@ -1084,7 +1384,7 @@ def main():
     # near-duplicate. Cost is a slower difflib pass over 6 sets; worth it.
     sources = {name: f"data/{name}_set.jsonl" for name in
                ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5",
-                "heldout6")}
+                "heldout6", "heldout7")}
     existing = {}
     for name, path in sources.items():
         try:
