@@ -12,6 +12,7 @@ from schema import FUNCTION_SCHEMA, FIELDS, build_messages
 
 MODEL_ID = "google/functiongemma-270m-it"
 OUTPUT_DIR = "checkpoints/functiongemma-270m-lora-intent"
+EPOCHS = 3
 
 
 def format_target(expected):
@@ -76,6 +77,14 @@ def main():
         rows = [json.loads(line) for line in f]
     dataset = IntentDataset(rows, tokenizer, processor)
 
+    # round 8 shrank the set and quietly cut optimizer steps 430 -> 337 (v10 trained
+    # there). Print the number so the next row-count change is visible instead of silent.
+    steps = len(rows) // 8 * EPOCHS
+    print(f"{len(rows)} rows x {EPOCHS} epochs / batch 8 = {steps} optimizer steps")
+    if not 380 <= steps <= 560:
+        print(f"WARNING: {steps} steps is off the ~430-500 band every round since 4 has "
+              f"converged in. Retune num_train_epochs before trusting the comparison.")
+
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
         # round 4 rebalanced the set by oversampling, 504 distinct rows -> 1511. At 6
@@ -91,7 +100,13 @@ def main():
         # keeps optimizer steps near the ~414 that converged in round 5 (1282/8*3 = 481).
         # round 7 grew the set to 1721 rows (821 distinct). 2 epochs keeps optimizer steps
         # near the ~481 that converged in round 6 (1721/8*2 = 430).
-        num_train_epochs=2,
+        # round 8's update_only merge SHRANK the set, 1721 rows -> 1349, so the 2 epochs
+        # set for round 7 silently became 337 steps -- 22% under the ~430 target, and v10
+        # was trained there. 3 epochs puts it back on budget (1349/8*3 = 506). Watch this
+        # whenever the row count moves: the epoch count is a proxy for optimizer steps,
+        # and nothing recomputes it. ponytail: a printed step count beats an assert here,
+        # the number needs eyeballing against the comment, not just a floor.
+        num_train_epochs=EPOCHS,
         # 8x1 and 4x2 both died at step 1 with a raw "CUDA error: out of memory" from the
         # driver (not torch's allocator) while nvidia-smi showed 7.4 GB free. On Windows WDDM
         # a GPU allocation is backed by system RAM, and this machine was down to ~5.5 GB of

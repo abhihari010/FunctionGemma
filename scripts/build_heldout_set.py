@@ -650,6 +650,89 @@ def build(tagged, out_path, extra_sources):
           f"0 exact overlap with {', '.join(sorted(existing))}")
 
 
+# Fifth clean slice, written BEFORE the round-9 run and BEFORE v12 trains. Round 9 wrote
+# training templates against observed heldout3/heldout4 failures, which spends both as
+# instruments: a gain there now partly measures how well those templates were paraphrased.
+# This set exists so v12 has one surface nobody has tuned against. Same boundaries, wording
+# chosen to share no idiom with the round-9 pools -- no "down tools", "come to a stop",
+# "crack on", "press on", "stop there", or mid-sentence "actually"/"correction".
+HELDOUT5 = [
+    # --- pause: temporary, expects to resume. Idioms absent from training ---
+    ("Idle for a tick, I'm not done with you.", ("unspecified", "none", "unspecified", "pause")),
+    ("Sit on your hands a minute.", ("unspecified", "none", "unspecified", "pause")),
+    ("Nothing for now -- await my word.", ("unspecified", "none", "unspecified", "pause")),
+    ("Ease off, I'll signal when to go.", ("unspecified", "none", "unspecified", "pause")),
+    ("Put a pin in it, more to come.", ("unspecified", "none", "unspecified", "pause")),
+    ("Dead stop, temporarily.", ("unspecified", "none", "unspecified", "pause")),
+    ("Quiet for a spell, standing by.", ("unspecified", "none", "unspecified", "pause")),
+    ("Hang fire, instructions pending.", ("unspecified", "none", "unspecified", "pause")),
+
+    # --- abort: final. Same register as the pause rows above, finality is the only cue ---
+    ("Idle it, we're not continuing.", ("unspecified", "none", "unspecified", "abort")),
+    ("Sit on your hands, that's the lot.", ("unspecified", "none", "unspecified", "abort")),
+    ("Nothing further -- the run's dead.", ("unspecified", "none", "unspecified", "abort")),
+    ("Ease off for good, keep out of view.", ("unspecified", "none", "unspecified", "abort")),
+    ("Put a pin in it permanently.", ("unspecified", "none", "unspecified", "abort")),
+    ("Dead stop, that's us finished.", ("unspecified", "none", "unspecified", "abort")),
+    ("Quiet from here on, mission's off.", ("unspecified", "none", "unspecified", "abort")),
+    ("Hang fire indefinitely, we've lost the window.", ("unspecified", "none", "unspecified", "abort")),
+
+    # --- resume: bare idioms, the shape that produced hallucinated retry_* actions ---
+    ("Roll again.", ("unspecified", "none", "unspecified", "resume")),
+    ("Spin it up again.", ("unspecified", "none", "unspecified", "resume")),
+    ("Let's have you moving.", ("unspecified", "none", "unspecified", "resume")),
+    ("Clear to proceed, same job.", ("unspecified", "none", "unspecified", "resume")),
+    ("Wind it back up.", ("unspecified", "none", "unspecified", "resume")),
+    ("Nothing holding you now.", ("unspecified", "none", "unspecified", "resume")),
+
+    # --- retry_read vs read_chip: repetition marker is the only difference ---
+    ("Scan the tag once more.", ("unspecified", "none", "unspecified", "retry_read")),
+    ("That scan didn't take -- go again.", ("unspecified", "none", "unspecified", "retry_read")),
+    ("Second attempt on the chip, please.", ("unspecified", "none", "unspecified", "retry_read")),
+    ("Read the tag on the blue block.", ("blue", "none", "unspecified", "read_chip")),
+    ("Chip number off the red die, nothing else.", ("red", "none", "unspecified", "read_chip")),
+    ("I want the tag on the black cube in the northeast.", ("black", "none", "NE", "read_chip")),
+
+    # --- retry_send vs read_chip: "send" appears in both, v11 confused exactly this ---
+    ("Push that transmission out again.", ("unspecified", "none", "unspecified", "retry_send")),
+    ("The upload dropped -- one more go.", ("unspecified", "none", "unspecified", "retry_send")),
+    ("Transmit the code a second time.", ("unspecified", "none", "unspecified", "retry_send")),
+    ("Send me the tag off the yellow target.", ("yellow", "none", "unspecified", "read_chip")),
+
+    # --- report_status vs read_chip: asking about the rover, not a target ---
+    ("Where are you at?", ("unspecified", "none", "unspecified", "report_status")),
+    ("Give me a sitrep.", ("unspecified", "none", "unspecified", "report_status")),
+    ("What's your state?", ("unspecified", "none", "unspecified", "report_status")),
+    ("Talk to me -- how's the run tracking?", ("unspecified", "none", "unspecified", "report_status")),
+
+    # --- return_to_start vs abort: motion verb decides, per round 9 ---
+    ("Make your way in and shut off.", ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Drive home, then idle.", ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Come on back to the box.", ("unspecified", "none", "unspecified", "return_to_start")),
+    ("Freeze on the spot, nothing more.", ("unspecified", "none", "unspecified", "abort")),
+    ("Don't move and don't come in, we're through.", ("unspecified", "none", "unspecified", "abort")),
+
+    # --- collect_target: bare locative is a tasking, plus the avoid_regions constraint ---
+    ("Blue cube, northeast quarter.", ("blue", "none", "NE", "collect_target")),
+    ("The red block has turned up southwest.", ("red", "none", "SW", "collect_target")),
+    ("Fetch the yellow die out of the southeast.", ("yellow", "none", "SE", "collect_target")),
+    ("Grab the black object from the northwest.", ("black", "none", "NW", "collect_target")),
+    ("Bring in the blue target, steer clear of the marked zones.",
+     ("blue", "avoid_regions", "unspecified", "collect_target")),
+    ("Red die from the northeast -- keep off the shaded areas.",
+     ("red", "avoid_regions", "NE", "collect_target")),
+    ("Collect the yellow block, no-go areas are off limits.",
+     ("yellow", "avoid_regions", "unspecified", "collect_target")),
+    ("Black cube in the southwest, avoid the restricted patches.",
+     ("black", "avoid_regions", "SW", "collect_target")),
+
+    # --- position correction folded into collect_target (round 8) ---
+    ("Amend that -- blue die is actually southeast.", ("blue", "none", "SE", "collect_target")),
+    ("Scratch the last position, red cube is northwest.", ("red", "none", "NW", "collect_target")),
+    ("New fix on the yellow object: northeast.", ("yellow", "none", "NE", "collect_target")),
+]
+
+
 def main():
     build([(t, l, "familiar") for t, l in FAMILIAR]
           + [(t, l, "contested") for t, l in CONTESTED]
@@ -669,6 +752,11 @@ def main():
           "data/heldout4_set.jsonl",
           {"heldout1": "data/heldout_set.jsonl", "heldout2": "data/heldout2_set.jsonl",
            "heldout3": "data/heldout3_set.jsonl"})
+
+    build([(t, l, "heldout5") for t, l in HELDOUT5],
+          "data/heldout5_set.jsonl",
+          {"heldout1": "data/heldout_set.jsonl", "heldout2": "data/heldout2_set.jsonl",
+           "heldout3": "data/heldout3_set.jsonl", "heldout4": "data/heldout4_set.jsonl"})
 
 
 if __name__ == "__main__":

@@ -896,7 +896,13 @@ def balance(rows):
 def main():
     # the held-out set is checked too: it is the only eval set not yet used for model
     # selection, and training on its wording would destroy the one clean instrument left
-    sources = {"eval": "data/eval_set.jsonl", "heldout": "data/heldout_set.jsonl"}
+    # ALL held-out sets, not just eval+heldout. The two-set version could not see
+    # heldout2/3/4/5, and templates written against an observed heldout3 or heldout4 failure
+    # are exactly the case that needs checking -- a draft of round 9 put 8 verbatim test
+    # sentences into training and a hand-rolled check still missed one plus a 0.918
+    # near-duplicate. Cost is a slower difflib pass over 6 sets; worth it.
+    sources = {name: f"data/{name}_set.jsonl" for name in
+               ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5")}
     existing = {}
     for name, path in sources.items():
         try:
