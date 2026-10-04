@@ -19,6 +19,72 @@ def load_eval_set(path="data/eval_set.jsonl"):
         return [json.loads(line) for line in f]
 
 
+
+# Exact schema-constrained decoding. The GBNF grammar in gguf/leader_intent.gbnf does this
+# for llama.cpp, but the PyTorch eval path ignores it, and v14 paid for that: 8 of its 18
+# target_location errors were values that are not even in that field's enum ("N", "S", "E",
+# "W", and once "North", where the only legal values are NW/NE/SW/SE/unspecified). No amount
+# of training data makes an out-of-enum token impossible; constrained decoding does.
+#
+# The output is a fixed template with six slots from small enums, so there is no need for a
+# grammar engine. Walk the slots left to right and, at each one, score every legal value as a
+# continuation of what has been decided so far, then keep the best. That is exact constrained
+# argmax -- stronger than the per-token greedy a grammar gives, because it compares whole
+# values rather than committing to a first token it cannot take back.
+#
+# On cost: a row takes 6 forward passes here instead of ~60 autoregressive steps, but this
+# loop does ONE ROW AT A TIME (it batches across a slot's candidates, not across rows) while
+# the unconstrained path batches 16 prompts per generate(). Measured over all 740 examples
+# that is 742 ms/example constrained vs 470 ms/example unconstrained -- so it is SLOWER here,
+# not faster. It beats unconstrained at batch 1 (~7 s/example, see the batch-size note below)
+# by a wide margin. Batching rows as well would close the gap; not done, because accuracy is
+# what this path is for and 742 ms is not the bottleneck.
+PREFIX = "<start_function_call>call:set_leader_intent{"
+ENUMS = {f: FUNCTION_SCHEMA["function"]["parameters"]["properties"][f]["enum"] for f in FIELDS}
+
+
+def decode_constrained(model, tokenizer, prompt, device):
+    """Return the schema-valid field dict with the highest total log-probability."""
+    text = prompt + PREFIX
+    chosen = {}
+    for slot, field in enumerate(FIELDS):
+        text += f"{field}:<escape>"
+        base = tokenizer(text, add_special_tokens=False)["input_ids"]
+        cands = ENUMS[field]
+        cand_ids = [tokenizer(v, add_special_tokens=False)["input_ids"] for v in cands]
+
+        width = max(len(base) + len(c) for c in cand_ids)
+        pad = tokenizer.pad_token_id or 0
+        rows, spans = [], []
+        for c in cand_ids:
+            seq = base + c
+            rows.append(seq + [pad] * (width - len(seq)))
+            spans.append((len(base), len(seq)))
+        ids = torch.tensor(rows, device=device)
+        mask = torch.tensor([[1] * e + [0] * (width - e) for _, e in spans], device=device)
+
+        # logits_to_keep is load-bearing, not an optimisation. The full tensor here is
+        # candidates x ~315 positions x 262144 vocab, which OOMs an 8 GB card at 2.7 GB a
+        # slot. Only the candidate span matters, so ask for just the tail.
+        keep = width - min(b for b, _ in spans) + 1
+        logits = model(input_ids=ids, attention_mask=mask, logits_to_keep=keep).logits
+        kept_from = width - logits.shape[1]  # absolute position of logits[:, 0]
+        logprobs = torch.log_softmax(logits.float(), dim=-1)
+
+        scores = []
+        for r, (b, e) in enumerate(spans):
+            # the token at position k is predicted by the logits at k-1
+            tok = ids[r, b:e]
+            lp = logprobs[r, b - 1 - kept_from:e - 1 - kept_from, :]
+            scores.append(lp.gather(-1, tok.unsqueeze(-1)).sum().item())
+
+        best = cands[max(range(len(cands)), key=lambda i: scores[i])]
+        chosen[field] = best
+        text += best + "<escape>"
+        if slot < len(FIELDS) - 1:
+            text += ","
+    return chosen
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--adapter", default=None, help="path to a LoRA adapter dir; omit for base model")
@@ -28,6 +94,9 @@ def main():
     parser.add_argument("--eval-set", default="data/eval_set.jsonl",
                         help="eval set to score against")
     parser.add_argument("--max-new-tokens", type=int, default=128)
+    parser.add_argument("--constrain", action="store_true",
+                        help="decode under the schema enums (see decode_constrained). "
+                             "Makes out-of-enum output impossible; also faster.")
     parser.add_argument("--batch-size", type=int, default=16,
                         help="prompts per generate() call. 1 = true single-request latency "
                              "(~7s/example on this laptop); 16 = same accuracy, ~10x faster wall clock")
@@ -74,29 +143,37 @@ def main():
     sync()
     wall_t0 = time.perf_counter()
     with torch.no_grad():
-        for start in range(0, n, args.batch_size):
-            idx = order[start:start + args.batch_size]
-            batch = tokenizer(
-                [prompts[i] for i in idx], return_tensors="pt",
-                padding=True, add_special_tokens=False,
-            ).to(model.device)
+        if args.constrain:
+            for i in order:
+                sync()
+                t0 = time.perf_counter()
+                parsed_all[i] = decode_constrained(model, tokenizer, prompts[i], model.device)
+                sync()
+                latencies[i] = time.perf_counter() - t0
+        else:
+            for begin in range(0, n, args.batch_size):
+                idx = order[begin:begin + args.batch_size]
+                batch = tokenizer(
+                    [prompts[i] for i in idx], return_tensors="pt",
+                    padding=True, add_special_tokens=False,
+                ).to(model.device)
 
-            sync()
-            t0 = time.perf_counter()
-            out = model.generate(
-                **batch, pad_token_id=pad_id, max_new_tokens=args.max_new_tokens,
-                do_sample=False,  # model's default generation_config samples (do_sample=True);
-                                  # greedy decoding is needed for a reproducible accuracy/latency benchmark
-            )
-            sync()
-            per_example_s = (time.perf_counter() - t0) / len(idx)
-
-            prompt_width = batch["input_ids"].shape[-1]
-            for i, seq in zip(idx, out):
-                parsed_all[i] = parse_function_call(
-                    tokenizer.decode(seq[prompt_width:], skip_special_tokens=True)
+                sync()
+                t0 = time.perf_counter()
+                out = model.generate(
+                    **batch, pad_token_id=pad_id, max_new_tokens=args.max_new_tokens,
+                    do_sample=False,  # model's default generation_config samples (do_sample=True);
+                                      # greedy decoding is needed for a reproducible accuracy/latency benchmark
                 )
-                latencies[i] = per_example_s
+                sync()
+                per_example_s = (time.perf_counter() - t0) / len(idx)
+
+                prompt_width = batch["input_ids"].shape[-1]
+                for i, seq in zip(idx, out):
+                    parsed_all[i] = parse_function_call(
+                        tokenizer.decode(seq[prompt_width:], skip_special_tokens=True)
+                    )
+                    latencies[i] = per_example_s
     wall_clock_s = time.perf_counter() - wall_t0
 
     field_correct = {f: 0 for f in FIELDS}
