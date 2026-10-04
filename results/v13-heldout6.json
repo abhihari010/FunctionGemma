@@ -1,0 +1,1237 @@
+{
+  "summary": {
+    "label": "v13-heldout6",
+    "n_examples": 56,
+    "exact_match_accuracy": 0.625,
+    "per_field_accuracy": {
+      "target_color": 1.0,
+      "avoid_region": 0.9285714285714286,
+      "stay_region": 0.6607142857142857,
+      "until_region": 0.9821428571428571,
+      "target_location": 0.875,
+      "action": 0.9821428571428571
+    },
+    "batch_size": 16,
+    "wall_clock_s": 14.020478299999013,
+    "by_set": {
+      "avoid_stay": {
+        "exact_match": 0.625,
+        "n": 8
+      },
+      "avoid_target": {
+        "exact_match": 0.75,
+        "n": 8
+      },
+      "pathway": {
+        "exact_match": 0.5,
+        "n": 6
+      },
+      "route_negative": {
+        "exact_match": 1.0,
+        "n": 8
+      },
+      "stay_half": {
+        "exact_match": 0.5,
+        "n": 10
+      },
+      "stay_quad": {
+        "exact_match": 0.3333333333333333,
+        "n": 6
+      },
+      "stay_until": {
+        "exact_match": 0.6,
+        "n": 10
+      }
+    },
+    "by_action": {
+      "collect_target": {
+        "exact_match": 0.625,
+        "n": 56
+      }
+    },
+    "latency_s": {
+      "mean": 0.24971995714284795,
+      "median": 0.22668495624998286,
+      "min": 0.18414673125005265,
+      "max": 0.3560726875000455
+    }
+  },
+  "examples": [
+    {
+      "text": "Don't stray out of the northern half at any stage.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Your box for this attempt is the southern half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Everything happens in the eastern half, nothing outside it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Limit yourself to the western half please.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "You've got the north half and that's it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Bounded by the south half for the duration.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Go no further west than the halfway line -- east half only.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "The whole run takes place in the west half of the course.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Is the north half my limit? Yes, treat it that way.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "South half. Nowhere else.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "The yellow die and the northwest quadrant -- that's your whole world right now.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "NW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Don't wander out of the northeast corner; the red cube is in there.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "NE",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "NE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Everything you need is in the southwest section, so don't go past it. Blue object.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "SW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "SW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "Black target, and your movement is capped at the southeast quadrant.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "SE",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "SE",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Boxed into the northwest corner for this one. Bring in the blue piece.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "NW",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Yellow is the pickup and the southeast section is as far as you go.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "SE",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Wheels on the marked path the whole time, and fetch the red block.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "You may not deviate from the safe corridor.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Blue object please, and no wandering off the taped route.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "The corridor is the constraint -- don't step outside it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Collect the black cube. Wheels never leave the marked track.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Is it fine to shortcut off the path? No. Stick to it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "return_to_start"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "You're held to the southern half right up until the east half, then it's open.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "E",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "E",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "North half is the cap until you make the west side of the field.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Don't stray from the east half before you've got to the north half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "N",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "N",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "Bounded to the west half; reaching the south half clears it.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "S",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Down in the southern half until the eastern half, and the yellow die is the pickup.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "E",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "E",
+        "target_location": "S",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "Your limit is the north half, lifted the moment you hit the west half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "East half only, and that holds until the north half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "N",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "E",
+        "until_region": "N",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Boxed to the west side of the field until the south half -- then grab the black block.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "W",
+        "until_region": "S",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "S",
+        "target_location": "W",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "When does the southern-half restriction end? When you reach the eastern half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "S",
+        "until_region": "E",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "E",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Held in the northern half. Release point is the western half.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "N",
+        "until_region": "W",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Northern half is your bound and the southwest corner is shut.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "SW",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "SW",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Don't stray from the south half, and the northeast quadrant is a no-go.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "NE",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NE",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "You're capped at the east half; also the northwest corner is out of play.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "West half is the limit. Nothing goes into the southeast section.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "W",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Boxed into the north half with the southwest quadrant pulled from the map.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "SW",
+        "stay_region": "N",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Your world is the southern half, minus the northeast corner.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "NE",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NE",
+        "stay_region": "S",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Keep to the marked corridor and the northwest quarter is closed.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "NW",
+        "stay_region": "pathway",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "East half, and scratch the southeast corner from your plan.",
+      "expected": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "E",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "unspecified",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Yellow cube is the objective, and the southwest corner has been pulled.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "SW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "SW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Bring the black piece in. Northeast quadrant is sealed.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "NE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "NE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "We want the blue die; the northwest section is no longer on the map.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "NW",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Red block, and whatever you do stay out of the southeast corner.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "SE",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "The southern half has been fenced off -- the yellow object still comes home.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "S",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Grab the blue target. North half is unavailable this round.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "N",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Can I cut through the east half? No, it's shut. Black cube is the pickup.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "E",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "E",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.3560726875000455
+    },
+    {
+      "text": "Red object is yours and the west half is scratched.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "W",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "unspecified",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "W",
+        "action": "collect_target"
+      },
+      "exact_match": false,
+      "latency_s": 0.2851518187499096
+    },
+    {
+      "text": "Swing through the southern half and collect the blue die from the northeast corner.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Your line runs up the western half -- the red cube is in the northeast section.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Come in over the north half, black object is in the southwest quadrant.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Drive the east half on approach; yellow block sits in the northwest corner.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Route takes you diagonally across the south half to the blue target in the northwest.",
+      "expected": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "blue",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "NW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Head up the west half, then the red die in the southeast section is yours.",
+      "expected": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "red",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.18414673125005265
+    },
+    {
+      "text": "Push across the northern half to reach the yellow object in the southeast.",
+      "expected": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "yellow",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SE",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    },
+    {
+      "text": "Via the eastern half, please -- black piece, southwest corner.",
+      "expected": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "parsed": {
+        "target_color": "black",
+        "avoid_region": "none",
+        "stay_region": "none",
+        "until_region": "none",
+        "target_location": "SW",
+        "action": "collect_target"
+      },
+      "exact_match": true,
+      "latency_s": 0.22668495624998286
+    }
+  ]
+}

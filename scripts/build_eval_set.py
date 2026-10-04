@@ -12,6 +12,8 @@ generalisation number, "core57" is the continuity number.
 """
 import json
 
+from schema import expand_v2
+
 # label tuple = (target_color, constraints, target_location, action)
 EXAMPLES = [
     # --- canonical: Leader's Intent examples, rules doc section 2.2 ---
@@ -27,10 +29,17 @@ EXAMPLES = [
     ("Focus on getting the black box and avoiding contact with every other object on the field.",
      ("black", "avoid_objects", "unspecified", "collect_target")),
     # NOTE: source sentence used "orange box" placeholder; swapped to blue for the same reason.
+    # v3 RELABEL: "leaving the safe pathway" is a containment constraint. Under v2 there was
+    # no field for it so this row said constraints="none", which scored a model RIGHT for
+    # dropping half the sentence. stay_region="pathway" exists because of this row.
     ("New tasking: find and bring back the blue box without touching other objects or leaving the safe pathway.",
-     ("blue", "avoid_objects", "unspecified", "collect_target")),
+     ("blue", "avoid_objects", "unspecified", "collect_target", "pathway")),
+    # v3 RELABEL: the rules' own hardest sentence, and the single reason until_region exists.
+    # Under v2 it was labelled ("blue", "none", "NE") -- target only, both constraints
+    # silently discarded. Now stay=S, until=E. No training row copies this wording; the
+    # round-10 block in build_train_set.py is written from its PATTERN only.
     ("Stay to the far south of the field until you reach the eastern half and then obtain the blue object in the northeast corner.",
-     ("blue", "none", "NE", "collect_target")),
+     ("blue", "none", "NE", "collect_target", "S", "E")),
     ("Abort the mission, remain undetected.",
      ("unspecified", "none", "unspecified", "abort")),
     ("Avoid the southwest quarter of the field.",
@@ -362,26 +371,8 @@ EXT2_EXAMPLES = [
      ("red", "none", "SW", "collect_target")),
 ]
 
-# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
-# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
-# as originally written; collapse_constraints() maps them at write time, so the original
-# labelling intent stays readable and the change is one line to revert.
-def collapse_constraints(value):
-    return "none" if value == "avoid_objects" else value
 
 
-# Round 8: update_only left the schema. Every one of its 245 examples was a position
-# correction about the target already being pursued ("adjust your route", "same job",
-# "keep at it"), it never carried a constraint, and folding it into collect_target lifted
-# v9's five-set accuracy from 95.94% to 97.00% on relabelled predictions alone. The
-# downstream state machine merges a partial update onto the active task, so the action
-# field never needed to carry it. The label tuples below are kept as originally written;
-# collapse_action() maps them at write time, so the change is one line to revert.
-def collapse_action(value):
-    return "collect_target" if value == "update_only" else value
-
-
-FIELDS = ("target_color", "constraints", "target_location", "action")
 
 def main():
     tagged = ([(t, l, "core57") for t, l in EXAMPLES]
@@ -396,10 +387,10 @@ def main():
 
     with open("data/eval_set.jsonl", "w", encoding="utf-8") as f:
         for text, labels, tag in tagged:
-            labels = tuple(collapse_constraints(v) if f == "constraints"
-                           else collapse_action(v) if f == "action" else v
-                           for f, v in zip(FIELDS, labels))
-            row = {"text": text, "expected": dict(zip(FIELDS, labels)), "set": tag}
+            # 4-tuples are the v2 authoring shape; schema.expand_v2 maps them to the
+            # v3 fields (and rejects any value outside the schema enums). A 5th/6th
+            # element carries stay_region/until_region for the rows that need them.
+            row = {"text": text, "expected": expand_v2(*labels), "set": tag}
             f.write(json.dumps(row) + "\n")
     print(f"wrote {len(tagged)} examples to data/eval_set.jsonl "
           f"({len(EXAMPLES)} core57 + {len(EXT_EXAMPLES)} ext "

@@ -3,6 +3,8 @@ wording from data/eval_set.jsonl. Verifies zero text overlap with the eval set
 before writing (train/eval separation is load-bearing for the eval numbers)."""
 import json
 
+from schema import expand_v2
+
 COLORS = ["blue", "red", "yellow", "black"]
 LOCS = ["NW", "NE", "SW", "SE"]
 LOC_WORDS = {"NW": "northwest", "NE": "northeast", "SW": "southwest", "SE": "southeast"}
@@ -14,30 +16,15 @@ NOUNS = ["die", "box", "cube", "block"]
 
 rows = []
 
-# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
-# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
-# as originally written; collapse_constraints() maps them at write time, so the original
-# labelling intent stays readable and the change is one line to revert.
-def collapse_constraints(value):
-    return "none" if value == "avoid_objects" else value
+# Object avoidance (rules doc 2.2) and update_only (round 8) both left the schema, and
+# schema v3 split `constraints` into avoid_region/stay_region/until_region. The label tuples
+# below are still written in the ORIGINAL v2 shape -- expand_v2() in schema.py does all three
+# mappings at write time, so the labelling intent stays readable and every mapping is in one
+# reviewable place instead of smeared over ~40 call sites.
+def add(text, color, constraints, loc, action, stay="none", until="none", avoid="none"):
+    rows.append({"text": text,
+                 "expected": expand_v2(color, constraints, loc, action, stay, until, avoid)})
 
-
-# Round 8: update_only left the schema. Every one of its 245 examples was a position
-# correction about the target already being pursued ("adjust your route", "same job",
-# "keep at it"), it never carried a constraint, and folding it into collect_target lifted
-# v9's five-set accuracy from 95.94% to 97.00% on relabelled predictions alone. The
-# downstream state machine merges a partial update onto the active task, so the action
-# field never needed to carry it. The label tuples below are kept as originally written;
-# collapse_action() maps them at write time, so the change is one line to revert.
-def collapse_action(value):
-    return "collect_target" if value == "update_only" else value
-
-
-def add(text, color, constraints, loc, action):
-    rows.append({"text": text, "expected": {
-        "target_color": color, "constraints": collapse_constraints(constraints),
-        "target_location": loc, "action": collapse_action(action),
-    }})
 
 # ---------- target retrieval (no location slot) ----------
 no_loc_templates = [
@@ -827,18 +814,190 @@ for t in abort_after_stop_verb:
 # above a third. These targets are the best compromise across both fields: they take
 # constraints from 63/24/13 to roughly 47/28/25, and actions from 71/14/8/8 to roughly
 # 57/17/13/13, without letting either axis collapse.
-TARGET_CELLS = {
-    # Round 6: 11 populated cells instead of 5. Shares are not flat -- collect_target and
-    # read_chip are the core mission verbs and stay dominant, while the new control verbs get
-    # enough share to clear the ~10% line below which held-out recall fell to ~0.84 in round 4.
-    # avoid_regions is deliberately held at 18% even though it only co-occurs with
-    # collect_target: at 12.5% it recalled 0.762, at 25% it recalled 1.000, and squeezing it
-    # to make room for the new actions is the most likely way to regress something that works.
-    # Round 8: update_only's 0.13 merged into collect_target/none (0.13 -> 0.26) when the
-    # label was folded in. Every other cell keeps its exact round-6 share, so the new control
-    # verbs stay above the ~10% line; nothing shrinks to pay for the merge.
+# PREDICTION TO CHECK IN THE v13 RESULTS: target_location is now named on 14.7% of rows,
+# down from 32.6% in v11. Nothing was deleted -- un-overloading moved the avoided region off
+# target_location on 212 rows, and those rows had been the single largest source of "a compass
+# word is in this sentence, so set target_location". The labels are right now and were wrong
+# before, but the field has half the positive density it trained on at 97.70%. If
+# target_location is the field that regresses in v13, that is the cause, and the fix is more
+# genuine target-location sentences, NOT putting regions back in the slot.
+
+# ---------- round 10: containment (stay_region, until_region) ----------
+# schema v3 added these two fields with ZERO training examples. The only attested sentences
+# are the rules doc's own two, and BOTH sit in data/eval_set.jsonl, so neither can be trained
+# on. Everything below is written from the rules' phrasing PATTERN, not its sentences:
+#   "Stay to the far south of the field until you reach the eastern half and then obtain
+#    the blue object in the northeast corner."   -> stay=S, until=E, blue, NE
+#   "...bring back the orange box without touching other objects or leaving the safe
+#    pathway."                                   -> stay=pathway
+#
+# HALVES lead this block. The rules state containment in halves ("the far south", "the
+# eastern half") while they only ever give targets by quadrant -- that asymmetry is why
+# N/S/E/W exist on the constraint fields and not on target_location. Quadrant containment is
+# here too, because a judge can obviously say "stay in the northwest corner", just less of it.
+HALF_WORDS = {"N": "northern", "S": "southern", "E": "eastern", "W": "western"}
+HALF_BARE = {"N": "north", "S": "south", "E": "east", "W": "west"}
+HALVES = ["N", "S", "E", "W"]
+
+# (a) containment with no release condition, stated in halves
+stay_half_templates = [
+    "Keep the vehicle in the {hw} half of the field for this run.",
+    "Stay within the {hw} half the entire way out and back.",
+    "Operate only in the {hw} half, nowhere else.",
+    "The vehicle is confined to the {hw} side of the field.",
+    "Hold to the far {hb} of the field throughout.",
+    "Remain inside the {hw} half until I say otherwise.",
+    "Your working area this round is the {hw} half, full stop.",
+    "Do not leave the {hw} half of the course.",
+]
+for i, template in enumerate(stay_half_templates):
+    for j, h in enumerate(HALVES):
+        add(template.format(hw=HALF_WORDS[h], hb=HALF_BARE[h]),
+            "unspecified", "none", "unspecified", "collect_target", stay=h)
+
+# (b) containment stated in quadrants, and WITH a named target -- the co-occurrence that
+# avoid_region never got in v11 (0 of its 212 rows named a colour), which is the leading
+# suspect for why it failed every novel-phrasing sentence on heldout5 that named one.
+stay_quad_templates = [
+    "Grab the {c} {n} and stay inside the {lw} quadrant while you do it.",
+    "The {c} target is yours -- keep the vehicle in the {lw} corner the whole time.",
+    "Work the {lw} section only, and bring back the {c} object.",
+    "Collect the {c} {n}, remaining within the {lw} area at all times.",
+]
+for i, template in enumerate(stay_quad_templates):
+    for j, c in enumerate(COLORS):
+        loc = LOCS[(i + j) % len(LOCS)]
+        add(template.format(c=c, lw=LOC_WORDS[loc], n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", "unspecified", "collect_target", stay=loc)
+
+# (c) stay_region = "pathway". The rules name a safe pathway but never define it
+# geometrically, so it cannot be a compass value; the autonomy stack resolves the geometry.
+pathway_sentences = [
+    "Bring back the {c} {n} and do not leave the safe pathway.",
+    "Keep to the marked corridor the whole way, the {c} target is the pickup.",
+    "The {c} object comes home, and the vehicle stays on the designated path.",
+    "Retrieve the {c} {n} without ever stepping off the laid-out route.",
+    "Stay on the safe pathway. The {c} target is what we want.",
+    "Fetch the {c} object -- the vehicle must not leave the marked lane.",
+    # no target named, so the pathway constraint has to stand on its own wording
+    "Do not leave the safe pathway at any point.",
+    "The vehicle stays on the marked corridor this entire run.",
+    "Keep to the designated path, no exceptions.",
+    "Nothing off the laid-out route -- stay on it.",
+    "You are restricted to the safe pathway.",
+    "Hold the marked lane the whole way.",
+]
+for i, template in enumerate(pathway_sentences):
+    c = COLORS[i % len(COLORS)]
+    add(template.format(c=c, n=NOUNS[i % len(NOUNS)]),
+        c if "{c}" in template else "unspecified",
+        "none", "unspecified", "collect_target", stay="pathway")
+
+# (d) containment WITH a release condition. until_region only ever appears here -- a keep-out
+# region has no release condition in any rules example, so every avoid row keeps until=none.
+# The pairs never share a compass component (S->E, not S->SE), so "which half is which" is
+# never genuinely ambiguous, same discipline as PATH_WORD above.
+UNTIL_PAIRS = [("S", "E"), ("N", "W"), ("E", "N"), ("W", "S")]
+stay_until_templates = [
+    "Stay to the far {sb} of the field until you reach the {uw} half, then collect the {c} {n}.",
+    "Hold to the {sw} half until you make the {uw} side, after that you are free to move.",
+    "Keep inside the {sw} half; once you reach the {uw} half that restriction lifts.",
+    "Remain in the {sw} half of the course until you hit the {uw} half.",
+    "Work the {sw} side only until you get to the {uw} half, then grab the {c} target.",
+    "The {sw} half is your limit until you arrive at the {uw} half.",
+    "Travel confined to the far {sb} until the {uw} half, then proceed normally.",
+    "Do not leave the {sw} half before you reach the {uw} side of the field.",
+]
+for i, template in enumerate(stay_until_templates):
+    for j, (sr, ur) in enumerate(UNTIL_PAIRS):
+        c = COLORS[(i + j) % len(COLORS)]
+        add(template.format(sw=HALF_WORDS[sr], sb=HALF_BARE[sr], uw=HALF_WORDS[ur],
+                            c=c, n=NOUNS[(i + j) % len(NOUNS)]),
+            c if "{c}" in template else "unspecified",
+            "none", "unspecified", "collect_target", stay=sr, until=ur)
+
+# (e) avoid AND stay in one command. This combination is the entire reason v3 split
+# `constraints` into separate fields -- a single-valued enum could not hold both -- so if it
+# has no training data the split bought nothing.
+AVOID_STAY_PAIRS = [("SW", "N"), ("NE", "S"), ("NW", "E"), ("SE", "W")]
+avoid_stay_templates = [
+    "Stay in the {sw} half and keep clear of the {aw} corner.",
+    "The {aw} quadrant is off limits; work the {sw} half only.",
+    "Hold to the {sw} side of the field and treat the {aw} corner as a keep-out zone.",
+    "Operate inside the {sw} half, and nothing enters the {aw} section.",
+    "{AW} corner is closed. Remain in the {sw} half.",
+    "Confine yourself to the {sw} half and route around the {aw} quadrant entirely.",
+]
+for i, template in enumerate(avoid_stay_templates):
+    for j, (ar, sr) in enumerate(AVOID_STAY_PAIRS):
+        add(template.format(sw=HALF_WORDS[sr], aw=LOC_WORDS[ar],
+                            AW=LOC_WORDS[ar].capitalize()),
+            "unspecified", "none", "unspecified", "collect_target", stay=sr, avoid=ar)
+
+# (f) avoid_region WITH a named target. v11's 212 avoid rows ALL had target_color
+# "unspecified", and on heldout5 the model missed every novel-wording avoid sentence that
+# named a colour -- an unseen combination, not just unseen vocabulary. Also the first
+# avoid_region rows stated in HALVES, which the schema has always allowed and no row used.
+avoid_with_target = [
+    ("Collect the {c} {n}, and keep out of the {aw} corner on the way.", "quad"),
+    ("The {c} target is the pickup. The {aw} quadrant is restricted.", "quad"),
+    ("Bring in the {c} object; nothing enters the {aw} section.", "quad"),
+    ("Retrieve the {c} {n} and route around the {aw} corner, it is flagged.", "quad"),
+    ("Get the {c} target. Stay out of the {hw} half of the field.", "half"),
+    ("The {hw} half is off limits -- the {c} {n} still comes home.", "half"),
+    ("Fetch the {c} object. No part of your route may cross into the {hw} side.", "half"),
+    ("{HW} half is closed this round. The {c} target is your objective.", "half"),
+]
+for i, (template, kind) in enumerate(avoid_with_target):
+    pool = LOCS if kind == "quad" else HALVES
+    for j, c in enumerate(COLORS):
+        r = pool[(i + j) % len(pool)]
+        word = LOC_WORDS[r] if kind == "quad" else HALF_WORDS[r]
+        add(template.format(c=c, n=NOUNS[(i + j) % len(NOUNS)],
+                            aw=word, hw=word, HW=word.capitalize()),
+            c, "avoid_regions", r, "collect_target")
+
+# (g) MINIMAL PAIRS: route vs containment. Every sentence above that sets stay_region uses a
+# containment verb (stay/remain/hold/confine/operate-in); the rows below use the same region
+# word with a ROUTE verb (traverse/enter via/come across) and carry NO constraint. "Cut
+# across the southern half" is a path, "stay to the far south" is a fence, and the only cue
+# is the verb. distractor_route above already covers four of these; these add the half
+# vocabulary that block never used.
+#   NOTE on ratios: these land in collect_target/none (oversampled ~4x) while their partners
+#   land in collect_target/stay (~2x), so balance() does NOT preserve the 1:1 authoring
+#   ratio. Round 9 built machinery to pin pair ratios and it bought 2 examples out of 566, so
+#   this is left alone deliberately -- but if stay_region starts firing on route sentences,
+#   this skew is the first thing to check.
+route_not_containment = [
+    "Traverse the {hw} half on your way to the {c} {n} in the {lw} corner.",
+    "Enter via the {hw} side, the {c} target is in the {lw} quadrant.",
+    "Your approach runs through the {hw} half -- pick up the {c} object in the {lw} section.",
+    "Come at it across the {hw} half; the {c} {n} sits in the {lw} corner.",
+]
+for i, template in enumerate(route_not_containment):
+    for j, c in enumerate(COLORS):
+        h = HALVES[(i + j) % len(HALVES)]
+        loc = [l for l in LOCS if h not in l][(i + j) % 2]
+        add(template.format(hw=HALF_WORDS[h], c=c, lw=LOC_WORDS[loc],
+                            n=NOUNS[(i + j) % len(NOUNS)]),
+            c, "none", loc, "collect_target")
+
+
+# v3 note: the cell key used to be (action, constraints), and `constraints` is gone. The
+# replacement collapses the three region fields to WHICH KIND of constraint is present,
+# which is what the balancing was ever about -- the specific region is already balanced by
+# the templates looping over all of LOCS/HALVES.
+def cell_kind(e):
+    avoid, stay = e["avoid_region"] != "none", e["stay_region"] != "none"
+    return {(False, False): "none", (True, False): "avoid",
+            (False, True): "stay", (True, True): "avoid_stay"}[(avoid, stay)]
+
+
+# Round 4-8 shares, which converged at 97.70% on five sets (v11). Reproduced verbatim so
+# the v3 cells can be added WITHOUT re-guessing ten numbers that are known to work.
+V11_CELLS = {
     ("collect_target", "none"): 0.26,
-    ("collect_target", "avoid_regions"): 0.16,
+    ("collect_target", "avoid"): 0.16,
     ("read_chip", "none"): 0.14,
     ("abort", "none"): 0.08,
     ("return_to_start", "none"): 0.07,
@@ -851,13 +1010,35 @@ TARGET_CELLS = {
     ("retry_send", "none"): 0.05,
 }
 
+# The two new v3 cells. 0.15 total is a deliberate guess, reasoned from avoid_region: it
+# recalled 0.762 at 12.5% share and 1.000 at 25%, so ~11% is the lowest share that has ever
+# worked for a constraint class, and avoid_stay gets less because co-occurrence is the rarer
+# phrasing in the rules. until_region is NOT its own cell -- it only ever appears inside a
+# stay row, and splitting it would halve the pool each sub-cell draws from.
+STAY_CELLS = {
+    ("collect_target", "stay"): 0.11,
+    ("collect_target", "avoid_stay"): 0.04,
+}
+
+# Everything from v11 keeps its RELATIVE proportion and is scaled down to make room, so the
+# only intentional change between v11 and v13 is the new classes, not a reshuffle of the old
+# ones. ponytail: computed, not a hand-retyped table -- a table drifts from its own comment.
+# (V11_CELLS sums to 1.02, not 1.0 -- a pre-existing wart. balance() anchors on whichever
+# cell is closest to target and normalises, so only the RATIOS matter; the scale below keeps
+# the grand total put so a share here still reads as roughly its percentage of the set.)
+_v11_total = sum(V11_CELLS.values())
+_scale = (_v11_total - sum(STAY_CELLS.values())) / _v11_total
+TARGET_CELLS = {cell: share * _scale for cell, share in V11_CELLS.items()}
+TARGET_CELLS.update(STAY_CELLS)
+assert abs(sum(TARGET_CELLS.values()) - _v11_total) < 1e-9
+
 # A cell oversampled past this is memorising a handful of sentences rather than learning the
 # class; the builder warns and stops at the cap instead of silently producing 8x duplicates.
 MAX_OVERSAMPLE = 4.0
 
 
 def balance(rows):
-    """Oversample toward TARGET_CELLS on the joint (action, constraints) cell.
+    """Oversample toward TARGET_CELLS on the joint (action, constraint-kind) cell.
 
     Deterministic round-robin over each cell pool, so a rebuild reproduces the file.
     Duplicates are the point: they reweight the loss without inventing sentences.
@@ -868,7 +1049,7 @@ def balance(rows):
     pools = collections.defaultdict(list)
     for r in rows:
         e = r["expected"]
-        pools[(e["action"], e["constraints"])].append(r)
+        pools[(e["action"], cell_kind(e))].append(r)
 
     unexpected = set(pools) - set(TARGET_CELLS)
     if unexpected:
@@ -902,7 +1083,8 @@ def main():
     # sentences into training and a hand-rolled check still missed one plus a 0.918
     # near-duplicate. Cost is a slower difflib pass over 6 sets; worth it.
     sources = {name: f"data/{name}_set.jsonl" for name in
-               ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5")}
+               ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5",
+                "heldout6")}
     existing = {}
     for name, path in sources.items():
         try:
@@ -940,12 +1122,12 @@ def main():
     with open("data/train_set.jsonl", "w", encoding="utf-8") as f:
         for r in balanced:
             f.write(json.dumps(r) + "\n")
-    cmix = collections.Counter(r["expected"]["constraints"] for r in balanced)
+    cmix = collections.Counter(cell_kind(r["expected"]) for r in balanced)
     amix = collections.Counter(r["expected"]["action"] for r in balanced)
     n = len(balanced)
     print(f"wrote {n} examples to data/train_set.jsonl "
           f"({len(rows)} distinct + {n - len(rows)} oversampled), 0 overlap with eval/heldout")
-    print("  constraints: " + "  ".join(f"{k}={v} ({v/n:.1%})" for k, v in cmix.most_common()))
+    print("  constraint kind: " + "  ".join(f"{k}={v} ({v/n:.1%})" for k, v in cmix.most_common()))
     print("  action:      " + "  ".join(f"{k}={v} ({v/n:.1%})" for k, v in amix.most_common()))
 
 

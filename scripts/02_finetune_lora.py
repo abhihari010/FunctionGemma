@@ -12,7 +12,7 @@ from schema import FUNCTION_SCHEMA, FIELDS, build_messages
 
 MODEL_ID = "google/functiongemma-270m-it"
 OUTPUT_DIR = "checkpoints/functiongemma-270m-lora-intent"
-EPOCHS = 3
+TARGET_STEPS = 504
 
 
 def format_target(expected):
@@ -77,13 +77,15 @@ def main():
         rows = [json.loads(line) for line in f]
     dataset = IntentDataset(rows, tokenizer, processor)
 
-    # round 8 shrank the set and quietly cut optimizer steps 430 -> 337 (v10 trained
-    # there). Print the number so the next row-count change is visible instead of silent.
-    steps = len(rows) // 8 * EPOCHS
-    print(f"{len(rows)} rows x {EPOCHS} epochs / batch 8 = {steps} optimizer steps")
-    if not 380 <= steps <= 560:
-        print(f"WARNING: {steps} steps is off the ~430-500 band every round since 4 has "
-              f"converged in. Retune num_train_epochs before trusting the comparison.")
+    # The step budget is now set DIRECTLY instead of via epochs. Epochs were only ever a
+    # proxy for optimizer steps, and the proxy broke twice: round 8's update_only merge shrank
+    # the set 1721 -> 1349 rows and silently cut steps 430 -> 337 (v10 trained there, 22%
+    # under budget), and round 10's containment data grew it to 1657, which at 3 epochs would
+    # have been 621 -- 23% OVER. Neither row-count change touched num_train_epochs because
+    # nothing recomputed it. max_steps makes the budget the thing you set, so a data change
+    # can no longer move it by accident, and v13 is step-for-step comparable to v11's 504.
+    epochs = TARGET_STEPS * 8 / len(rows)
+    print(f"{len(rows)} rows, batch 8, {TARGET_STEPS} optimizer steps = {epochs:.2f} epochs")
 
     training_args = TrainingArguments(
         output_dir=OUTPUT_DIR,
@@ -106,7 +108,7 @@ def main():
         # whenever the row count moves: the epoch count is a proxy for optimizer steps,
         # and nothing recomputes it. ponytail: a printed step count beats an assert here,
         # the number needs eyeballing against the comment, not just a floor.
-        num_train_epochs=EPOCHS,
+        max_steps=TARGET_STEPS,
         # 8x1 and 4x2 both died at step 1 with a raw "CUDA error: out of memory" from the
         # driver (not torch's allocator) while nvidia-smi showed 7.4 GB free. On Windows WDDM
         # a GPU allocation is backed by system RAM, and this machine was down to ~5.5 GB of

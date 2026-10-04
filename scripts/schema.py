@@ -42,11 +42,15 @@ FUNCTION_SCHEMA = {
                     #      train against.
                     #   3. Per-field accuracy becomes diagnostic -- avoid and contain fail
                     #      separately instead of hiding inside one `constraints` number.
-                    # "none" means no keep-out constraint was stated. There is deliberately no
-                    # value for "a region constraint with no region named": all 212
-                    # avoid_regions rows through v11 named a compass region, so the case is
-                    # unattested. If a judge ever says "avoid the shaded areas" with no
-                    # compass reference, this enum needs a value for it.
+                    # "none" means no keep-out constraint was stated. There is deliberately
+                    # no value for "a region constraint with no region named", and that is a
+                    # KNOWN LOSSY CASE, not an unattested one -- correcting an earlier comment
+                    # here that called it unattested. All 212 training rows through v11 named a
+                    # compass region, but four heldout5 sentences do not ("steer clear of the
+                    # marked zones", "keep off the shaded areas", "no-go areas are off limits",
+                    # "avoid the restricted patches"), and on those four the keep-out
+                    # constraint is simply discarded. If judges phrase it that way in practice,
+                    # add an "unnamed" member; those four rows are the evidence for it.
                     "description": "Region the vehicle must keep out of, or none if no keep-out region was stated.",
                 },
                 "stay_region": {
@@ -133,6 +137,45 @@ FUNCTION_SCHEMA = {
 FIELDS = ("target_color", "avoid_region", "stay_region", "until_region",
           "target_location", "action")
 DEVELOPER_MESSAGE = "You are a model that can do function calling with the following functions"
+
+
+# ---------------------------------------------------------------------------
+# v2 -> v3 label translation.
+#
+# All three set builders author labels as the v2 4-tuple (target_color, constraints,
+# target_location, action) across ~700 literal rows. Rewriting every one of them by hand
+# to carry three region values is a large diff with a transcription error on every line,
+# so instead they keep authoring v2 tuples and translate here, which is the same trick
+# collapse_constraints/collapse_action already use for avoid_objects and update_only.
+#
+# The one real relabelling: on `avoid_regions` rows the v2 `target_location` slot held the
+# AVOIDED region, not the target (all 212 such rows had target_color "unspecified"), so it
+# moves to avoid_region and target_location becomes "unspecified". That un-overloading is
+# the point of schema v3 -- see the target_location comment above.
+def expand_v2(color, constraints, loc, action, stay="none", until="none", avoid="none"):
+    """v2 label tuple (+ optional v3-only region values) -> full v3 field dict."""
+    constraints = "none" if constraints == "avoid_objects" else constraints
+    if constraints == "avoid_regions":
+        if avoid != "none":
+            raise ValueError("avoid_regions already puts the region in loc; drop avoid=")
+        avoid, loc = loc, "unspecified"
+    elif constraints != "none":
+        raise ValueError(f"unknown v2 constraints value: {constraints!r}")
+    out = {
+        "target_color": color,
+        "avoid_region": avoid,
+        "stay_region": stay,
+        "until_region": until,
+        "target_location": loc,
+        "action": "collect_target" if action == "update_only" else action,
+    }
+    if out["until_region"] != "none" and out["stay_region"] == "none":
+        raise ValueError("until_region without a stay_region to release")
+    for f, v in out.items():
+        allowed = FUNCTION_SCHEMA["function"]["parameters"]["properties"][f]["enum"]
+        if v not in allowed:
+            raise ValueError(f"{f}={v!r} not in {allowed}")
+    return {f: out[f] for f in FIELDS}
 
 
 def build_messages(user_text):

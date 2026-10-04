@@ -24,6 +24,8 @@ import collections
 import difflib
 import json
 
+from schema import expand_v2
+
 # label tuple = (target_color, constraints, target_location, action)
 
 FAMILIAR = [
@@ -386,23 +388,6 @@ HELDOUT2 = [
     ("Get it back to base, nothing retrieved.", ("unspecified", "none", "unspecified", "return_to_start")),
 ]
 
-# Object avoidance is a standing rule (rules doc 2.2), not a variable a judge sets, so
-# avoid_objects left the schema -- see scripts/schema.py. The label tuples below are kept
-# as originally written; collapse_constraints() maps them at write time, so the original
-# labelling intent stays readable and the change is one line to revert.
-def collapse_constraints(value):
-    return "none" if value == "avoid_objects" else value
-
-
-# Round 8: update_only left the schema. Every one of its 245 examples was a position
-# correction about the target already being pursued ("adjust your route", "same job",
-# "keep at it"), it never carried a constraint, and folding it into collect_target lifted
-# v9's five-set accuracy from 95.94% to 97.00% on relabelled predictions alone. The
-# downstream state machine merges a partial update onto the active task, so the action
-# field never needed to carry it. The label tuples below are kept as originally written;
-# collapse_action() maps them at write time, so the change is one line to revert.
-def collapse_action(value):
-    return "collect_target" if value == "update_only" else value
 
 
 # Third clean slice, written BEFORE the round-6 training run. The existing three sets contain
@@ -592,7 +577,109 @@ HELDOUT4 = [
     ("Transmit the code one more time.", ("unspecified", "none", "unspecified", "retry_send")),
 ]
 
-FIELDS = ("target_color", "constraints", "target_location", "action")
+
+# Sixth clean slice, and the ONLY instrument for the schema-v3 constraint fields. Written
+# BEFORE v13 trains and never consulted while writing the round-10 training block, which is
+# the discipline round 9 broke: it wrote training templates against observed heldout3/heldout4
+# failures, which spends a set as an instrument because a gain there then partly measures how
+# well the failures were paraphrased.
+#
+# Idioms here are deliberately disjoint from round 10's containment templates. Round 10 used
+# stay within / keep the vehicle in / operate only in / confined to / hold to the far /
+# remain inside / your working area / do not leave. None of those appear below. If the model
+# only answers to the eight verbs it was trained on, these sentences expose it -- which is
+# exactly the failure avoid_region showed on heldout5 (6 cue words, 0 for 4 on novel wording).
+#
+# label tuple = (target_color, constraints, target_location, action[, stay, until, avoid])
+#
+# STRATA, scored separately:
+#   stay_half      - containment in halves, novel verbs
+#   stay_quad      - containment in a quadrant, with a named target
+#   pathway        - stay_region="pathway", the rules' undefined safe corridor
+#   stay_until     - containment WITH a release condition (the rules' hardest shape)
+#   avoid_stay     - both constraints in one command (the reason v3 split the field)
+#   avoid_target   - avoid_region alongside a named target: v11's documented blind spot
+#   route_negative - route verbs + region words, NO constraint. Over-firing detector; if
+#                    these fail, the model learned "direction word => constraint".
+HELDOUT6 = [
+    # --- stay_half: containment, halves, none of round 10's verbs ---
+    ("Don't stray out of the northern half at any stage.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_half"),
+    ("Your box for this attempt is the southern half.", ("unspecified", "none", "unspecified", "collect_target", "S"), "stay_half"),
+    ("Everything happens in the eastern half, nothing outside it.", ("unspecified", "none", "unspecified", "collect_target", "E"), "stay_half"),
+    ("Limit yourself to the western half please.", ("unspecified", "none", "unspecified", "collect_target", "W"), "stay_half"),
+    ("You've got the north half and that's it.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_half"),
+    ("Bounded by the south half for the duration.", ("unspecified", "none", "unspecified", "collect_target", "S"), "stay_half"),
+    ("Go no further west than the halfway line -- east half only.", ("unspecified", "none", "unspecified", "collect_target", "E"), "stay_half"),
+    ("The whole run takes place in the west half of the course.", ("unspecified", "none", "unspecified", "collect_target", "W"), "stay_half"),
+    ("Is the north half my limit? Yes, treat it that way.", ("unspecified", "none", "unspecified", "collect_target", "N"), "stay_half"),
+    ("South half. Nowhere else.", ("unspecified", "none", "unspecified", "collect_target", "S"), "stay_half"),
+
+    # --- stay_quad: containment in a quadrant, target named ---
+    ("The yellow die and the northwest quadrant -- that's your whole world right now.", ("yellow", "none", "unspecified", "collect_target", "NW"), "stay_quad"),
+    ("Don't wander out of the northeast corner; the red cube is in there.", ("red", "none", "unspecified", "collect_target", "NE"), "stay_quad"),
+    ("Everything you need is in the southwest section, so don't go past it. Blue object.", ("blue", "none", "unspecified", "collect_target", "SW"), "stay_quad"),
+    ("Black target, and your movement is capped at the southeast quadrant.", ("black", "none", "unspecified", "collect_target", "SE"), "stay_quad"),
+    ("Boxed into the northwest corner for this one. Bring in the blue piece.", ("blue", "none", "unspecified", "collect_target", "NW"), "stay_quad"),
+    ("Yellow is the pickup and the southeast section is as far as you go.", ("yellow", "none", "unspecified", "collect_target", "SE"), "stay_quad"),
+
+    # --- pathway: the rules name a safe corridor but never define it geometrically ---
+    ("Wheels on the marked path the whole time, and fetch the red block.", ("red", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+    ("You may not deviate from the safe corridor.", ("unspecified", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+    ("Blue object please, and no wandering off the taped route.", ("blue", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+    ("The corridor is the constraint -- don't step outside it.", ("unspecified", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+    ("Collect the black cube. Wheels never leave the marked track.", ("black", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+    ("Is it fine to shortcut off the path? No. Stick to it.", ("unspecified", "none", "unspecified", "collect_target", "pathway"), "pathway"),
+
+    # --- stay_until: containment with a release condition ---
+    ("You're held to the southern half right up until the east half, then it's open.", ("unspecified", "none", "unspecified", "collect_target", "S", "E"), "stay_until"),
+    ("North half is the cap until you make the west side of the field.", ("unspecified", "none", "unspecified", "collect_target", "N", "W"), "stay_until"),
+    ("Don't stray from the east half before you've got to the north half.", ("unspecified", "none", "unspecified", "collect_target", "E", "N"), "stay_until"),
+    ("Bounded to the west half; reaching the south half clears it.", ("unspecified", "none", "unspecified", "collect_target", "W", "S"), "stay_until"),
+    ("Down in the southern half until the eastern half, and the yellow die is the pickup.", ("yellow", "none", "unspecified", "collect_target", "S", "E"), "stay_until"),
+    ("Your limit is the north half, lifted the moment you hit the west half.", ("unspecified", "none", "unspecified", "collect_target", "N", "W"), "stay_until"),
+    ("East half only, and that holds until the north half.", ("unspecified", "none", "unspecified", "collect_target", "E", "N"), "stay_until"),
+    ("Boxed to the west side of the field until the south half -- then grab the black block.", ("black", "none", "unspecified", "collect_target", "W", "S"), "stay_until"),
+    ("When does the southern-half restriction end? When you reach the eastern half.", ("unspecified", "none", "unspecified", "collect_target", "S", "E"), "stay_until"),
+    ("Held in the northern half. Release point is the western half.", ("unspecified", "none", "unspecified", "collect_target", "N", "W"), "stay_until"),
+
+    # --- avoid_stay: both constraints in one command ---
+    ("Northern half is your bound and the southwest corner is shut.", ("unspecified", "none", "unspecified", "collect_target", "N", "none", "SW"), "avoid_stay"),
+    ("Don't stray from the south half, and the northeast quadrant is a no-go.", ("unspecified", "none", "unspecified", "collect_target", "S", "none", "NE"), "avoid_stay"),
+    ("You're capped at the east half; also the northwest corner is out of play.", ("unspecified", "none", "unspecified", "collect_target", "E", "none", "NW"), "avoid_stay"),
+    ("West half is the limit. Nothing goes into the southeast section.", ("unspecified", "none", "unspecified", "collect_target", "W", "none", "SE"), "avoid_stay"),
+    ("Boxed into the north half with the southwest quadrant pulled from the map.", ("unspecified", "none", "unspecified", "collect_target", "N", "none", "SW"), "avoid_stay"),
+    ("Your world is the southern half, minus the northeast corner.", ("unspecified", "none", "unspecified", "collect_target", "S", "none", "NE"), "avoid_stay"),
+    ("Keep to the marked corridor and the northwest quarter is closed.", ("unspecified", "none", "unspecified", "collect_target", "pathway", "none", "NW"), "avoid_stay"),
+    # The one row where two region slots share a compass letter (E and SE). Kept on
+    # purpose: "east half" and "southeast corner" are different words, so it is hard, not
+    # ambiguous, and collapsing the two is a failure worth being able to see. Every other
+    # row in this file keeps its region slots compass-disjoint.
+    ("East half, and scratch the southeast corner from your plan.", ("unspecified", "none", "unspecified", "collect_target", "E", "none", "SE"), "avoid_stay"),
+
+    # --- avoid_target: a keep-out region alongside a NAMED target. v11 had 0 of 212 such
+    #     rows and missed every heldout5 sentence of this shape. Round 10 added 32.
+    ("Yellow cube is the objective, and the southwest corner has been pulled.", ("yellow", "avoid_regions", "SW", "collect_target"), "avoid_target"),
+    ("Bring the black piece in. Northeast quadrant is sealed.", ("black", "avoid_regions", "NE", "collect_target"), "avoid_target"),
+    ("We want the blue die; the northwest section is no longer on the map.", ("blue", "avoid_regions", "NW", "collect_target"), "avoid_target"),
+    ("Red block, and whatever you do stay out of the southeast corner.", ("red", "avoid_regions", "SE", "collect_target"), "avoid_target"),
+    ("The southern half has been fenced off -- the yellow object still comes home.", ("yellow", "avoid_regions", "S", "collect_target"), "avoid_target"),
+    ("Grab the blue target. North half is unavailable this round.", ("blue", "avoid_regions", "N", "collect_target"), "avoid_target"),
+    ("Can I cut through the east half? No, it's shut. Black cube is the pickup.", ("black", "avoid_regions", "E", "collect_target"), "avoid_target"),
+    ("Red object is yours and the west half is scratched.", ("red", "avoid_regions", "W", "collect_target"), "avoid_target"),
+
+    # --- route_negative: region words with ROUTE verbs and no constraint at all. The cue is
+    #     the verb: "cut across the south half" is a path, "stay to the south half" is a
+    #     fence. If these come back with a stay_region set, the model is firing on the
+    #     direction word rather than the verb.
+    ("Swing through the southern half and collect the blue die from the northeast corner.", ("blue", "none", "NE", "collect_target"), "route_negative"),
+    ("Your line runs up the western half -- the red cube is in the northeast section.", ("red", "none", "NE", "collect_target"), "route_negative"),
+    ("Come in over the north half, black object is in the southwest quadrant.", ("black", "none", "SW", "collect_target"), "route_negative"),
+    ("Drive the east half on approach; yellow block sits in the northwest corner.", ("yellow", "none", "NW", "collect_target"), "route_negative"),
+    ("Route takes you diagonally across the south half to the blue target in the northwest.", ("blue", "none", "NW", "collect_target"), "route_negative"),
+    ("Head up the west half, then the red die in the southeast section is yours.", ("red", "none", "SE", "collect_target"), "route_negative"),
+    ("Push across the northern half to reach the yellow object in the southeast.", ("yellow", "none", "SE", "collect_target"), "route_negative"),
+    ("Via the eastern half, please -- black piece, southwest corner.", ("black", "none", "SW", "collect_target"), "route_negative"),
+]
 
 # Above this similarity to any existing train/eval sentence, a "fresh" sentence is a
 # paraphrase and the held-out set stops being held out. Tuned so the genuine
@@ -639,10 +726,10 @@ def build(tagged, out_path, extra_sources):
 
     with open(out_path, "w", encoding="utf-8") as f:
         for text, labels, tag in tagged:
-            labels = tuple(collapse_constraints(v) if f == "constraints"
-                           else collapse_action(v) if f == "action" else v
-                           for f, v in zip(FIELDS, labels))
-            row = {"text": text, "expected": dict(zip(FIELDS, labels)), "set": tag}
+            # 4-tuples are the v2 authoring shape; schema.expand_v2 maps them to the
+            # v3 fields (and rejects any value outside the schema enums). A 5th/6th
+            # element carries stay_region/until_region for the rows that need them.
+            row = {"text": text, "expected": expand_v2(*labels), "set": tag}
             f.write(json.dumps(row) + "\n")
     counts = collections.Counter(tag for _, _, tag in tagged)
     mix = "  ".join(f"{k}={v}" for k, v in sorted(counts.items()))
@@ -717,14 +804,30 @@ HELDOUT5 = [
     ("The red block has turned up southwest.", ("red", "none", "SW", "collect_target")),
     ("Fetch the yellow die out of the southeast.", ("yellow", "none", "SE", "collect_target")),
     ("Grab the black object from the northwest.", ("black", "none", "NW", "collect_target")),
+    # v3 RELABEL, and the schema's one known expressiveness gap. Every one of these four
+    # avoids an UNNAMED region -- "the marked zones", "the shaded areas", "no-go areas",
+    # "restricted patches" -- and avoid_region has no value for that: the decision was to
+    # drop a separate "unnamed" member and let "none" cover it. So the keep-out constraint
+    # is genuinely DISCARDED on these four rows, which is lossy and is written down here
+    # rather than hidden.
+    #
+    # Two of them were also mislabelled under v2 in a way v3 exposes: "from the northeast"
+    # and "in the southwest" are the TARGET's quadrant, but v2 put the region in
+    # target_location on every avoid_regions row, so those quadrants were being scored as
+    # avoided areas. They are targets. That also corrects what I reported earlier about
+    # these four: the model was not only facing novel wording, it was facing labels that
+    # conflated two different claims.
+    #
+    # If judges really do say "avoid the shaded areas", avoid_region needs an "unnamed"
+    # value and these four rows are the evidence for adding it.
     ("Bring in the blue target, steer clear of the marked zones.",
-     ("blue", "avoid_regions", "unspecified", "collect_target")),
+     ("blue", "none", "unspecified", "collect_target")),
     ("Red die from the northeast -- keep off the shaded areas.",
-     ("red", "avoid_regions", "NE", "collect_target")),
+     ("red", "none", "NE", "collect_target")),
     ("Collect the yellow block, no-go areas are off limits.",
-     ("yellow", "avoid_regions", "unspecified", "collect_target")),
+     ("yellow", "none", "unspecified", "collect_target")),
     ("Black cube in the southwest, avoid the restricted patches.",
-     ("black", "avoid_regions", "SW", "collect_target")),
+     ("black", "none", "SW", "collect_target")),
 
     # --- position correction folded into collect_target (round 8) ---
     ("Amend that -- blue die is actually southeast.", ("blue", "none", "SE", "collect_target")),
@@ -757,6 +860,11 @@ def main():
           "data/heldout5_set.jsonl",
           {"heldout1": "data/heldout_set.jsonl", "heldout2": "data/heldout2_set.jsonl",
            "heldout3": "data/heldout3_set.jsonl", "heldout4": "data/heldout4_set.jsonl"})
+
+    # heldout6 already carries its own stratum tag per row, so it is passed straight through.
+    build(HELDOUT6, "data/heldout6_set.jsonl",
+          {f"heldout{i}": f"data/heldout{i}_set.jsonl".replace("heldout1_", "heldout_")
+           for i in range(1, 6)})
 
 
 if __name__ == "__main__":
