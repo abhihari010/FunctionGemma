@@ -1514,6 +1514,31 @@ def balance(rows):
     if unexpected:
         raise SystemExit(f"cell with no target, refusing to guess: {sorted(unexpected)}")
 
+    # TRIED AND REJECTED (v16): splitting the avoid+stay budget in proportion to pool size.
+    # Round 12's polarity pairs reach the model skewed -- avoid oversampled 1.63x against
+    # stay's 1.00x, so an authored 1:1 pair arrives 1:0.61 -- and the swaps were directional
+    # the same way, so the skew looked causal. Equalising it is easy: give the two cells their
+    # COMBINED share split by pool size and their want/have ratio is equal by construction.
+    # That was built, verified (ratio exactly 1:1.00, both cells 1.00x, 240 avoid / 316 stay
+    # distinct rows) and trained as v16. It did not work:
+    #
+    #   polarity swaps          12 -> 13     the hypothesis, refuted
+    #   stay MISSED / SPURIOUS  16/12 -> 13/15
+    #   avoid MISSED / SPURIOUS 10/8  -> 6/10
+    #   pooled, 9 sets          92.80% -> 93.06%   (+0.25, all of it heldout6)
+    #   pooled, minus heldout6  94.29% -> 93.61%   (-0.68)
+    #   original coverage sets  97.17% -> 96.29%   (-0.88, 9 newly broken vs 4 fixed)
+    #
+    # What it actually did was move the firing threshold, not polarity discrimination: it
+    # traded MISSED for SPURIOUS on both fields and left the swap count alone. Raising stay's
+    # share 11% -> 14% made it over-fire on sentences that merely mention a direction ("Run
+    # the western edge on the way out" -> stay=W), and it cost core competence on easy rows
+    # ("Fetch the yellow block." -> read_chip). The only gain was +12.5% on heldout6, which
+    # round 11 was written from and which is therefore partly a paraphrase-memory score.
+    #
+    # So the hand-set shares stay. They were tuned on measured held-out recall (round 4:
+    # 0.762 at 12.5% share, 1.000 at 25%) and that evidence outranks a pair-ratio argument.
+    # Polarity is orthogonal to class balance and needs wording this author did not generate.
     # anchor on whichever cell is already closest to its target, so nothing shrinks
     implied_total = max(len(pools[c]) / TARGET_CELLS[c] for c in pools)
 
