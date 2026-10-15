@@ -1566,9 +1566,15 @@ def main():
     # are exactly the case that needs checking -- a draft of round 9 put 8 verbatim test
     # sentences into training and a hand-rolled check still missed one plus a 0.918
     # near-duplicate. Cost is a slower difflib pass over 6 sets; worth it.
+    # round 13: chat-model-generated rows targeting heldout9's four failure patterns,
+    # hand-filtered (raw batch with the drop reasons: data/gen_round13_raw.jsonl). heldout9
+    # itself was written by a different model and must never feed training.
+    with open("data/gen_round13_clean.jsonl", encoding="utf-8") as f:
+        rows.extend(json.loads(line) for line in f)
+
     sources = {name: f"data/{name}_set.jsonl" for name in
                ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5",
-                "heldout6", "heldout7", "heldout8")}
+                "heldout6", "heldout7", "heldout8", "heldout9")}
     existing = {}
     for name, path in sources.items():
         try:
