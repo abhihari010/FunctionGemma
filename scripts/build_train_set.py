@@ -1039,12 +1039,7 @@ stay_enclosure = [
     "The {hw} half is sealed around you.",
     "Shut inside the {hw} half this run.",
 ]
-# (f) containment as a CONFIRMATION or question-answer
-stay_confirm = [
-    "Can you leave the {hw} half? No.",
-    "Am I clear that the {hw} half is the cap? You are.",
-    "Is anything outside the {hw} half allowed? It is not.",
-]
+# (removed: self-answered question-form containment -- judges issue commands, not Q&A)
 # (g) containment via LIMIT / CEILING nouns
 stay_limit = [
     "The {hw} half is your limit.",
@@ -1053,7 +1048,7 @@ stay_limit = [
     "Outer bound: the {hw} half.",
 ]
 for group in (stay_possessive, stay_exclusive, stay_fragment, stay_drift,
-              stay_enclosure, stay_confirm, stay_limit):
+              stay_enclosure, stay_limit):
     for i, template in enumerate(group):
         for j, h in enumerate(HALVES):
             add(template.format(hw=HALF_WORDS[h], HW=HALF_WORDS[h].capitalize(),
@@ -1070,7 +1065,6 @@ stay_quad_round11 = [
     "Do not drift out of the {lw} corner; the {c} {n} is in there.",
     "You are walled into the {lw} section. Collect the {c} target.",
     "Your limit is the {lw} quadrant, and the {c} {n} is what we want.",
-    "Can you leave the {lw} corner? No. {C} object, please.",
     "{LW} corner is your whole ground. The {c} {n} is the objective.",
 ]
 for i, template in enumerate(stay_quad_round11):
@@ -1088,7 +1082,6 @@ pathway_round11 = [
     "The corridor. Nothing outside it.",
     "Do not drift off the safe pathway.",
     "You are walled into the marked corridor.",
-    "Can you cut off the path? No.",
     "Your limit is the edge of the safe pathway.",
     "Designated route exclusively, no exceptions.",
     "On the lane, and not a wheel either side.",
@@ -1269,7 +1262,6 @@ avoid_stay_round11 = [
     "Do not drift out of the {sw} half, and give the {aw} section a wide berth.",
     "You are walled into the {sw} half; the {aw} corner is fenced off.",
     "Your limit is the {sw} half and the {aw} quadrant is a hazard zone.",
-    "Can you leave the {sw} half? No. And the {aw} corner is shut.",
     "{SW} half is your ground. Steer well away from the {aw} section.",
     "Stay to the marked corridor and keep out of the {aw} quadrant.",
     "The pathway is your bound, and the {aw} corner is suspended.",
