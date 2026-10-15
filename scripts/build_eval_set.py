@@ -221,8 +221,9 @@ EXT_EXAMPLES = [
      ("unspecified", "none", "unspecified", "abort")),
     ("Everything off, we've lost clearance to run.",
      ("unspecified", "none", "unspecified", "abort")),
+    # relabeled abort -> pause: "until I say otherwise" expects a resume (schema.py boundary rule)
     ("Hold everything. No movement until I say otherwise.",
-     ("unspecified", "none", "unspecified", "abort")),
+     ("unspecified", "none", "unspecified", "pause")),
     ("The attempt is void -- stop and conceal.",
      ("unspecified", "none", "unspecified", "abort")),
 

@@ -1469,6 +1469,7 @@ V11_CELLS = {
 STAY_CELLS = {
     ("collect_target", "stay"): 0.11,
     ("collect_target", "avoid_stay"): 0.04,
+    ("read_chip", "stay"): 0.01,  # round 15: chip reads inside a containment region
 }
 
 # Everything from v11 keeps its RELATIVE proportion and is scaled down to make room, so the
@@ -1563,7 +1564,10 @@ def main():
     # itself was written by a different model and must never feed training.
     # round 14: same process, targeting the r13 regressions on the old sets (terse
     # pause/abort/home/read idioms, indirectly stated constraints); data/gen_round14_raw.jsonl.
-    for path in ("data/gen_round13_clean.jsonl", "data/gen_round14_clean.jsonl"):
+    # round 15: route descriptions without constraint, stay+target in one quadrant, terse
+    # pause/resume/abort with no mention of home; data/gen_round15_raw.jsonl.
+    for path in ("data/gen_round13_clean.jsonl", "data/gen_round14_clean.jsonl",
+                 "data/gen_round15_clean.jsonl"):
         with open(path, encoding="utf-8") as f:
             rows.extend(json.loads(line) for line in f)
 
