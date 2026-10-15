@@ -1569,8 +1569,11 @@ def main():
     # round 13: chat-model-generated rows targeting heldout9's four failure patterns,
     # hand-filtered (raw batch with the drop reasons: data/gen_round13_raw.jsonl). heldout9
     # itself was written by a different model and must never feed training.
-    with open("data/gen_round13_clean.jsonl", encoding="utf-8") as f:
-        rows.extend(json.loads(line) for line in f)
+    # round 14: same process, targeting the r13 regressions on the old sets (terse
+    # pause/abort/home/read idioms, indirectly stated constraints); data/gen_round14_raw.jsonl.
+    for path in ("data/gen_round13_clean.jsonl", "data/gen_round14_clean.jsonl"):
+        with open(path, encoding="utf-8") as f:
+            rows.extend(json.loads(line) for line in f)
 
     sources = {name: f"data/{name}_set.jsonl" for name in
                ("eval", "heldout", "heldout2", "heldout3", "heldout4", "heldout5",
